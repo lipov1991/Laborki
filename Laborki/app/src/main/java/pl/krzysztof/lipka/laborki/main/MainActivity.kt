@@ -14,6 +14,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
+        // TODO lab1
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpActionBar()
