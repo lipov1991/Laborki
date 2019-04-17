@@ -1,20 +1,21 @@
 package pl.krzysztof.lipka.laborki
 
-import android.app.Application
-import pl.krzysztof.lipka.laborki.di.AppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 import pl.krzysztof.lipka.laborki.di.DaggerAppComponent
+import timber.log.Timber
 
-class App : Application() {
+class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        component.inject(this)
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
-    private val component: AppComponent by lazy {
-        DaggerAppComponent
-            .builder()
-            .application(this)
-            .build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().create(this)
     }
 }

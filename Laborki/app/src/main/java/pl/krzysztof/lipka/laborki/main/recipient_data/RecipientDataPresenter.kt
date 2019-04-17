@@ -1,5 +1,17 @@
 package pl.krzysztof.lipka.laborki.main.recipient_data
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter
+import pl.krzysztof.lipka.laborki.data.CoordinatesRepository
+import javax.inject.Inject
 
-class RecipientDataPresenter : MvpBasePresenter<RecipientDataView>()
+class RecipientDataPresenter @Inject constructor(
+    private val view: RecipientDataView,
+    private val repository: CoordinatesRepository
+) {
+
+    fun saveRecipientEmail(
+        recipientEmail: String
+    ) {
+        repository.recipientEmail = recipientEmail
+        view.onEmailSaved(repository.recipientEmail!!)
+    }
+}
