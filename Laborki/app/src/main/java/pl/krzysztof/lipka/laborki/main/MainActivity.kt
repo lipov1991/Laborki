@@ -12,7 +12,7 @@ import pl.krzysztof.lipka.laborki.common.utils.alert_dialog.AlertDialogUtils
 import pl.krzysztof.lipka.laborki.main.recipient_data.RecipientDataFragment
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), MainView {
 
     companion object {
         private const val MAIN_SCREEN_BACK_STACK_ENTRY_COUNT = 1
