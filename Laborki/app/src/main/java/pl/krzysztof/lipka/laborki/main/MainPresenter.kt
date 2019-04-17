@@ -1,5 +1,10 @@
 package pl.krzysztof.lipka.laborki.main
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter
+import javax.inject.Inject
 
-class MainPresenter : MvpBasePresenter<MainView>()
+class MainPresenter @Inject constructor(
+    private val view: MainView
+) {
+
+    fun receiveTestMessage() = view.onTestMessageReceived()
+}
