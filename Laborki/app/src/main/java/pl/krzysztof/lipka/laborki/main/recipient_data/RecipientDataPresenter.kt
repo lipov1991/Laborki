@@ -8,10 +8,5 @@ class RecipientDataPresenter @Inject constructor(
     private val repository: CoordinatesRepository
 ) {
 
-    fun saveRecipientEmail(
-        recipientEmail: String
-    ) {
-        repository.recipientEmail = recipientEmail
-        view.onEmailSaved(repository.recipientEmail!!)
-    }
+    // TODO
 }
