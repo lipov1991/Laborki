@@ -28,7 +28,14 @@ Wskazówka: W celu przesłania danych z fragmentu do aktywności należy wykorzy
 
 Cel:
 
+- Omówienie wykorzystanej w projekcie architektury MVP.
+- Stworzenie nowoczesnej kontrolki EditText.
 - Omówienie biblioteki Dagger 2 i wykorzystanie jej w projekcie.
-- Tworzenie nowoczesnych kontrolek.
 
-Zadanie 1 
+Zadanie 1 (2p). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
+
+Zadanie 2 (2p). Dodać do projektu bibliotekę Dagger 2, a następnie odseparować moduły aplikacji wykorzystując technikę wstrzykiwania zależności.
+
+Zadanie 3 ()
+
+#### Termin realizacji zadań: 25.04.2019 godz. 21.00
