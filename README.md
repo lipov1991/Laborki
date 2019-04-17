@@ -31,11 +31,29 @@ Cel:
 - Omówienie wykorzystanej w projekcie architektury MVP.
 - Stworzenie nowoczesnej kontrolki EditText.
 - Omówienie biblioteki Dagger 2 i wykorzystanie jej w projekcie.
+- Omówienie i wykorzystanie w projekcie wzorca Repository.
 
 Zadanie 1 (2p). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
 
-Zadanie 2 (2p). Dodać do projektu bibliotekę Dagger 2, a następnie odseparować moduły aplikacji wykorzystując technikę wstrzykiwania zależności.
+Zadanie 2 (2p). Dodać do projektu bibliotekę Dagger 2, a następnie odseparować komponenty aplikacji wykorzystując technikę wstrzykiwania zależności.
 
-Zadanie 3 ()
+Zadanie 3 (3p). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekarnu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, formularz powinien zostać automatycznie uzupełniony współrzędnymi użytkownika. 
 
-#### Termin realizacji zadań: 25.04.2019 godz. 21.00
+Zadanie 4 (2p). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
+Przenieść wszystkie dane przechowywane w prezenterze do repozytorium.
+
+#### Termin realizacji zadań: 02.05.2019 godz. 21.00
+
+
+# Laboratorium 3
+
+Cel:
+
+- Poznanie technik współdzielenia danych pomiędzy różnymi aplikacjami.
+
+Zadanie 1 (2p). Po kliknięciu w ikonę "Share" powinno pojawić się menu systemowe umożliwiające wybranie aplikacji, przez którą mają zostać przesłane współrzędne. Obsłużyć wszystkie opisane poniżej przypadki:
+
+- użytkownik nie podał żadnych informacji -> brak akcji
+- użytkownik nie podał adresu email -> wyświetlenie menu systemowego
+- użytkownik nie podał współrzędnych-> uruchomienie aplikacji do zarządzania wiadomościami email. 
+
