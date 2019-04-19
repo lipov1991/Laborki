@@ -21,7 +21,7 @@ Zadanie 2 (2p). Dodać obsługę przycisku "Dalej". Podany adres email powinien 
 
 Wskazówka: W celu przesłania danych z fragmentu do aktywności należy wykorzystać interfejs ShareDataListener. Proszę zdefiniować w nim następującą funkcję: fun onEmailChanged(emailAddress: String). Po odczytaniu wartości parametru emailAddress w klasie MainActivity, należy ją zapisać w prezenterze: presenter.onEmailChanged(emailAddress). 
 
-#### Termin realizacji zadań: 25.04.2019 godz. 21.00
+#### Termin realizacji zadań: 02.05.2019 godz. 21.00
 
 
 # Laboratorium 2
@@ -42,18 +42,32 @@ Zadanie 3 (3p). Utworzyć widok umożliwiający podanie współrzędnych geograf
 Zadanie 4 (2p). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 Przenieść wszystkie dane przechowywane w prezenterze do repozytorium.
 
-#### Termin realizacji zadań: 02.05.2019 godz. 21.00
+#### Termin realizacji zadań: 09.05.2019 godz. 21.00
 
 
 # Laboratorium 3
 
-Cel:
+Cel: Poznanie technik współdzielenia danych pomiędzy różnymi aplikacjami.
 
-- Poznanie technik współdzielenia danych pomiędzy różnymi aplikacjami.
-
-Zadanie 1 (2p). Po kliknięciu w ikonę "Share" powinno pojawić się menu systemowe umożliwiające wybranie aplikacji, przez którą mają zostać przesłane współrzędne. Obsłużyć wszystkie opisane poniżej przypadki:
+Zadanie 1 (2p). Po kliknięciu w ikonę "Share" powinno pojawić się menu systemowe umożliwiające wybranie aplikacji, przez którą mają zostać przesłane współrzędne. Obsłużyć opisane poniżej przypadki:
 
 - użytkownik nie podał żadnych informacji -> brak akcji
 - użytkownik nie podał adresu email -> wyświetlenie menu systemowego
-- użytkownik nie podał współrzędnych-> uruchomienie aplikacji do zarządzania wiadomościami email. 
 
+#### Termin realizacji zadań: 16.05.2019 godz. 21.00
+
+
+# Laboratorium 3
+
+Cel: 
+
+- Poznanie techniki tworzenia listy za pomocą RecyclerView.
+- Integracja z Google Maps API.. 
+
+Zadanie 1 (2 punkty). Zintegrować aplikację z Google Maps API. Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
+
+Zadanie 2 (2 punkty). Stworzyć ekran składający się z mapy oraz listy obiektów wojskowych (mapa_1.png). Lista powinna wyświetlać obiekty zapisane w dostępnym repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony. Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany obiekt. 
+
+Zadanie 3 (2 punkty). Po kliknięciu w obiekt, w jego miejscu powinien wyświetlić się dialog prezentujący szczegóły techniczne. Dodać ikonę umożliwiającą usuwanie zaznaczonego obiektu z mapy.
+
+Zadanie 4 (2 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii sił lądowych. W przypadku naruszenia tych zasad, powinien wyświetlić stosowny komunikat (mapa_2.png).
