@@ -93,7 +93,7 @@ Zadanie 2. Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiekt
 
 # Kryteria oceny końcowej
 
-Za każde z zadań można otrzymać łącznie 2 punkty. Na ocenę mają wpływ: funkcjonalność (1p) oraz styl kodu (1p). W przypadku oddania zadania po terminie można otrzymać tylko 1 punkt. Za cały projekt można otrzymać łącznie 22 punkty. 
+Za każde z zadań można otrzymać łącznie 2 punkty (funkcjonalność - 1p, styl kodu - 1p). W przypadku oddania zadania po terminie można otrzymać tylko 1 punkt. Za cały projekt można otrzymać łącznie 22 punkty. 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
 22p - 20p - bardzo dobry
