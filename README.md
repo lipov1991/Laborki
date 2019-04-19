@@ -96,8 +96,8 @@ Zadanie 2. Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiekt
 Za każde z zadań można otrzymać łącznie 2 punkty (funkcjonalność - 1p, styl kodu - 1p). W przypadku oddania zadania po terminie można otrzymać tylko 1 punkt. Za cały projekt można otrzymać łącznie 22 punkty. 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-22p - 20p - bardzo dobry
-19p - 17p - dobry
-16p - 13p - dostateczny
-12p - 10p - dopuszczający
-9p i mniej - niedostateczny
+- 22p - 20p - bardzo dobry
+- 19p - 17p - dobry
+- 16p - 13p - dostateczny
+- 12p - 10p - dopuszczający
+- 9p i mniej - niedostateczny
