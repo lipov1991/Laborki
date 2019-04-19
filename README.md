@@ -1,6 +1,6 @@
 # Instalacja sterowników ADB
 
-1. W Menadżerze urządzęń należy wybrać nazwę podłączonego telefonu<br/> (Inne urządzenia) oraz kliknąć w opcję "Aktualizuj oprogramowanie sterownika" -> Przeglądaj mój komputer...
+1. W Menadżerze urządzęń wybrać nazwę podłączonego telefonu<br/> (Inne urządzenia) oraz kliknąć w opcję "Aktualizuj oprogramowanie sterownika" -> Przeglądaj mój komputer...
 
 2. Wskazać ścieżkę do zainstalowanych sterowników (android_sdk_location\extras\google\usb_driver).
 
@@ -62,7 +62,7 @@ Zadanie 1 (2p). Po kliknięciu w ikonę "Share" powinno pojawić się menu syste
 Cel: 
 
 - Poznanie techniki tworzenia listy za pomocą RecyclerView.
-- Integracja z Google Maps API.. 
+- Integracja z Google Maps API.
 
 Zadanie 1 (2 punkty). Zintegrować aplikację z Google Maps API. Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
 
