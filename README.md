@@ -69,7 +69,7 @@ Cele:
 
 Zadanie 1. Zintegrować aplikację z Google Maps API. Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
 
-Zadanie 2. Stworzyć ekran składający się z mapy oraz listy obiektów wojskowych (mapa_1.png). Lista powinna wyświetlać obiekty zapisane w dostępnym repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony. Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany obiekt. 
+Zadanie 2. Utworzyć ekran składający się z mapy oraz listy prezentującej sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony. Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany obiekt. 
 
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
