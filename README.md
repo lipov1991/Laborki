@@ -29,14 +29,14 @@ Wskazówka: W celu przesłania danych z fragmentu do aktywności należy wykorzy
 Cele:
 
 - Omówienie wykorzystanej w projekcie architektury MVP.
-- Stworzenie nowoczesnej kontrolki EditText.
+- Utworzenie nowoczesnej kontrolki EditText.
 - Omówienie biblioteki Dagger 2 i wykorzystanie jej w projekcie.
 
 Zadanie 1. Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
 
 Zadanie 2. Dodać do projektu bibliotekę Dagger 2, a następnie odseparować komponenty aplikacji wykorzystując technikę wstrzykiwania zależności.
 
-Zadanie 3. Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekarnu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. 
+Zadanie 3. Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. 
 
 
 #### Termin realizacji zadań: 09.05.2019 godz. 21.00
