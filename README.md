@@ -1,4 +1,14 @@
-# Instalacja sterowników ADB
+# Laboratorium 1 
+
+Tematy:
+
+- Przygotowanie środowiska developerskiego
+- Podstawy języka Kotlin
+- Zapoznanie się z aplikacją "Laborki" 
+- Tworzenie dialogów z wykorzystaniem klasy AlertDialog
+- Podstawy obsługi stosu
+
+## Instalacja sterowników ADB
 
 1. W Menadżerze urządzęń wybrać nazwę podłączonego telefonu<br/> (Inne urządzenia) oraz kliknąć w opcję "Aktualizuj oprogramowanie sterownika" -> Przeglądaj mój komputer...
 
@@ -7,97 +17,104 @@
 3. Zainstalować wybrabe sterowniki.
 
 
-# Laboratorium 1
+# Laboratorium 2
 
-Cele: 
+Tematy: 
 
-- Przygotowanie środowiska developerskiego.
-- Krótkie omówienie języka Kotlin.
-- Zapoznanie się z aplikacją "Laborki". 
+- Architektura MVP
+- Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
+- Wzorzec Repository
+- Testy jednostkowe
 
-Zadanie 1. Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Należy upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment.
+Zadanie 1 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
-Zadanie 2. Dodać obsługę przycisku "Dalej". Podany adres email powinien być przesłany z fragmentu do aktywności, a następnie zapisany w prezenterze MainPresenter. Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu.
+Zadanie 2 (3 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium. Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo. Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
 
-Wskazówka: W celu przesłania danych z fragmentu do aktywności należy wykorzystać interfejs ShareDataListener. Proszę zdefiniować w nim  funkcję o następującej strukturze: fun onEmailChanged(email: String). Przekazany parametr należy zapisać w prezenterze. 
+Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
 
 #### Termin realizacji zadań: 02.05.2019 godz. 21.00
 
 
-# Laboratorium 2
+# Laboratorium 3
 
-Cele:
+Tematy:
 
-- Omówienie wykorzystanej w projekcie architektury MVP.
-- Utworzenie nowoczesnej kontrolki EditText.
-- Omówienie biblioteki Dagger 2 i wykorzystanie jej w projekcie.
+- Uprawnienia
+- Obsługa GPS
+- Dobre praktyki nawigowania po aplikacji
+- Tworzenie nowoczesnych kontrolek
+- Testy UI
 
-Zadanie 1. Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
+Zadanie 1 (3 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
-Zadanie 2. Dodać do projektu bibliotekę Dagger 2, a następnie odseparować komponenty aplikacji wykorzystując technikę wstrzykiwania zależności.
+Zadanie 2 (3 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposón, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
-Zadanie 3. Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. 
+Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
+
+Zadanie 4 (3 punkty) ???
 
 
 #### Termin realizacji zadań: 09.05.2019 godz. 21.00
 
 
-# Laboratorium 3
+# Laboratorium 4
 
-Cele: 
+Tematy: 
 
-- Omówienie i wykorzystanie w projekcie wzorca Repository.
-- Poznanie technik współdzielenia danych pomiędzy różnymi aplikacjami.
+- Techniki współdzielenia danych pomiędzy różnymi aplikacjami
+- Tworzenie list za pomocą RecyclerView
+- Integracja z Google Maps API
 
-Zadanie 1. Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
-Przenieść wszystkie dane przechowywane w prezenterze do repozytorium.
+Zadanie 1 (4 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
 
-Zadanie 2. Po kliknięciu w ikonę "Share" powinno pojawić się menu systemowe umożliwiające wybranie aplikacji, za pomocą której mają zostać przesłane współrzędne. Obsłużyć opisane poniżej przypadki:
+a) Użytkownik nie podał adresu email -  Wyświelić menu systemowe umożliwiające wybór aplikacji, za pomocą której mogą zostać przesłane współrzędne.
 
-- użytkownik nie podał żadnych informacji -> brak akcji
-- użytkownik nie podał adresu email -> wyświetlenie menu systemowego
+b) użytkownik podał wszystkie dane (adres email oraz współrzędne) - Otworzyć aplikację umożliwiającą wysyłanie emaila.
+
+c) Użytkownik nie podał żadnych informacji - brak akcji
+
+W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
+
+Napisać testy jednostkowe sprawdzające obsługę przycisku "Share".
+
+Zadanie 2 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony.  
+
+Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
+
+Zadanie 4 (3 punkty) ???
 
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
 
-# Laboratorium 4
-
-Cele: 
-
-- Poznanie techniki tworzenia listy za pomocą RecyclerView.
-- Integracja z Google Maps API.
-
-Zadanie 1. Zintegrować aplikację z Google Maps API. Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
-
-Zadanie 2. Utworzyć ekran składający się z mapy oraz listy prezentującej sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony. Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany obiekt. 
-
-#### Termin realizacji zadań: 23.05.2019 godz. 21.00
-
-
 # Laboratorium 5
 
-Cele:
+Tematy:
 
-- Nauczenie się prostej interakcji z mapą.
-- Obsługa markerów.
-- Omówienie i wykorzystanie w projekcie paradygmatu programowania reaktywnego.
-- Poznanie bibliotek RxJava oraz Retrofit.
-- Nauczenie się dobrych praktyk komunikacji z zewnętrznymi usługami.
+- Interakcja z mapą
+- Obsługa markerów
+- Programowanie reaktywne z wykorzystaniem biblioteki RxJava
+- Obsługa usług zewnętrznych z wykorzystaniem biblioteki Retrofit
 
-Zadanie 1. Po kliknięciu w obiekt, w jego miejscu powinien wyświetlić się dialog prezentujący szczegóły techniczne. Dodać ikonę umożliwiającą usuwanie zaznaczonego obiektu z mapy (mapa_1.png).
+Zadanie 1 (3 punkty). Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany sprzęt. Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
-Zadanie 2. Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/).
+Zadanie 2 (4 punkty). Po kliknięciu w marker powinien wyświetlić się dialog prezentujący szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). Napisać testy jednostkowe w celu upewnienia się, że opisane mechanizmy działają prawidłowo.
+
+Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/). Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo.
+
+Zadanie 4 (3 punkty) ???
 
 #### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
 
 # Kryteria oceny końcowej
 
-Za każde z zadań można otrzymać łącznie 2 punkty (funkcjonalność - 1p, styl kodu - 1p). W przypadku oddania zadania po terminie można otrzymać tylko 1 punkt. Za cały projekt można otrzymać łącznie 22 punkty. 
+Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: funkcjonalność oraz styl kodu. W przypadku oddania zadania po terminie odejmowane są 2 punkty.
+
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-- 22p - 20p - bardzo dobry
-- 19p - 17p - dobry
-- 16p - 13p - dostateczny
-- 12p - 10p - dopuszczający
-- 9p i mniej - niedostateczny
+- 42p - 39p - 5
+- 38p - 35p - 4.5
+- 34p - 31p - 4
+- 30p - 26p - 3.5
+- 25p - 22p - 3
+- 21p i mniej - 2
