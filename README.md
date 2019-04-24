@@ -24,8 +24,11 @@ Tematy:
 - Architektura MVP
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
+- Testy UI
 
-Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Uwaga: Upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment.
+Zadanie 1 (3 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. 
+Uwaga: Upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment. 
+Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
 Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
@@ -44,7 +47,6 @@ Tematy:
 - Obsługa GPS
 - Dobre praktyki nawigowania po aplikacji
 - Tworzenie nowoczesnych kontrolek
-- Testy UI
 
 Zadanie 1 (3 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
@@ -114,9 +116,9 @@ Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: fun
 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-- 43p - 40p - 5
-- 39p - 36p - 4.5
-- 35p - 32p - 4
-- 31p - 27p - 3.5
-- 26p - 23p - 3
-- 22p i mniej - 2
+- 44p - 41p - 5
+- 40p - 37p - 4.5
+- 36p - 33p - 4
+- 32p - 28p - 3.5
+- 27p - 24p - 3
+- 23p i mniej - 2
