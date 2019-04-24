@@ -6,8 +6,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.support.AndroidSupportInjectionModule
 import pl.krzysztof.lipka.laborki.App
-import pl.krzysztof.lipka.laborki.common.utils.alert_dialog.AlertDialogUtils
-import pl.krzysztof.lipka.laborki.common.utils.alert_dialog.AlertDialogUtilsImpl
 
 @Module(includes = [AndroidSupportInjectionModule::class, ActivityModule::class])
 abstract class AppModule {
@@ -21,9 +19,4 @@ abstract class AppModule {
     abstract fun bindsContext(
         app: App
     ): Context
-
-    @Binds
-    abstract fun bindsAlertDialogUtils(
-        alertDialogUtilsImpl: AlertDialogUtilsImpl
-    ): AlertDialogUtils
 }
