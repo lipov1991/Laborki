@@ -25,11 +25,13 @@ Tematy:
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
 
-Zadanie 1 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
+Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Uwaga: Upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment.
 
-Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
+Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
-Zadanie 3 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
+Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
+
+Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
 
 #### Termin realizacji zadań: 02.05.2019 godz. 21.00
 
@@ -112,9 +114,9 @@ Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: fun
 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-- 41p - 38p - 5
-- 37p - 34p - 4.5
-- 33p - 30p - 4
-- 29p - 25p - 3.5
-- 24p - 21p - 3
-- 20p i mniej - 2
+- 43p - 40p - 5
+- 39p - 36p - 4.5
+- 35p - 32p - 4
+- 31p - 27p - 3.5
+- 26p - 23p - 3
+- 22p i mniej - 2
