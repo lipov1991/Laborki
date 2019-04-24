@@ -24,11 +24,10 @@ Tematy:
 - Architektura MVP
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
-- Testy jednostkowe
 
 Zadanie 1 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
-Zadanie 2 (3 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium. Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo. Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
+Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
 
 Zadanie 3 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
 
@@ -64,6 +63,7 @@ Tematy:
 - Techniki współdzielenia danych pomiędzy różnymi aplikacjami
 - Tworzenie list za pomocą RecyclerView
 - Integracja z Google Maps API
+- Testy jednostkowe
 
 Zadanie 1 (4 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
 
@@ -112,9 +112,9 @@ Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: fun
 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-- 42p - 39p - 5
-- 38p - 35p - 4.5
-- 34p - 31p - 4
-- 30p - 26p - 3.5
-- 25p - 22p - 3
-- 21p i mniej - 2
+- 41p - 38p - 5
+- 37p - 34p - 4.5
+- 33p - 30p - 4
+- 29p - 25p - 3.5
+- 24p - 21p - 3
+- 20p i mniej - 2
