@@ -16,6 +16,9 @@ Tematy:
 
 3. Zainstalować wybrabe sterowniki.
 
+Materiały pomocnicze:
+
+- https://www.download.net.pl/jak-zainstalowac-sterowniki-usb-i-adb-do-androida-w-windows/n/4061/
 
 # Laboratorium 2
 
