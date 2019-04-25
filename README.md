@@ -36,6 +36,10 @@ Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu po
 
 Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
 
+Materiały pomocnicze:
+
+- https://developer.android.com/training/testing/espresso
+
 #### Termin realizacji zadań: 02.05.2019 godz. 21.00
 
 
