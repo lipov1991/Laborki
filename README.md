@@ -27,21 +27,14 @@ Tematy:
 - Architektura MVP
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
-- Testy UI
 
-Zadanie 1 (3 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. 
+Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. 
 Uwaga: Upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment. 
-Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
 Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
 Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
 
-Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
-
-Materiały pomocnicze:
-
-- https://developer.android.com/training/testing/espresso
 
 #### Termin realizacji zadań: 02.05.2019 godz. 21.00
 
@@ -55,6 +48,8 @@ Tematy:
 - Dobre praktyki nawigowania po aplikacji
 - Tworzenie nowoczesnych kontrolek
 
+Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
+
 Zadanie 1 (3 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
 
 Zadanie 2 (3 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposón, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
@@ -63,6 +58,9 @@ Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączon
 
 Zadanie 4 (3 punkty) ???
 
+Materiały pomocnicze:
+
+- https://developer.android.com/training/testing/espresso
 
 #### Termin realizacji zadań: 09.05.2019 godz. 21.00
 
