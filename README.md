@@ -35,8 +35,11 @@ Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informaj
 
 Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
 
+Zadanie 4 (2 punkty). Utworzyć ekran powitalny (tak zwany splash screen). Każda z grup powinna zaprezentować inne rozwiązanie. 
 
-#### Termin realizacji zadań: 02.05.2019 godz. 21.00
+
+#### Termin realizacji zadań 1-3: 02.05.2019 godz. 21.00
+#### Termin realizacji zadania 4: 30.05.2019 godz. 21.00
 
 
 # Laboratorium 3
@@ -48,19 +51,13 @@ Tematy:
 - Dobre praktyki nawigowania po aplikacji
 - Tworzenie nowoczesnych kontrolek
 
-Zadanie 4 (3 punkty). Utworzyć ekran powitalny (tzw. splash screen). Każdy z zespołów powinien wymyślić oraz zrealiozować inne rozwiązanie.
+Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. 
 
-Zadanie 1 (3 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
-
-Zadanie 2 (3 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposón, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Napisać test UI w celu upewnienia się, że opisany mechanizm działa prawidłowo.
+Zadanie 2 (2 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposón, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. 
 
 Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
 
-Zadanie 4 (3 punkty) ???
-
-Materiały pomocnicze:
-
-- https://developer.android.com/training/testing/espresso
+Zadanie 4 (2 punkty) ???
 
 #### Termin realizacji zadań: 09.05.2019 godz. 21.00
 
@@ -72,9 +69,8 @@ Tematy:
 - Techniki współdzielenia danych pomiędzy różnymi aplikacjami
 - Tworzenie list za pomocą RecyclerView
 - Integracja z Google Maps API
-- Testy jednostkowe
 
-Zadanie 1 (4 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
+Zadanie 1 (3 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
 
 a) Użytkownik nie podał adresu email -  Wyświelić menu systemowe umożliwiające wybór aplikacji, za pomocą której mogą zostać przesłane współrzędne.
 
@@ -84,13 +80,11 @@ c) Użytkownik nie podał żadnych informacji - brak akcji
 
 W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
 
-Napisać testy jednostkowe sprawdzające obsługę przycisku "Share".
-
 Zadanie 2 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony.  
 
 Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
 
-Zadanie 4 (3 punkty) ???
+Zadanie 4 (2 punkty) ???
 
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
@@ -104,16 +98,22 @@ Tematy:
 - Programowanie reaktywne z wykorzystaniem biblioteki RxJava
 - Obsługa usług zewnętrznych z wykorzystaniem biblioteki Retrofit
 
-Zadanie 1 (3 punkty). Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany sprzęt. Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo.
+Zadanie 1 (2 punkty). Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany sprzęt. 
 
-Zadanie 2 (4 punkty). Po kliknięciu w marker powinien wyświetlić się dialog prezentujący szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). Napisać testy jednostkowe w celu upewnienia się, że opisane mechanizmy działają prawidłowo.
+Zadanie 2 (3 punkty). Po kliknięciu w marker powinien wyświetlić się dialog prezentujący szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). 
 
-Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/). Napisać test jednostkowy w celu upewnienia się, że opisany mechanizm działa prawidłowo.
+Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/).
 
-Zadanie 4 (3 punkty) ???
+Zadanie 4 (2 punkty) ???
 
 #### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
+
+## Ćwiczenia dla chętnych (możliwość podwyższenia oceny końcowej)
+
+Zadanie 1 (3 punkty). Napisać testy jednostkowe w celu upewnienia się, że wszystkie mechanizmy w aplikacji działają prawidłowo.
+
+Zadanie 2 (3 punkty). Napisać testy sprawdzające poprawność działania elementów UI w aplikacji.
 
 # Kryteria oceny końcowej
 
@@ -121,9 +121,9 @@ Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: fun
 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
-- 44p - 41p - 5
-- 40p - 37p - 4.5
-- 36p - 33p - 4
-- 32p - 28p - 3.5
-- 27p - 24p - 3
-- 23p i mniej - 2
+- 34p - 30p - 5
+- 29p - 27p - 4.5
+- 26p - 24p - 4
+- 23p - 21p - 3.5
+- 20p - 18p - 3
+- 17p i mniej - 2
