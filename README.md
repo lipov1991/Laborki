@@ -28,8 +28,7 @@ Tematy:
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
 
-Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. 
-Uwaga: Upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment. 
+Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. Należy upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment. 
 
 Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
 
