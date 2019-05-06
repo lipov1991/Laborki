@@ -116,7 +116,7 @@ Zadanie 2 (3 punkty). Napisać testy sprawdzające poprawność działania eleme
 
 # Kryteria oceny końcowej
 
-Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: funkcjonalność oraz styl kodu. W przypadku oddania zadania po terminie odejmowane są 2 punkty.
+Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: funkcjonalność oraz styl kodu. W przypadku oddania zadań po terminie odejmowane są 2 punkty.
 
 Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
 
