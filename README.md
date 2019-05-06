@@ -58,7 +58,7 @@ Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączon
 
 Zadanie 4 (2 punkty) ???
 
-#### Termin realizacji zadań: 09.05.2019 godz. 21.00
+#### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
 
 # Laboratorium 4
@@ -85,7 +85,7 @@ Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę na
 
 Zadanie 4 (2 punkty) ???
 
-#### Termin realizacji zadań: 16.05.2019 godz. 21.00
+#### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
 
 # Laboratorium 5
