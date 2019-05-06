@@ -50,7 +50,7 @@ Tematy:
 - Dobre praktyki nawigowania po aplikacji
 - Tworzenie nowoczesnych kontrolek
 
-Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. W przypadku wyłączonego modułu GPS użytkownik powinien zostać przekierowany do ekranu z ustawieniami GPS. Po włączeniu modułu GPS, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. 
+Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. W przypadku wyłączonego modułu GPS użytkownik powinien zostać przekierowany do ekranu z ustawieniami lokalizacji. Po włączeniu modułu GPS w trybie wysokiej dokładności, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. W trakcie przekierowania do ekranu z ustawieniami, powinien wyświetlić się komunikat: "Upewnij się, że masz włączony moduł GPS w trybie wysokiej dokładności.".
 
 Zadanie 2 (2 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. 
 
