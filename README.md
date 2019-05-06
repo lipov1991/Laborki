@@ -56,7 +56,7 @@ Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataF
 
 Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
 
-Zadanie 4 (2 punkty) Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami.
+Zadanie 4 (2 punkty) Dodać globalny mechaznim nawigacji pomiędzy ekranami.
 
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
