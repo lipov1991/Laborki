@@ -52,11 +52,11 @@ Tematy:
 
 Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. W przypadku wyłączonego modułu GPS użytkownik powinien zostać przekierowany do ekranu z ustawieniami lokalizacji. Po włączeniu modułu GPS w trybie wysokiej dokładności, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. W trakcie przekierowania do ekranu z ustawieniami, powinien wyświetlić się toast z komunikatem: "Upewnij się, że masz włączony moduł GPS w trybie wysokiej dokładności.".
 
-Zadanie 2 (2 punkty). Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami. Następnie rozszerzyć obsługę przycisku "Dalej" w klasie RecipientDataFragment w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. 
+Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataFragment.kt w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Podczas przechodzenia pomiędzy ekranami nie powinny znikać informacje o współrzędnych oraz adresie email. 
 
 Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
 
-Zadanie 4 (2 punkty) ???
+Zadanie 4 (2 punkty) Dodać globalny mechaznim umożliwiający nawigowanie pomiędzy ekranami.
 
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
