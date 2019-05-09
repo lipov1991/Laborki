@@ -54,8 +54,7 @@ Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych g
 
 * Wykorzystane biblioteki
 
-- com.google.android.gms:play-services-location:16.0.0
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+com.google.android.gms:play-services-maps:16.1.0
 
 Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataFragment.kt w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Podczas przechodzenia pomiędzy ekranami nie powinny znikać informacje o współrzędnych oraz adresie email. 
 
