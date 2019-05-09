@@ -10,6 +10,8 @@ Tematy:
 
 ## Instalacja sterowników ADB
 
+W przypadku, gdy podłączone urządzenie nie jest wykrywane, należy wykonać następujące kroki:
+
 1. W Menadżerze urządzęń wybrać nazwę podłączonego telefonu<br/> (Inne urządzenia) oraz kliknąć w opcję "Aktualizuj oprogramowanie sterownika" -> Przeglądaj mój komputer...
 
 2. Wskazać ścieżkę do zainstalowanych sterowników (android_sdk_location\extras\google\usb_driver).
