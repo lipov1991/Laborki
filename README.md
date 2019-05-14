@@ -91,6 +91,10 @@ Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę na
 
 Zadanie 4 (2 punkty) ???
 
+Materiały pomocnicze:
+
+- https://cloud.google.com/maps-platform/?apis=maps
+
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
 
