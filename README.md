@@ -89,7 +89,7 @@ Zadanie 2 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (
 
 Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
 
-Zadanie 4 (2 punkty) ???
+Zadanie 4 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
 
 Materiały pomocnicze:
 
