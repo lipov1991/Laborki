@@ -72,8 +72,6 @@ https://stackoverflow.com/questions/40760625/how-to-check-permission-in-fragment
 Tematy: 
 
 - Techniki współdzielenia danych pomiędzy różnymi aplikacjami
-- Tworzenie list za pomocą RecyclerView
-- Integracja z Google Maps API
 
 Zadanie 1 (3 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
 
@@ -85,20 +83,30 @@ c) Użytkownik nie podał żadnych informacji - brak akcji
 
 W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
 
-Zadanie 2 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony.  
+#### Termin realizacji zadań: 23.05.2019 godz. 21.00
+
+
+# Laboratorium 5
+
+Tematy: 
+
+- Tworzenie list za pomocą RecyclerView
+- Integracja z Google Maps API
+
+Zadanie 1 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony.  
+
+Zadanie 2 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
 
 Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
-
-Zadanie 4 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
 
 Materiały pomocnicze:
 
 - https://cloud.google.com/maps-platform/?apis=maps
 
-#### Termin realizacji zadań: 23.05.2019 godz. 21.00
+#### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
 
-# Laboratorium 5
+# Laboratorium 6
 
 Tematy:
 
