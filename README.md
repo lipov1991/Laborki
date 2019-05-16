@@ -83,6 +83,10 @@ c) Użytkownik nie podał żadnych informacji - brak akcji
 
 W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
 
+val encodedBody = Uri.encode(body)
+    val encodedSubject = Uri.encode(getString(subjectResId))
+    val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
+
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
 
