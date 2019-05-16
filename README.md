@@ -54,6 +54,8 @@ Tematy:
 
 Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. W przypadku wyłączonego modułu GPS użytkownik powinien zostać przekierowany do ekranu z ustawieniami lokalizacji. Po włączeniu modułu GPS w trybie wysokiej dokładności, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. W trakcie przekierowania do ekranu z ustawieniami, powinien wyświetlić się toast z komunikatem: "Upewnij się, że masz włączony moduł GPS w trybie wysokiej dokładności.".
 
+W zadaniu warto skorzystać z biblioteki com.google.android.gms:play-services-location:16.0.0
+
 Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataFragment.kt w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Podczas przechodzenia pomiędzy ekranami nie powinny znikać informacje o współrzędnych oraz adresie email. 
 
 Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
@@ -63,9 +65,6 @@ Zadanie 4 (2 punkty) Dodać globalny mechaznim nawigacji pomiędzy ekranami.
 Materiały pomocnicze:
 
 https://stackoverflow.com/questions/40760625/how-to-check-permission-in-fragment
-
-implementation 'com.google.android.gms:play-services-location:16.0.0'
-implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
@@ -86,9 +85,12 @@ c) Użytkownik nie podał żadnych informacji - brak akcji
 
 W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
 
+Sposób konfiguracji parametru "data" (wywołanie klienta poczty e-mial):
+
 val encodedBody = Uri.encode(body)
-    val encodedSubject = Uri.encode(getString(subjectResId))
-    val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
+val encodedSubject = Uri.encode(getString(subjectResId))
+val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
+... Uri.parse(mailtoUriString)
 
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
@@ -105,6 +107,8 @@ Zadanie 1 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (
 Zadanie 2 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
 
 Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
+
+W zadaniu warto skorzystać z biblioteki com.google.android.gms:play-services-maps:16.1.0
 
 Materiały pomocnicze:
 
