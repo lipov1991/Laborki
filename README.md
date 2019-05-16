@@ -64,6 +64,9 @@ Materiały pomocnicze:
 
 https://stackoverflow.com/questions/40760625/how-to-check-permission-in-fragment
 
+implementation 'com.google.android.gms:play-services-location:16.0.0'
+implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
 #### Termin realizacji zadań: 16.05.2019 godz. 21.00
 
 
