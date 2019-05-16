@@ -87,10 +87,10 @@ W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w forma
 
 Sposób konfiguracji parametru "data" (wywołanie klienta poczty e-mial):
 
-val encodedBody = Uri.encode(body)
-val encodedSubject = Uri.encode(getString(subjectResId))
-val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
-... Uri.parse(mailtoUriString)
+- val encodedBody = Uri.encode(body)
+- val encodedSubject = Uri.encode(getString(subjectResId))
+- val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
+- ... Uri.parse(mailtoUriString)
 
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
