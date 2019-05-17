@@ -56,22 +56,6 @@ Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych g
 
 W zadaniu warto skorzystać z biblioteki com.google.android.gms:play-services-location:16.0.0
 
-Komunikacja klasy LocationUtils.kt z klasą CoordinatesDataPresenter.kt:
-
-- LocationUtils.kt: 
-* val longitudeLiveData: MutableLiveData<String>
-- longitudeLiveData.value = location.longitude.toString()
-- CoordinatesDataPresenter.kt:
-*  locationUtils.longitudeLiveData.observe(fragment, Observer {
-            coordinatesDataView.showLongitude(it.toString())
-        })
-- CoordinatesDataView.kt:
-* fun showLongitude(longitude: String)
-- CoordinatesDataFragment.kt:
-* override fun showLongitude(
-        longitude: String
-    ) = longitude_text.setText(longitude)
-
 Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataFragment.kt w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Podczas przechodzenia pomiędzy ekranami nie powinny znikać informacje o współrzędnych oraz adresie email. 
 
 Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
@@ -150,7 +134,7 @@ Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wo
 
 Zadanie 4 (2 punkty) ???
 
-#### Termin realizacji zadań: 30.05.2019 godz. 21.00
+#### Termin realizacji zadań: 06.06.2019 godz. 21.00
 
 
 ## Ćwiczenia dla chętnych (możliwość podwyższenia oceny końcowej)
