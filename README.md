@@ -102,7 +102,7 @@ Tematy:
 - Tworzenie list za pomocą RecyclerView
 - Integracja z Google Maps API
 
-Zadanie 1 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium. Wybrany element listy powinien być w jakiś sposób wyróżniony.  
+Zadanie 1 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium (należy pobrać z repozytorium plik ResourcesRepository.kt). Wybrany element listy powinien być w jakiś sposób wyróżniony.  
 
 Zadanie 2 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
 
