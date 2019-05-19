@@ -108,11 +108,9 @@ Zadanie 2 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby
 
 Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
 
-W zadaniu warto skorzystać z biblioteki com.google.android.gms:play-services-maps:16.1.0
-
 Materiały pomocnicze:
 
-- https://cloud.google.com/maps-platform/?apis=maps
+- Laboratorium 5 - instrukcje do ćwiczeń.pdf
 
 #### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
