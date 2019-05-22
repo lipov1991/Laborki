@@ -126,11 +126,35 @@ Tematy:
 
 Zadanie 1 (2 punkty). Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany sprzęt. 
 
-Zadanie 2 (3 punkty). Po kliknięciu w marker powinien wyświetlić się dialog prezentujący szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). 
+- https://developers.google.com/maps/documentation/android-sdk/events (Map click / long click events)
+- https://developers.google.com/maps/documentation/android-sdk/marker
+
+Zadanie 2 (3 punkty). Po kliknięciu w marker powinno wyświetlić się okno (pop-up) prezentujące szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). 
+
+W zadaniu należy wykorzystać komponent PopupWindow:
+
+1. Utworzyć widok o nazwie pop_up.xml (mapa1.png).
+2. Utworzyć obiekt klasy PopupWindow przekazując w konstruktorze parametry:
+- view: layoutInflater.inflate(R.layout.pop_up, root)
+- width: 300dp (proszę skorzystać z funkcji convertDpToPx)
+- height: 180dp (proszę skorzystać z funkcji convertDpToPx)
+
+fun convertDpToPx(valueInDp: Float) = (valueInDp * resources.displayMetrics.density).toInt()
+
+3. Wypełnić widok informacjami odczytanami z obiektu klasy Resource. 
+4. Wyświetlić okno: popupWindow.showAtLocation(map_container, Gravity.CENTER, position.x - offsetX, position.y - offsetY)
+* map_container to id kontenera z mapą (w pliku activity_map.xml)
+* Parametr o nazwie position to pozycja markera na ekranie. Należy ją odczytać w następujący sposób:
+  projection.toScreenLocation(marker.position). Obiekt o nazwie projection to drugi parametr funkcji onMarkerClicked.
+* Parametry offsetX oraz offsetY należy obliczyć według wzoru:
+
+offsetX: convertDpToPx(180F)
+offsetY: convertDpToPx(360F)
 
 Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/).
 
 Zadanie 4 (2 punkty) ???
+
 
 #### Termin realizacji zadań: 06.06.2019 godz. 21.00
 
