@@ -103,7 +103,7 @@ Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę na
 
 Materiały pomocnicze:
 
-- PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 5 - instrukcje do ćwiczeń.pdf
+- https://github.com/lipov1991/PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 5 - instrukcje do ćwiczeń.pdf
 
 #### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
