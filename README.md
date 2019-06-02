@@ -103,7 +103,7 @@ Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę na
 
 Materiały pomocnicze:
 
-- Laboratorium 5 - instrukcje do ćwiczeń.pdf
+- PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 5 - instrukcje do ćwiczeń.pdf
 
 #### Termin realizacji zadań: 30.05.2019 godz. 21.00
 
@@ -127,7 +127,7 @@ Zadanie 4 (2 punkty) Zmienić typ mapy na GoogleMap.MAP_TYPE_HYBRID. Następnie 
 
 Materiały pomocnicze:
 
-- Laboratorium 6- instrukcje do ćwiczeń.pdf
+- PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 6- instrukcje do ćwiczeń.pdf
 
 #### Termin realizacji zadań: 06.06.2019 godz. 21.00
 
