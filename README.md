@@ -85,13 +85,6 @@ c) Użytkownik nie podał żadnych informacji - brak akcji
 
 W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
 
-Sposób konfiguracji parametru "data" (wywołanie klienta poczty e-mial):
-
-- val encodedBody = Uri.encode(body)
-- val encodedSubject = Uri.encode(getString(subjectResId))
-- val mailtoUriString = getString(R.string.mailto_uri_format, recipientAddress, encodedSubject, encodedBody)
-- ... Uri.parse(mailtoUriString)
-
 #### Termin realizacji zadań: 23.05.2019 godz. 21.00
 
 
@@ -144,6 +137,7 @@ Materiały pomocnicze:
 Zadanie 1 (3 punkty). Napisać testy jednostkowe w celu upewnienia się, że wszystkie mechanizmy w aplikacji działają prawidłowo.
 
 Zadanie 2 (3 punkty). Napisać testy sprawdzające poprawność działania elementów UI w aplikacji.
+
 
 # Kryteria oceny końcowej
 
