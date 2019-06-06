@@ -1,4 +1,4 @@
-# Laboratorium 1 (przygotowanie środowiska developerskiego)
+# Laboratorium 1
 
 ## Instalacja sterowników ADB
 
@@ -13,6 +13,7 @@ W przypadku, gdy podłączone urządzenie nie jest wykrywane, należy wykonać n
 Materiały pomocnicze:
 
 - https://www.download.net.pl/jak-zainstalowac-sterowniki-usb-i-adb-do-androida-w-windows/n/4061/
+
 
 # Laboratorium 2
 
@@ -33,7 +34,6 @@ Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informaj
 Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
 
 Zadanie 4 (2 punkty). Utworzyć ekran powitalny (tak zwany splash screen). Każda z grup powinna zaprezentować inne rozwiązanie. 
-
 
 #### Termin realizacji zadań 1-3: 02.05.2019 godz. 21.00
 #### Termin realizacji zadania 4: 30.05.2019 godz. 21.00
