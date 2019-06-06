@@ -1,12 +1,4 @@
-# Laboratorium 1 
-
-Tematy:
-
-- Przygotowanie środowiska developerskiego
-- Podstawy języka Kotlin
-- Zapoznanie się z aplikacją "Laborki" 
-- Tworzenie dialogów z wykorzystaniem klasy AlertDialog
-- Podstawy obsługi stosu
+# Laboratorium 1 (przygotowanie środowiska developerskiego)
 
 ## Instalacja sterowników ADB
 
@@ -26,6 +18,10 @@ Materiały pomocnicze:
 
 Tematy: 
 
+- Podstawy języka Kotlin
+- Zapoznanie się z aplikacją "Laborki" 
+- Tworzenie dialogów z wykorzystaniem klasy AlertDialog
+- Podstawy obsługi stosu
 - Architektura MVP
 - Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
 - Wzorzec Repository
