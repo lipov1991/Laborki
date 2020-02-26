@@ -6,8 +6,7 @@ Celem laboratoriów jest zapoznanie studentów z nowoczesnymi technikami tworzen
 # Sposób realizacji projektu
 
 Projekt jest realizowany w grupach dwuosobowych. Na początku każda z grup tworzy brancz (z developa) i nazywa go według schemtu: nazwisko1_nazwisko2.
-Każde zadanie powinno zostać zakończone commitem z wiadomością według schematu: lab_nr (np. lab_1). Po pierwszym commicie (tylko) należy wykonać pull requesta do developa.
-W celu zaliczenia zadania należy w określonym terminie wykonać commit do brancza develop.
+Każde zadanie powinno zostać zakończone commitem z wiadomością według schematu: lab_nr (np. lab_1). Po pierwszym commicie (tylko) należy wykonać pull requesta do developa. W celu zaliczenia zadania należy w określonym terminie wykonać commit.
 
 
 # Laboratorium 1
@@ -69,9 +68,9 @@ W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przy
 
 Skala ocen:
 
-100%-91% - 5
-90%-86%  - 4.5
-85%-71%  - 4
-70%-61%  - 3.5
-60%-51%  - 3
+100%-91% - 5<br/>
+90%-86%  - 4.5<br/>
+85%-71%  - 4<br/>
+70%-61%  - 3.5<br/>
+60%-51%  - 3<br/>
  <50%    - 2
