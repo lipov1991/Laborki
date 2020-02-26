@@ -1,3 +1,5 @@
+TEST
+
 # Cel laboratoriów
 
 Celem laboratoriów jest zapoznanie studentów z nowoczesnymi technikami tworzenia aplikacji na Androida. Na każdych zajęciach rozwijana jest aplikacja o nazwie "Laborki". 
