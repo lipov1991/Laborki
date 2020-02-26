@@ -15,7 +15,7 @@ Każde zadanie powinno zostać zakończone commitem z wiadomością według sche
 Tematy: 
 
 - Przygotowanie środowiska programistycznego
-- Architektura MVVN
+- Architektura MVVM
 - Wstrzykiwanie zależności
 - Zapoznanie się z szablonem aplikacji "Laborki"
 - Obsługa gestów
