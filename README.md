@@ -22,7 +22,7 @@ Tematy:
 
 Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
 
-<b>Zadanie1 (2p).</b> Obsłużyć następujące zdarzenia na głównym ekranie aplikacji: długie klieknięcie w ekran, podwójne kliknięcie w ekran oraz zmiana przyśpieszenia (kątowego i liniowego). Po wykryciu zdarzenia na ekranie powinien pojawić się odpowiedni tekst (LONG_CLICK, DOUBLE_TAP, ACCELERATION_CHANGE). Do obsługi kliknięć należy użyć klasy GestureDetector.SimpleOnGestureListener. W celu wykrycia zmiany ruchu należy zaimplementować interefs SensorEventListener. W zadaniu należy skorzystać z klas pomocniczych: GestureDetectorUtils oraz SensorEventsUtils.
+<b>Zadanie1 (2p).</b> Obsłużyć następujące zdarzenia na głównym ekranie aplikacji: przytrzymanie palca na ekranie, podwójne kliknięcie w ekran oraz zmiana przyśpieszenia (kątowego i liniowego). Po wykryciu zdarzenia na ekranie powinien pojawić się odpowiedni tekst (LONG_PRESS, DOUBLE_TAP, ACCELERATION_CHANGE). Do obsługi kliknięć należy użyć klasy GestureDetector.SimpleOnGestureListener. W celu wykrycia zmiany ruchu należy zaimplementować interefs SensorEventListener. W zadaniu należy skorzystać z klas pomocniczych: GestureDetectorUtils oraz SensorEventsUtils.
 
 #### Termin realizacji zadania: 04.03.2020 godz. 21.00
 
