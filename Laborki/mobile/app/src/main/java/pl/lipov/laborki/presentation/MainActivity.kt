@@ -15,10 +15,6 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        observeLiveDataEvents()
-    }
-
-    private fun observeLiveDataEvents() {
         viewModel.run {
             onAccelerometerNotDetected.observe(::getLifecycle) {
                 info_text.text = getString(R.string.no_accelerometer_detected)

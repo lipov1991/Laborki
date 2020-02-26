@@ -4,7 +4,7 @@ enum class Event(
     private val value: Int
 ) {
 
-    LONG_CLICK(1),
+    LONG_PRESS(1),
     DOUBLE_TAP(2),
     ACCELERATION_CHANGE(3)
 }
