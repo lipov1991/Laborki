@@ -1,7 +1,6 @@
 package pl.lipov.laborki.presentation
 
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,8 +15,6 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        info_text.setOnTouchListener(viewModel.getOnTouchListener())
-        viewModel.registerSensorEventListener()
         observeLiveDataEvents()
     }
 
@@ -33,17 +30,5 @@ class MainActivity : AppCompatActivity() {
                 info_text.text = it.name
             }
         }
-    }
-
-    override fun onTouchEvent(
-        event: MotionEvent
-    ): Boolean {
-        viewModel.onTouchEvent(event)
-        return super.onTouchEvent(event)
-    }
-
-    override fun onDestroy() {
-        viewModel.unregisterSensorEventListener()
-        super.onDestroy()
     }
 }

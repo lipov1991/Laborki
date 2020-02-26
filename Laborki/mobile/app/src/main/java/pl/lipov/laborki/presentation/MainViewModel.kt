@@ -1,7 +1,5 @@
 package pl.lipov.laborki.presentation
 
-import android.view.MotionEvent
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
@@ -19,16 +17,4 @@ class MainViewModel(
         sensorEventsUtils.onAccelerometerNotDetected
     val onGestureEvent: MutableLiveData<Event> = gestureDetectorUtils.onEvent
     val onSensorEvent: MutableLiveData<Event> = sensorEventsUtils.onEvent
-
-    fun getOnTouchListener(): View.OnTouchListener = gestureDetectorUtils
-
-    fun onTouchEvent(
-        event: MotionEvent
-    ) {
-        gestureDetectorUtils.onTouchEvent(event)
-    }
-
-    fun registerSensorEventListener() = sensorEventsUtils.registerSensorEventListener()
-
-    fun unregisterSensorEventListener() = sensorEventsUtils.unregisterSensorEventListener()
 }
