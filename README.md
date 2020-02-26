@@ -1,18 +1,20 @@
+# Cel laboratoriów
+
+Celem laboratoriów jest zapoznanie studentów z nowoczesnymi technikami tworzenia aplikacji na Androida. Na każdych zajęciach rozwijana jest aplikacja o nazwie "Laborki". 
+
+
+# Sposób realizacji projektu
+
+Projekt jest realizowany w grupach dwuosobowych. Na początku każda z grup tworzy brancz (z developa) i nazywa go według schemtu: nazwisko1_nazwisko2.
+Każde zadanie powinno zostać zakończone commitem z wiadomością według schematu: lab_nr (np. lab_1). Po pierwszym commicie (tylko) należy wykonać pull requesta do developa.
+W celu zaliczenia zadania należy w określonym terminie wykonać commit do brancza develop.
+
+
 # Laboratorium 1
 
-## Instalacja sterowników ADB
+Temat: Przygotowanie środowiska programistycznego
 
-W przypadku, gdy podłączone urządzenie nie jest wykrywane, należy wykonać następujące kroki:
-
-1. W Menadżerze urządzęń wybrać nazwę podłączonego telefonu<br/> (Inne urządzenia) oraz kliknąć w opcję "Aktualizuj oprogramowanie sterownika" -> Przeglądaj mój komputer...
-
-2. Wskazać ścieżkę do zainstalowanych sterowników (android_sdk_location\extras\google\usb_driver).
-
-3. Zainstalować wybrabe sterowniki.
-
-Materiały pomocnicze:
-
-- https://www.download.net.pl/jak-zainstalowac-sterowniki-usb-i-adb-do-androida-w-windows/n/4061/
+Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
 
 
 # Laboratorium 2
@@ -20,130 +22,56 @@ Materiały pomocnicze:
 Tematy: 
 
 - Podstawy języka Kotlin
-- Zapoznanie się z aplikacją "Laborki" 
-- Tworzenie dialogów z wykorzystaniem klasy AlertDialog
-- Podstawy obsługi stosu
-- Architektura MVP
-- Wstrzykiwanie zależności z wykorzystaniem biblioteki Dagger 2
-- Wzorzec Repository
+- Architektura MVVN
+- Wstrzykiwanie zależności
+- Zapoznanie się z szablonem aplikacji "Laborki"
 
-Zadanie 1 (2 punkty). Dodać obsługę przycisku "Wstecz". Przed wyjściem z aplikacji powinien pojawić się dialog z prośbą o potwierdzenie decyzji. Klasa AlertDialogUtils.kt powinna być dołączona do fragmentu za pomocą mechanizmu DI. Należy upewnić się, że dialog jest wyświetlany tylko w przypadku, gdy na stosie znajduje się jeden fragment. 
-
-Zadanie 2 (1 punkt). Dodać repozytorium umożliwiające przechowywanie informajci o podanym mailu oraz współrzędnych geograficznych.
-
-Zadanie 3 (2 punkty). Dodać obsługę przycisku "Dalej". Po jego kliknięciu podany adres email powinien zostać zapisany w repozytorium.  Obsłużyć klawiaturę systemową w taki sposób, żeby przycisk "Dalej" był widoczny w momencie wpisywania tekstu. 
-
-Zadanie 4 (2 punkty). Utworzyć ekran powitalny (tak zwany splash screen). Każda z grup powinna zaprezentować inne rozwiązanie. 
-
-#### Termin realizacji zadań 1-3: 02.05.2019 godz. 21.00
-#### Termin realizacji zadania 4: 30.05.2019 godz. 21.00
+#### Termin realizacji zadania: 04.03.2020 godz. 21.00
 
 
 # Laboratorium 3
 
 Tematy:
 
-- Uprawnienia
-- Obsługa GPS
-- Dobre praktyki nawigowania po aplikacji
-- Tworzenie nowoczesnych kontrolek
+- Tworzenie widoków
+- Obsługa gestów
 
-Zadanie 1 (2 punkty). Utworzyć widok umożliwiający podanie współrzędnych geograficznych (coordinates.png). Po wyświetleniu ekranu użytkownik powinien zostać poproszony o udzielenie dostępu do lokalizacji. W przypadku wyłączonego modułu GPS użytkownik powinien zostać przekierowany do ekranu z ustawieniami lokalizacji. Po włączeniu modułu GPS w trybie wysokiej dokładności, współrzędne użytkownika powinny zostać automatycznie wyświetlone w formularzu. W trakcie przekierowania do ekranu z ustawieniami, powinien wyświetlić się toast z komunikatem: "Upewnij się, że masz włączony moduł GPS w trybie wysokiej dokładności.".
-
-W zadaniu warto skorzystać z biblioteki com.google.android.gms:play-services-location:16.0.0
-
-Zadanie 2 (2 punkty). Dodać obsługę przycisku "Dalej" w klasie RecipientDataFragment.kt w taki sposób, aby po jego kliknięciu wyświetlił się ekran ze współrzędnymi. Podczas przechodzenia pomiędzy ekranami nie powinny znikać informacje o współrzędnych oraz adresie email. 
-
-Zadanie 3 (2 punkty). Poprawić wygląd komponentu EditText zgodnie z dołączonym zdjęciem (custom_edit_text.png).
-
-Zadanie 4 (2 punkty) Dodać globalny mechaznim nawigacji pomiędzy ekranami.
-
-Materiały pomocnicze:
-
-https://stackoverflow.com/questions/40760625/how-to-check-permission-in-fragment
-
-#### Termin realizacji zadań: 16.05.2019 godz. 21.00
+#### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
 
 # Laboratorium 4
 
 Tematy: 
 
-- Techniki współdzielenia danych pomiędzy różnymi aplikacjami
+- Obsługa usług zewnętrznych z wykorzystaniem biblioteki Retrofit
+- Programowanie reaktywne z wykorzystaniem biblioteki RxJava
 
-Zadanie 1 (3 punkty). Obsłużyć przycisk "Share" w każdym z opsianych poniżej przypadków:
-
-a) Użytkownik nie podał adresu email -  Wyświelić menu systemowe umożliwiające wybór aplikacji, za pomocą której mogą zostać przesłane współrzędne.
-
-b) użytkownik podał wszystkie dane (adres email oraz współrzędne) - Otworzyć aplikację umożliwiającą wysyłanie emaila.
-
-c) Użytkownik nie podał żadnych informacji - brak akcji
-
-W pierwszym oraz drugim przypadku należy automatycznie uzupełnić dane w formacie: "longitude: xxx; latitude: xxx".
-
-#### Termin realizacji zadań: 23.05.2019 godz. 21.00
+#### Termin realizacji zadania: 18.03.2020 godz. 21.00
 
 
 # Laboratorium 5
 
-Tematy: 
+Temat: Integracja z Google Maps API
 
-- Tworzenie list za pomocą RecyclerView
-- Integracja z Google Maps API
-
-Zadanie 1 (2 punkty). Utworzyć ekran z listą prezentującą sprzęt wojskowy (mapa_1.png). Informacje o sprzęcie można pobrać z repozytorium (należy pobrać z repozytorium plik ResourcesRepository.kt).  
-
-Zadanie 2 (2 punkty) Poprawić listę utworzoną w zadaniu 2 w taki sposób, aby jej elementy były oddzielone poziomą linią. Wybrany element listy powinien być w jakiś sposób wyróżniony.
-
-Zadanie 3 (2 punkty). Zintegrować aplikację z Google Maps API. Dodać mapę nad listą prezentującą sprzęt wojskowy (mapa_1.png). Mapa powinna prezentować obszar określony za pomocą współrzędnych pobranych na poprzednim ekranie. 
-
-Materiały pomocnicze:
-
-- PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 5 - instrukcje do ćwiczeń.pdf
-
-#### Termin realizacji zadań: 30.05.2019 godz. 21.00
+#### Termin realizacji zadania: 25.03.2020 godz. 21.00
 
 
 # Laboratorium 6
 
-Tematy:
+Temat: Interakcja z mapą
 
-- Interakcja z mapą
-- Obsługa markerów
-- Programowanie reaktywne z wykorzystaniem biblioteki RxJava
-- Obsługa usług zewnętrznych z wykorzystaniem biblioteki Retrofit
-
-Zadanie 1 (2 punkty). Po dłuższym przytrzymaniu punktu na mapie, w jego miejscu powinien pojawić się wybany sprzęt. 
-
-Zadanie 2 (3 punkty). Po kliknięciu w marker powinno wyświetlić się okno (pop-up) prezentujące szczegóły techniczne urządzenia. Dodać ikonę umożliwiającą usuwanie zaznaczonego urządzenia z mapy (mapa_1.png). 
-
-Zadanie 3 (3 punkty). Dodać mechanizm zabezpieczający przed umieszczaniem w wodzie obiektów z kategorii sił lądowych. W analogiczny sposób należy uniemożliwić umieszczanie na lądzie obiektów z kategorii marynarki wojennej. W przypadku naruszenia tych zasad, powinien wyświetlić się stosowny komunikat (mapa_2.png). W celu wykonania ćwiczenia należy skorzystać z API o nazwie On Water (https://onwater.io/).
-
-Zadanie 4 (2 punkty) Zmienić typ mapy na GoogleMap.MAP_TYPE_HYBRID. Następnie dodać obsługę akcji kliknięcia w obiekty POI (points of interests). Po kliknęciu w obiekt, w jego miejscu powinien pojawić się marker z nazwą obiektu.
-
-Materiały pomocnicze:
-
-- PMAG/Materiały pomocnicze/Instrukcje do ćwiczeń/Laboratorium 6- instrukcje do ćwiczeń.pdf
-
-#### Termin realizacji zadań: 06.06.2019 godz. 21.00
+#### Termin realizacji zadania: 01.04.2020 godz. 21.00
 
 
-## Ćwiczenia dla chętnych (możliwość podwyższenia oceny końcowej)
+# Ocena końcowa
 
-Zadanie 1 (3 punkty). Napisać testy jednostkowe w celu upewnienia się, że wszystkie mechanizmy w aplikacji działają prawidłowo.
+W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie odejmowane są 2 punkty.
 
-Zadanie 2 (3 punkty). Napisać testy sprawdzające poprawność działania elementów UI w aplikacji.
+Skala ocen:
 
-
-# Kryteria oceny końcowej
-
-Za wszystkie zadania można otrzymać łącznie 42 punkty. Uwględniane są: funkcjonalność oraz styl kodu. W przypadku oddania zadań po terminie odejmowane są 2 punkty.
-
-Poniżej przedstawiono wymaganą ilość punktów na poszczególne oceny:
-
-- 34p - 30p - 5
-- 29p - 27p - 4.5
-- 26p - 24p - 4
-- 23p - 21p - 3.5
-- 20p - 18p - 3
-- 17p i mniej - 2
+100%-91% - 5
+90%-86%  - 4.5
+85%-71%  - 4
+70%-61%  - 3.5
+60%-51%  - 3
+ <50%    - 2
