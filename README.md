@@ -12,19 +12,17 @@ Każde zadanie powinno zostać zakończone commitem z wiadomością według sche
 
 # Laboratorium 1
 
-Temat: Przygotowanie środowiska programistycznego
-
-Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
-
-
-# Laboratorium 2
-
 Tematy: 
 
-- Podstawy języka Kotlin
+- Przygotowanie środowiska programistycznego
 - Architektura MVVN
 - Wstrzykiwanie zależności
 - Zapoznanie się z szablonem aplikacji "Laborki"
+- Obsługa gestów
+
+Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
+
+<b>Zadanie1 (2p).</b> Obsłużyć następujące zdarzenia na głównym ekranie aplikacji: długie klieknięcie w ekran, podwójne kliknięcie w ekran oraz zmiana przyśpieszenia (kątowego i liniowego). Po wykryciu zdarzenia na ekranie powinien pojawić się odpowiedni tekst (LONG_CLICK, DOUBLE_TAP, ACCELERATION_CHANGE). Do obsługi kliknięć należy użyć klasy GestureDetector.SimpleOnGestureListener. W celu wykrycia zmiany ruchu należy zaimplementować interefs SensorEventListener. W zadaniu należy skorzystać z klas pomocniczych: GestureDetectorUtils oraz SensorEventsUtils.
 
 #### Termin realizacji zadania: 04.03.2020 godz. 21.00
 
@@ -34,7 +32,6 @@ Tematy:
 Tematy:
 
 - Tworzenie widoków
-- Obsługa gestów
 
 #### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
