@@ -35,6 +35,7 @@ Tematy:
 
 - Tworzenie widoków
 - Obsługa gestów
+- Obsługa sensorów
 
 #### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
