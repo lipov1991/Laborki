@@ -1,4 +1,3 @@
-TEST
 
 # Cel laboratoriów
 
