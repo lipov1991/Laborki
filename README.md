@@ -27,16 +27,14 @@ Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%
 #### Termin realizacji zadania: 04.03.2020 godz. 21.00
 
 
-# Laboratorium 3
+# Laboratorium 2
 
-Tematy:
-
-- Tworzenie widoków
+Temat: Tworzenie widoków
 
 #### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
 
-# Laboratorium 4
+# Laboratorium 3
 
 Tematy: 
 
@@ -46,19 +44,21 @@ Tematy:
 #### Termin realizacji zadania: 18.03.2020 godz. 21.00
 
 
-# Laboratorium 5
+# Laboratorium 4
 
 Temat: Integracja z Google Maps API
 
 #### Termin realizacji zadania: 25.03.2020 godz. 21.00
 
 
-# Laboratorium 6
+# Laboratorium 5
 
 Temat: Interakcja z mapą
 
 #### Termin realizacji zadania: 01.04.2020 godz. 21.00
 
+CDN...
+-
 
 # Ocena końcowa
 
