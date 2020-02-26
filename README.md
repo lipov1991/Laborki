@@ -69,9 +69,9 @@ W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przy
 
 Skala ocen:
 
-100%-91% - 5
-90%-86%  - 4.5
-85%-71%  - 4
-70%-61%  - 3.5
-60%-51%  - 3
+100%-91% - 5</br>
+90%-86%  - 4.5</br>
+85%-71%  - 4</br>
+70%-61%  - 3.5</br>
+60%-51%  - 3</br>
  <50%    - 2
