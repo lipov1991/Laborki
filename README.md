@@ -21,7 +21,7 @@ Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%
 Tematy: 
 
 - Podstawy języka Kotlin
-- Architektura MVVN
+- Architektura MVVM
 - Wstrzykiwanie zależności
 - Zapoznanie się z szablonem aplikacji "Laborki"
 
