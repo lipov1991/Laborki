@@ -1,5 +1,8 @@
 package pl.lipov.laborki
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -18,8 +21,18 @@ private const val LOGIN_API_ENDPOINT = "http://apka.targislubne.pl/"
 
 val utilsModule = module {
     single { GestureDetectorUtils() }
-    single { SensorEventsUtils() }
+    factory { provideSensorManager(context = get()) }
+    factory { provideAccelerometer(sensorManager = get()) }
+    single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
 }
+
+private fun provideSensorManager(
+    context: Context
+): SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+private fun provideAccelerometer(
+    sensorManager: SensorManager
+): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
 val networkModule = module {
     factory { provideOkHttpClient() }
