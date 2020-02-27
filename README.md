@@ -5,9 +5,8 @@ Celem laboratoriów jest zapoznanie studentów z nowoczesnymi technikami tworzen
 
 # Sposób realizacji projektu
 
-Projekt jest realizowany w grupach dwuosobowych. Na początku każda z grup tworzy brancz (z developa) i nazywa go według schemtu: nazwisko1_nazwisko2.
-Każde zadanie powinno zostać zakończone commitem z wiadomością według schematu: lab_nr (np. lab_1). Po pierwszym commicie (tylko) należy wykonać pull requesta do developa.
-W celu zaliczenia zadania należy w określonym terminie wykonać commit do brancza develop.
+Projekt jest realizowany w grupach dwuosobowych. Projekty należy nazywać według schemtu: nazwisko1_nazwisko2.
+W celu zaliczenia zadania należy w określonym terminie przesłać zadanie na adres klipka@n7mobile.com.
 
 
 # Laboratorium 1
