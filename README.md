@@ -19,17 +19,27 @@ Tematy:
 - Wstrzykiwanie zależności
 - Zapoznanie się z szablonem aplikacji "Laborki"
 - Obsługa gestów
+- Obsługa sensorów
 
-Materiały pomocnicze: https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
+<b>Zadanie 1 (2p).</b> Obsłużyć następujące zdarzenia na głównym ekranie aplikacji: przytrzymanie palca na ekranie, podwójne kliknięcie w ekran oraz zmiana przyśpieszenia (akceleracji). Po wykryciu zdarzenia, na ekranie powinien pojawić się odpowiedni tekst (LONG_PRESS, DOUBLE_TAP, ACCELERATION_CHANGE). Do obsługi kliknięć należy użyć klasy GestureDetector.SimpleOnGestureListener. W celu wykrycia zmiany przyśpieszenia należy zaimplementować interefs SensorEventListener. W zadaniu należy skorzystać z klas pomocniczych: GestureDetectorUtils oraz SensorEventsUtils. Zdarzenie ACCELERATION_CHANGE powinno być emitowane tylko wtedy, gdy  parametry x i y przyjmują wartości większe od 5m/s^2. W przypadku gdy nie wykryto ackelerometra (accelerometer == null), na głównym ekranie powinien wyświetlić się tekst "Nie wykryto akcelerometra.".
 
-<b>Zadanie1 (2p).</b> Obsłużyć następujące zdarzenia na głównym ekranie aplikacji: przytrzymanie palca na ekranie, podwójne kliknięcie w ekran oraz zmiana przyśpieszenia (kątowego i liniowego). Po wykryciu zdarzenia na ekranie powinien pojawić się odpowiedni tekst (LONG_PRESS, DOUBLE_TAP, ACCELERATION_CHANGE). Do obsługi kliknięć należy użyć klasy GestureDetector.SimpleOnGestureListener. W celu wykrycia zmiany ruchu należy zaimplementować interefs SensorEventListener. W zadaniu należy skorzystać z klas pomocniczych: GestureDetectorUtils oraz SensorEventsUtils.
+Materiały pomocnicze: 
+
+- https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%201.pdf
+- https://developer.android.com/training/gestures/detector
+- https://developer.android.com/guide/topics/sensors/sensors_motion
 
 #### Termin realizacji zadania: 04.03.2020 godz. 21.00
 
 
 # Laboratorium 2
 
-Temat: Tworzenie widoków
+Tematy: 
+
+
+- Tworzenie widoków
+
+<b>Zadanie 2 (2p).</b> 
 
 #### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
