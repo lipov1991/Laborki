@@ -18,11 +18,31 @@ class SensorEventsUtils(
     }
 
     val onEvent = MutableLiveData<Event>()
-    val onAccelerometerNotDetected = MutableLiveData<Unit>()
+    val onAccelerometerNotDetected = MutableLiveData<String>()
+
+    init
+    {
+        if (accelerometer == null)
+        {
+            onAccelerometerNotDetected.postValue("Nie wykryto akcelerometra.")
+        }
+        else
+        {
+            sensorManager.registerListener(this, accelerometer, 4000)
+        }
+    }
 
     override fun onSensorChanged(
         sensorEvent: SensorEvent
     ) {
+        if(sensorEvent.sensor == accelerometer)
+        {
+            if(sensorEvent.values[0] > 5 && sensorEvent.values[1] > 5)
+            {
+                onEvent.postValue(Event.ACCELERATION_CHANGE)
+            }
+        }
+
     }
 
     override fun onAccuracyChanged(
