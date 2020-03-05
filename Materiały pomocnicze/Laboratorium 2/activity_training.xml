@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.TrainingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/ic_bordered_star"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_star_border"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/ic_star"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_star"
+            android:contentDescription="@null" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/play_button_text" />
+
+</RelativeLayout>
