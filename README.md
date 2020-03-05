@@ -74,7 +74,7 @@ CDN...
 
 # Ocena końcowa
 
-W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie odejmowane są 2 punkty.
+W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie można uzyskać co najwyżej połowę punktów.
 
 Skala ocen:
 
