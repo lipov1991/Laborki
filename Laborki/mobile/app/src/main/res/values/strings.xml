@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Laborki</string>
-    <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
+    <string name="no_accelerometer_detected">Nie wykryto akcelerometru.</string>
+    <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
+    <string name="unlock_button_text">Odblokuj telefon</string>
+    <string name="unlock_text">Nacisnij przycisk by odblokowac</string>
+    <string name="unlock_device_text">Podaj sekwencje by odblokowac</string>
 </resources>
