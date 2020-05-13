@@ -186,7 +186,6 @@ Tematy:
 
 - Menu w toolbarze
 - STT (Speech To Text)
-- Wykorzystanie informacji o sile sygnału Wi-Fi do lokalizacji urządzenia
 
 <b>Zadanie 9 (3p).</b> Po załadowaniu mapy proszę przybliżyć kamerę w taki sposób, aby cała Warszawa była widoczna. Zablokować możliwość zmniejszania zooma do wartości mniejszej niż początkowa (widok miasta). Dodać ikonę mikrofonu do toolbara. Po kliknięciu w mikrofon wyświetlić dialog STT. Proszę obsłużyć następujące hasła: "zaludnienie", "markety", "banki", "fast-foody". Aktywowana opcja ma być zwizualizowana za pomocą Heatmapy. U dołu ekranu ma się wyświetlać się tylko 1 przycisk - do rozwijania listy z galeriami. Pozostałe przyciski (market, fast-food, bank) mają być widoczne dopiero po wybraniu galerii z listy. Proszę ukrywać przyciski (market, fast-food, bank) w momencie znikania panelu do wyboru piętra.
 
@@ -197,6 +196,17 @@ Materiały pomocnicze:
 #### Termin realizacji zadania: 24.05.2020 godz. 23.59
 
 # CDN...
+
+
+# Laboratorium 10
+
+Tematy:
+
+- Wykorzystanie informacji o sile sygnału Wi-Fi do lokalizacji urządzenia
+- Implementacja kompasu
+
+<b>Zadanie 10 (2p).</b> Proszę utworzyć prosty kompas zgodnie z następującym filmem: 
+https://drive.google.com/open?id=1-Uo18J18W0Jez_u6URccsC_5iYvQiVHE
 
 
 # Ocena końcowa
