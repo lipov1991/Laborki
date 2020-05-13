@@ -195,8 +195,6 @@ Materiały pomocnicze:
 
 #### Termin realizacji zadania: 24.05.2020 godz. 23.59
 
-# CDN...
-
 
 # Laboratorium 10
 
@@ -207,6 +205,15 @@ Tematy:
 
 <b>Zadanie 10 (2p).</b> Proszę utworzyć prosty kompas zgodnie z następującym filmem: 
 https://drive.google.com/open?id=1-Uo18J18W0Jez_u6URccsC_5iYvQiVHE
+
+Materiały pomocnicze:
+
+- https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%2010
+
+#### Termin realizacji zadania: 31.05.2020 godz. 23.59
+
+
+# CDN...
 
 
 # Ocena końcowa
