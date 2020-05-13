@@ -36,12 +36,16 @@ Materiały pomocnicze:
 
 Tematy: 
 
-- Tworzenie widoków
+- Aktywności
 - Animacje
 - Kolekcje
 
 <b>Zadanie 2 (3p).</b> Dodać mechanizm uwierzytelniania użytkownika na podstawie gestów i zmiany akceleracji. Prawidłowa sekwencja zdarzeń to: DOUBLE_TAP, DOUBLE_TAP, LONG_PRESS, ACCELERATION_CHANGE. Po 3 nieudanych próbach logowania należy zablokować interfejs. 
 W ocenie zadania będzie również uwzględniony wkład artystyczny. Interfejs powinien być instuicyjny.
+
+Materiały pomocnicze:
+
+- https://github.com/lipov1991/PMAG/tree/develop/Materia%C5%82y%20pomocnicze/Laboratorium%202
 
 #### Termin realizacji zadania: 11.03.2020 godz. 21.00
 
@@ -50,31 +54,154 @@ W ocenie zadania będzie również uwzględniony wkład artystyczny. Interfejs p
 
 Tematy: 
 
-- Obsługa usług zewnętrznych z wykorzystaniem biblioteki Retrofit
-- Programowanie reaktywne z wykorzystaniem biblioteki RxJava
+- Tworzenie warstw w widokach
+- Tworzenie nowoczesnych kontrolek
+- Fragmenty
+- Komunikacja z bazą danych Firebase
 
-#### Termin realizacji zadania: 18.03.2020 godz. 21.00
+<b>Zadanie 3 (3p).</b> Dodać splash screen oraz 2 ekrany logowania. Na pierwszym z nich proszę umieścić kontrolkę EditText do loginu. Drugi ekran ma prezentować komponent wykonany w ramach poprzednich laboratoriów. Loginy oraz klucze (eventy) są przechowywane w bazie danych Firebase.
+
+Instrukcja do zadania wraz z makietami: 
+
+https://github.com/lipov1991/PMAG/tree/develop/Materia%C5%82y%20pomocnicze/Labolatorium%203
+
+Materiały pomocnicze:
+
+- https://firebase.google.com/docs/database/android/start
+
+#### Termin realizacji zadania: 08.04.2020 godz. 21.00
 
 
 # Laboratorium 4
 
-Temat: Integracja z Google Maps API
+Tematy: 
 
-#### Termin realizacji zadania: 25.03.2020 godz. 21.00
+- Integracja z Google Maps API
+- Komunikacja fragmentu z aktywnością
+
+<b>Zadanie 4 (3p).</b> Po zalogowaniu wyświetlić mapę. Po załadowaniu mapy płynnie wycentrować kamerę na Galerii Wileńskiej (latitude: 52.2550; longitude: 21.0378). Poziom przybliżenia ustawić na 18. Galeria ma być oznaczona markerem z tytułem "Galeria Wileńska". U dołu ekranu mają się wyswietlać się 3 przyciski (FloatingActionButton) umożliwiające umieszczanie w galerii lokali 3 różnych kategorii: market, restauracja, bank. Po kliknięciu w przycisk ma nastąpić zmiana aktywnej kategorii lokalu. Ustawienie lokalu w wybranej lokalizacji ma być możliwe po przytrzymaniu palca w wybranym punkcie. Po kliknięciu (krótkim) w lokal nad jego markerem ma się wyświetlić tytuł z nazwą kategorii. Po długim kliknięciu w lokal ma się włączyć tryb drag and drop. Ograniczyć liczbę lokali z każdej kategorii do jednego. Umożliwić usuwanie lokalu z mapy. 
+
+Materiały pomocnicze:
+
+- https://developers.google.com/maps/documentation/android-sdk/start
+- https://developers.google.com/maps/documentation/android-sdk/views#updating_the_camera_view
+- https://developers.google.com/maps/documentation/android-sdk/views#zoom
+
+#### Termin realizacji zadania: 19.04.2020 godz. 23.59
 
 
 # Laboratorium 5
 
-Temat: Interakcja z mapą
+Temat: Indoor Maps
 
-#### Termin realizacji zadania: 01.04.2020 godz. 21.00
+<b>Zadanie 5 (2p).</b> Obsłużyć opcję zmiany piętra: lokal umieszczony na n-tym piętrze ma być widoczny tylko na tym piętrze. Zablokować możliwość umieszczania lokalu w momencie gdy przyciski do zmiany piętra są niewidoczne.
 
-CDN...
--
+Materiały pomocnicze:
+
+- https://developers.google.com/maps/documentation/android-sdk/map#indoor_maps
+- https://developers.google.com/maps/documentation/android-sdk/reference/com/google/android/libraries/maps/GoogleMap#setOnIndoorStateChangeListener(com.google.android.libraries.maps.GoogleMap.OnIndoorStateChangeListener)
+
+#### Termin realizacji zadania: 26.04.2020 godz. 23.59
+
+
+# Laboratorium 6
+
+Tematy: 
+
+- BottomSheetDialogFragment
+- RecyclerView
+
+<b>Zadanie 6 (2p).</b> 
+
+Dodać przycisk (w lewym dolnym rogu) umożliwiający wybór bydynku. Po kliknięciu w przycisk ma się wyświetlić komponent bottom sheet 
+z listą dostępnych budynków. Po wybraniu budynku:
+- płynnie wycentrować kamerę w okreśonej lokalizacji,
+- usunąć markery: Market, Fast food, Bank (jeśli znajdują się na mapie),
+- zresetować statusy przycisków: Market, Fast food, Bank (domyślnie aktywnym przyciskiem powinien być Market).
+
+Współrzędne budynków:
+- Galeria Mokotów (52.1797645,21.0035337)
+- Galeria Wileńska (52.2550, 21.0378) 
+- Westfield Arkadia (52.2571543,20.9823334)
+
+#### Termin realizacji zadania: 03.05.2020 godz. 23.59
+
+
+# Laboratorium 7
+
+Tematy:
+
+- Tworzenie dialogów zgodnie ze specyfiką Material Design
+- Heatmap
+
+<b>Zadanie 7 (2p).</b> Dodać przycisk (w prawym górnym rogu) do wysyłania na serwer planu zagospodarowania budynku. Na ten moment obsługa przycisku powinna wyglądać w uproszczony sposób: 
+
+1. Wyświetlenie toasta z tekstem "Plan zagospodarowania został wysłany na serwer.".
+2. Usunięcie markerów: Market, Fast food, Bank (jeśli znajdują się na mapie).
+3. Zresetowanie statusów przycisków: Market, Fast food, Bank (domyślnie aktywnym przyciskiem powinien być Market).
+
+W przypadku zmiany galerii bez uprzedniego kliknięcia w przycisk do uploadowania, powinien wyświetlić się dialog:
+
+- tytuł: nazwa aktywnej galerii (którą użytkownik zamierza "opóścić")
+- treść: "Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?"
+- przycisk NIE: zamknięcie dialogu
+- przycisk TAK: usunięcie markerów: Market, Fast food, Bank (jeśli znajdują się na mapie) + zresetowanie statusów przycisków: 
+  Market, Fast food, Bank (domyślnie aktywnym przyciskiem powinien być Market) + zamknięcie dialogu.
+  
+Dialog powinien się również wyświetlić po kliknięcia Wstecz (na ekranie z mapą) bez uprzedniego kliknięcia w przycisk do uploadowania. W tym przypadku dialog powinien mieć tytuł: "Wyjście z aplikacji".
+
+Materiały pomocnicze:
+- https://github.com/afollestad/material-dialogs
+
+#### Termin realizacji zadania: 10.05.2020 godz. 23.59
+
+Proszę zapoznać się dobrze z opisem narzędzia Heatmap: https://developers.google.com/maps/documentation/android-sdk/utility/heatmap. Zdobyta w tym zakresie wiedza będzie potrzebna na kolejnych zajęciach. 
+
+
+# Laboratorium 8
+
+Tematy:
+
+- Integracja z REST API
+- Programowanie reaktywne
+- Heatmap
+
+<b>Zadanie 8 (3p).</b> Po załadowaniu mapy pobrać z serwera informacje dotyczące gęstości zaludnienia oraz gęstości rozmieszczenia lokali (banki, markety, restauracje) w Warszawie. Należy skorzystać z usług:
+ 
+- GET https://unburdened-aluminum.000webhostapp.com/getDistricts.php,
+- GET https://unburdened-aluminum.000webhostapp.com/getPlaces.php. 
+
+Pobrane dane proszę zwizualizować wykorzystując narzędzie Heatmap. Należy zadbać o obsługę błędów komunkacji z API.
+
+Materiały pomocnicze:
+- https://square.github.io/retrofit/
+
+
+#### Termin realizacji zadania: 17.05.2020 godz. 23.59
+
+
+# Laboratorium 9
+
+Tematy:
+
+- Menu w toolbarze
+- STT (Speech To Text)
+- Wykorzystanie informacji o sile sygnału Wi-Fi do lokalizacji urządzenia
+
+<b>Zadanie 9 (3p).</b> Po załadowaniu mapy proszę przybliżyć kamerę w taki sposób, aby cała Warszawa była widoczna. Zablokować możliwość zmniejszania zooma do wartości mniejszej niż początkowa (widok miasta). Dodać ikonę mikrofonu do toolbara. Po kliknięciu w mikrofon wyświetlić dialog STT. Proszę obsłużyć następujące hasła: "zaludnienie", "markety", "banki", "fast-foody". Aktywowana opcja ma być zwizualizowana za pomocą Heatmapy. U dołu ekranu ma się wyświetlać się tylko 1 przycisk - do rozwijania listy z galeriami. Pozostałe przyciski (market, fast-food, bank) mają być widoczne dopiero po wybraniu galerii z listy. Proszę ukrywać przyciski (market, fast-food, bank) w momencie znikania panelu do wyboru piętra.
+
+Materiały pomocnicze:
+
+- https://developer.android.com/reference/android/speech/RecognizerIntent#ACTION_RECOGNIZE_SPEECH
+
+#### Termin realizacji zadania: 24.05.2020 godz. 23.59
+
+# CDN...
+
 
 # Ocena końcowa
 
-W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie można uzyskać co najwyżej połowę punktów.
+W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie odejmowany jest 1 punkt.
 
 Skala ocen:
 
