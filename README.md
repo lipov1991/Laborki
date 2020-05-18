@@ -168,8 +168,7 @@ Tematy:
 
 <b>Zadanie 8 (3p).</b> Po załadowaniu mapy pobrać z serwera informacje dotyczące gęstości zaludnienia oraz gęstości rozmieszczenia lokali (banki, markety, restauracje) w Warszawie. Należy skorzystać z usług:
  
-- GET https://unburdened-aluminum.000webhostapp.com/getDistricts.php,
-- GET https://unburdened-aluminum.000webhostapp.com/getPlaces.php. 
+- GET https://unburdened-aluminum.000webhostapp.com/getDistricts.php
 
 Pobrane dane proszę zwizualizować wykorzystując narzędzie Heatmap. Należy zadbać o obsługę błędów komunkacji z API.
 
