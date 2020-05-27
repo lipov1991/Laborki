@@ -240,6 +240,7 @@ Materiały pomocnicze:
 - https://developer.android.com/reference/android/app/IntentService
 - https://developer.android.com/training/location/retrieve-current
 - https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
+- https://developer.android.com/guide/topics/permissions/overview
 
 
 # CDN...
