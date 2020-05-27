@@ -212,6 +212,36 @@ Materiały pomocnicze:
 #### Termin realizacji zadania: 31.05.2020 godz. 23.59
 
 
+# Laboratorium 11
+
+Tematy:
+
+- Rodzaje serwisów 
+- Klasa Service
+- Zarządzanie usługami
+- Komunikacja z usługami
+- Zabezpieczenie przed anulowaniem operacji
+
+Materiały pomocnicze:
+
+- https://developer.android.com/guide/components/services
+
+
+# Laboratorium 12
+
+Tematy:
+
+- Klasa IntentService
+- Lokalizowanie użytkownika
+- Uprawnienia
+
+Materiały pomocnicze:
+
+- https://developer.android.com/reference/android/app/IntentService
+- https://developer.android.com/training/location/retrieve-current
+- https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
+
+
 # CDN...
 
 
