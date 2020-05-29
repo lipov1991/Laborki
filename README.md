@@ -166,9 +166,7 @@ Tematy:
 - Programowanie reaktywne
 - Heatmap
 
-<b>Zadanie 8 (3p).</b> Po załadowaniu mapy pobrać z serwera informacje dotyczące gęstości zaludnienia w Warszawie. Należy skorzystać z usług:
- 
-- GET https://unburdened-aluminum.000webhostapp.com/getDistricts.php
+<b>Zadanie 8 (3p).</b> Po załadowaniu mapy pobrać z serwera informacje dotyczące gęstości zaludnienia w Warszawie. Należy skorzystać z usługi GET https://unburdened-aluminum.000webhostapp.com/getDistricts.php.
 
 Pobrane dane proszę zwizualizować wykorzystując narzędzie Heatmap. Należy zadbać o obsługę błędów komunkacji z API.
 
