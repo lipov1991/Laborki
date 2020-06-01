@@ -240,8 +240,14 @@ Materiały pomocnicze:
 - https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
 - https://developer.android.com/guide/topics/permissions/overview
 
+<b>Zadanie 12 (2p).</b> Zaproponować prosty algorytm dla systemu wspomagania decyzji wyboru najlepszej dzielnicy pod kątem rozmieszczania w niej lokali określonego typu (banki, fast-foody, markety). W kryterium oceny dzielnicy można uwzględnić na przykład liczbę mieszkańców. 
 
-# CDN...
+#### Termin realizacji zadania: 14.06.2020 godz. 23.59
+
+
+# Laboratorium 13
+
+Ostatnie laboratoria są poświęcone na konsultacje.
 
 
 # Ocena końcowa
