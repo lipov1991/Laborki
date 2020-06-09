@@ -250,6 +250,17 @@ Materiały pomocnicze:
 Ostatnie laboratoria są poświęcone na konsultacje.
 
 
+# Warunki zaliczenia laboratoriów na ocenę dostateczną
+
+1. Zaliczone przynajmniej 5 zadań w ramach aplikacji "Laborki".
+2. Wykonanie w ciągu 5 dni dodatkowego zadania.
+
+Przykładowe zadanie dodatkowe: 
+
+Utworzyć aplikację wyświetlającą mapę z zaznaczoną markerem lokalizacją użytkownika.  Informacja o lokalizacji powinna być pobierana cyklicznie co 20 sekund, a następnie zapisywana do pliku w formacie JSON. W pliku mają być przechowywane zawsze tylko najnowsze informacje - co najwyżej 5 ostatnich lokalizacji. Historię lokalizacji należy wizualizować za pomocą heatmapy. Heatmapa powinna być widoczna przez cały czas pod warunkiem, że historia nie jest pusta.  
+
+
+
 # Ocena końcowa
 
 W ocenie końcowej uwględniane są: działanie aplikacji oraz styl kodu. W przypadku oddania zadania po terminie odejmowany jest 1 punkt.
