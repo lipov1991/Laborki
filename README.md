@@ -267,7 +267,7 @@ Skala ocen:
 # Warunki zaliczenia laboratoriów na ocenę dostateczną
 
 1. Zaliczone przynajmniej 5 zadań w ramach aplikacji "Laborki".
-2. Wykonanie w ciągu 5 dni dodatkowego zadania.
+2. Wykonanie w ciągu 7 dni dodatkowego zadania.
 
 Przykładowe zadanie dodatkowe: 
 
