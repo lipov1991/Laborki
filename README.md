@@ -29,7 +29,7 @@ Materiały pomocnicze:
 - https://developer.android.com/training/gestures/detector
 - https://developer.android.com/guide/topics/sensors/sensors_motion
 
-#### Termin realizacji zadania: 04.03.2020 godz. 21.00
+#### Termin realizacji zadania: 04.03.2021 godz. 21.00
 
 
 # Laboratorium 2
@@ -47,7 +47,7 @@ Materiały pomocnicze:
 
 - https://github.com/lipov1991/PMAG/tree/develop/Materia%C5%82y%20pomocnicze/Laboratorium%202
 
-#### Termin realizacji zadania: 11.03.2020 godz. 21.00
+#### Termin realizacji zadania: 11.03.2021 godz. 21.00
 
 
 # Laboratorium 3
@@ -69,7 +69,7 @@ Materiały pomocnicze:
 
 - https://firebase.google.com/docs/database/android/start
 
-#### Termin realizacji zadania: 08.04.2020 godz. 21.00
+#### Termin realizacji zadania: 08.04.2021 godz. 21.00
 
 
 # Laboratorium 4
@@ -87,7 +87,7 @@ Materiały pomocnicze:
 - https://developers.google.com/maps/documentation/android-sdk/views#updating_the_camera_view
 - https://developers.google.com/maps/documentation/android-sdk/views#zoom
 
-#### Termin realizacji zadania: 19.04.2020 godz. 23.59
+#### Termin realizacji zadania: 19.04.2021 godz. 23.59
 
 
 # Laboratorium 5
@@ -101,7 +101,7 @@ Materiały pomocnicze:
 - https://developers.google.com/maps/documentation/android-sdk/map#indoor_maps
 - https://developers.google.com/maps/documentation/android-sdk/reference/com/google/android/libraries/maps/GoogleMap#setOnIndoorStateChangeListener(com.google.android.libraries.maps.GoogleMap.OnIndoorStateChangeListener)
 
-#### Termin realizacji zadania: 26.04.2020 godz. 23.59
+#### Termin realizacji zadania: 26.04.2021 godz. 23.59
 
 
 # Laboratorium 6
@@ -124,7 +124,7 @@ Współrzędne budynków:
 - Galeria Wileńska (52.2550, 21.0378) 
 - Westfield Arkadia (52.2571543,20.9823334)
 
-#### Termin realizacji zadania: 03.05.2020 godz. 23.59
+#### Termin realizacji zadania: 03.05.2021 godz. 23.59
 
 
 # Laboratorium 7
@@ -153,7 +153,7 @@ Dialog powinien się również wyświetlić po kliknięcia Wstecz (na ekranie z 
 Materiały pomocnicze:
 - https://github.com/afollestad/material-dialogs
 
-#### Termin realizacji zadania: 10.05.2020 godz. 23.59
+#### Termin realizacji zadania: 10.05.2021 godz. 23.59
 
 Proszę zapoznać się dobrze z opisem narzędzia Heatmap: https://developers.google.com/maps/documentation/android-sdk/utility/heatmap. Zdobyta w tym zakresie wiedza będzie potrzebna na kolejnych zajęciach. 
 
@@ -174,7 +174,7 @@ Materiały pomocnicze:
 - https://square.github.io/retrofit/
 
 
-#### Termin realizacji zadania: 17.05.2020 godz. 23.59
+#### Termin realizacji zadania: 17.05.2021 godz. 23.59
 
 
 # Laboratorium 9
@@ -190,7 +190,7 @@ Materiały pomocnicze:
 
 - https://developer.android.com/reference/android/speech/RecognizerIntent#ACTION_RECOGNIZE_SPEECH
 
-#### Termin realizacji zadania: 24.05.2020 godz. 23.59
+#### Termin realizacji zadania: 24.05.2021 godz. 23.59
 
 
 # Laboratorium 10
@@ -207,7 +207,7 @@ Materiały pomocnicze:
 
 - https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%2010
 
-#### Termin realizacji zadania: 31.05.2020 godz. 23.59
+#### Termin realizacji zadania: 31.05.2021 godz. 23.59
 
 
 # Laboratorium 11
@@ -242,7 +242,7 @@ Materiały pomocnicze:
 
 <b>Zadanie 12 (2p).</b> Zaproponować prosty algorytm dla systemu wspomagania decyzji wyboru najlepszej dzielnicy pod kątem rozmieszczania w niej lokali określonego typu (banki, fast-foody, markety). W kryterium oceny dzielnicy można uwzględnić na przykład liczbę mieszkańców. 
 
-#### Termin realizacji zadania: 14.06.2020 godz. 23.59
+#### Termin realizacji zadania: 14.06.2021 godz. 23.59
 
 
 # Laboratorium 13
