@@ -11,5 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/no_accelerometer_detected" />
+    
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zaloguj"/>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package pl.lipov.laborki.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
@@ -17,6 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.loginResult.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
+
+        binding.loginButton.setOnClickListener{
+            viewModel.signIn("Lipov", "abc")
+        }
+
         viewModel.run {
             onAccelerometerNotDetected.observe(this@MainActivity) {
                 binding.info.text = getString(R.string.no_accelerometer_detected)
