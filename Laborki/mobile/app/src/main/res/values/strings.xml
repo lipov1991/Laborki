@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Laborki</string>
     <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
+    <string name="sign_in_button">Zaloguj się</string>
 </resources>
