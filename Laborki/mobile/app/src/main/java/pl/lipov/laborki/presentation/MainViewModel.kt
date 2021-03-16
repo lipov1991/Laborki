@@ -6,7 +6,6 @@ import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
-import java.lang.Exception
 
 class MainViewModel(
     private val gestureDetectorUtils: GestureDetectorUtils,
@@ -19,12 +18,11 @@ class MainViewModel(
     val onGestureEvent: MutableLiveData<Event> = gestureDetectorUtils.onEvent
     val onSensorEvent: MutableLiveData<Event> = sensorEventsUtils.onEvent
 
-    val loginResult: MutableLiveData<String> = loginRepository.loginResult
+    fun getGestureDetector (): GestureDetectorUtils {
+        return gestureDetectorUtils
+    }
 
-    fun signIn(
-        login: String,
-        password: String
-    ) {
-        loginRepository.signIn(login, password)
+    fun getSensorEvent (): SensorEventsUtils {
+        return sensorEventsUtils
     }
 }
