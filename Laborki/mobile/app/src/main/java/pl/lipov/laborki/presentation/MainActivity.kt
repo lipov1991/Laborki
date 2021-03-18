@@ -1,8 +1,5 @@
 package pl.lipov.laborki.presentation
 
-import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Toast
@@ -17,8 +14,6 @@ class MainActivity : AppCompatActivity(), LoginCallback {
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private lateinit var mDetector: GestureDetectorCompat
-    private lateinit var sensorManager: SensorManager
-    private lateinit var sensor: Sensor
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -27,9 +22,8 @@ class MainActivity : AppCompatActivity(), LoginCallback {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mDetector = GestureDetectorCompat(this, viewModel.getGestureDetector())
-        sensorManager = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
+
 
 //        supportFragmentManager
 //                .beginTransaction()
@@ -51,8 +45,13 @@ class MainActivity : AppCompatActivity(), LoginCallback {
     }
 
     override fun onResume() {
-        sensorManager.registerListener(viewModel.getSensorEvent(), sensor, SensorManager.SENSOR_DELAY_NORMAL)
         super.onResume()
+        viewModel.registerSensorEventListener()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.unregisterSensorEventListener()
     }
 
     override fun onLoginSuccess() {

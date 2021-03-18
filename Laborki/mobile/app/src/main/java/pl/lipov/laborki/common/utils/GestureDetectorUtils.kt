@@ -22,5 +22,4 @@ class GestureDetectorUtils : GestureDetector.SimpleOnGestureListener() {
         onEvent.postValue(Event.DOUBLE_TAP)
         return super.onDoubleTap(e)
     }
-
 }
