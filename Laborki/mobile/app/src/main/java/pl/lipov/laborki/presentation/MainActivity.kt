@@ -46,9 +46,6 @@ class MainActivity :
 
         mDetector = GestureDetectorCompat(this, MyGestureListener(this))
         setUp()
-
-
-
     }
 
     override fun onLoginSuccess() {
@@ -115,8 +112,8 @@ class MainActivity :
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
 
             val currentX = event.values[0]
-            val currentY = event.values[1]
-            val currentZ = event.values[2]
+            //val currentY = event.values[1]
+            //val currentZ = event.values[2]
 
 
             if (currentX.toInt() > 5  ) {
