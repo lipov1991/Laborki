@@ -23,6 +23,8 @@ class SensorEventsUtils(
     override fun onSensorChanged(
         sensorEvent: SensorEvent
     ) {
+        //onAccelerometerNotDetected.postValue(Unit)
+        //sensorEvent.accuracy
     }
 
     override fun onAccuracyChanged(
