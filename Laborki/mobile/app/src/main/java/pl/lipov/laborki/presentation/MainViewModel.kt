@@ -18,6 +18,7 @@ class MainViewModel(
     val onGestureEvent: MutableLiveData<Event> = gestureDetectorUtils.onEvent
     val onSensorEvent: MutableLiveData<Event> = sensorEventsUtils.onEvent
 
+    var attemptEnterPassword = MutableLiveData<Event>()
 
     fun registerSensorEventListener() {
         sensorEventsUtils.registerEventListener()

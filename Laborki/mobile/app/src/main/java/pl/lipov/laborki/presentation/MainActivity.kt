@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), LoginCallback {
+class MainActivity : AppCompatActivity(){
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -24,22 +24,21 @@ class MainActivity : AppCompatActivity(), LoginCallback {
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
-
-//        supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.fragment_container, LoginFragment())// or .add
-//                //.addToBackStack(null)  - optional add to back stack
-//                .commit()
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, LoginFragment())// or .add
+                //.addToBackStack(null)  - optional add to back stack
+                .commit()
 
         viewModel.run {
             onAccelerometerNotDetected.observe(this@MainActivity) {
-                binding.info.text = getString(R.string.no_accelerometer_detected)
+                Toast.makeText(this@MainActivity, R.string.no_accelerometer_detected, Toast.LENGTH_LONG).show()
             }
             onGestureEvent.observe(this@MainActivity) {
-                binding.info.text = it.name
+                attemptEnterPassword.postValue(it)
             }
             onSensorEvent.observe(this@MainActivity) {
-                binding.info.text = it.name
+                attemptEnterPassword.postValue(it)
             }
         }
     }
@@ -52,10 +51,6 @@ class MainActivity : AppCompatActivity(), LoginCallback {
     override fun onPause() {
         super.onPause()
         viewModel.unregisterSensorEventListener()
-    }
-
-    override fun onLoginSuccess() {
-        Toast.makeText(this, "Witaj", Toast.LENGTH_LONG).show()
     }
 
     override fun onTouchEvent(
