@@ -7,11 +7,40 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zaloguj" />
+
+    <View
+        android:id="@+id/ic_star1"
+        android:layout_width="@dimen/lock_icon_size"
+        android:layout_height="@dimen/lock_icon_size"
+        android:background="@drawable/ic_star"
+        android:contentDescription="@null" />
+
+    <View
+        android:id="@+id/ic_star2"
+        android:layout_width="@dimen/lock_icon_size"
+        android:layout_height="@dimen/lock_icon_size"
+        android:background="@drawable/ic_star"
+        android:contentDescription="@null" />
+
+    <View
+        android:id="@+id/ic_star3"
+        android:layout_width="@dimen/lock_icon_size"
+        android:layout_height="@dimen/lock_icon_size"
+        android:background="@drawable/ic_star"
+        android:contentDescription="@null" />
+
+    <View
+        android:id="@+id/ic_star4"
+        android:layout_width="@dimen/lock_icon_size"
+        android:layout_height="@dimen/lock_icon_size"
+        android:background="@drawable/ic_star"
+        android:contentDescription="@null" />
+
+<!--        <Button-->
+<!--            android:id="@+id/login_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Zaloguj" />-->
     </LinearLayout>
 
 </layout>

@@ -5,6 +5,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import pl.lipov.laborki.data.model.Event
 
@@ -20,9 +21,14 @@ class SensorEventsUtils(
     val onEvent = MutableLiveData<Event>()
     val onAccelerometerNotDetected = MutableLiveData<Unit>()
 
-    override fun onSensorChanged(
-        sensorEvent: SensorEvent
-    ) {
+    override fun onSensorChanged(event: SensorEvent?) {
+        val x = event?.values!![0]
+        val y = event.values!![1]
+        val z = event.values!![2]
+
+        if ((x > 5) or (y > 5)) {
+            onEvent.postValue(Event.ACCELERATION_CHANGE)
+        }
     }
 
     override fun onAccuracyChanged(
@@ -30,5 +36,13 @@ class SensorEventsUtils(
         accuracy: Int
     ) {
         Log.d(TAG, "${sensor.name} accuracy changed to $accuracy.")
+    }
+
+    fun listenerRegistration() {
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    fun listenerUnregistration() {
+        sensorManager.unregisterListener(this, accelerometer)
     }
 }
