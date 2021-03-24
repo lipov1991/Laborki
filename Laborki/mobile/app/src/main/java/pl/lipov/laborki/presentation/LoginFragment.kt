@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
     private var eventHolder = mutableListOf<Event>()
     private var failedAttempts: Int = 0
     private val unlockKey =
-        listOf<Event>(Event.DOUBLE_TAP, Event.DOUBLE_TAP, Event.DOUBLE_TAP, Event.DOUBLE_TAP)
+        listOf<Event>(Event.LONG_CLICK, Event.DOUBLE_TAP, Event.DOUBLE_TAP, Event.ACCELERATION_CHANGE)
 
     override fun onAttach(
         context: Context
