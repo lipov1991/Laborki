@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Laborki</string>
-    <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
+
     <string name="test_message">Hello World!</string>
+    <string name="app_name">Laborki</string>
+    <string name="no_accelerometer_detected">Nie wykryto akcelerometru.</string>
+    <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
+    <string name="play_button_text">PLAY</string>
 </resources>

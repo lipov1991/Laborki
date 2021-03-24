@@ -1,14 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
-
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "pl.lipov.laborki"
-        minSdkVersion 26
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
@@ -26,8 +26,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-}
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
+    dataBinding{
+        enabled = true
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -45,6 +51,7 @@ dependencies {
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
 }

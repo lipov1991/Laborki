@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pl.lipov.laborki.R
+import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
 import pl.lipov.laborki.presentation.login.LoginCallback
+import pl.lipov.laborki.presentation.login.LoginFragment
 
 class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 
@@ -18,7 +22,7 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
     private val accelerometrThreshold : Float = 5.0F
 
 
-
+    val viewConnector: ConnectViewModel by viewModels()
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
@@ -46,9 +50,9 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 //            .addToBackStack(null)
 //            .commit()
 
-//        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment())
-//            .addToBackStack(null)
-//            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment())
+            .addToBackStack(null)
+            .commit()
 
 //        viewModel.run {
 //            onAccelerometerNotDetected.observe(this@MainActivity) {
@@ -68,18 +72,20 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         return super.onTouchEvent(event)
     }
 
-        private class MyGestureListener(acti: AppCompatActivity) :
+        private class MyGestureListener(acti: MainActivity) :
             GestureDetector.SimpleOnGestureListener() {
 
-            private var mainactiviy : AppCompatActivity = acti
+            private var mainactiviy : MainActivity = acti
 
             override fun onDoubleTap(e: MotionEvent?): Boolean {
                 Toast.makeText(mainactiviy, "DOUBLE_TAP", Toast.LENGTH_SHORT).show()
+                mainactiviy.viewConnector.getEvent.postValue(Event.DOUBLE_TAP)
                 return super.onDoubleTap(e)
             }
 
             override fun onLongPress(e: MotionEvent?) {
                 Toast.makeText(mainactiviy, "LONG_PRESS", Toast.LENGTH_SHORT).show()
+                mainactiviy.viewConnector.getEvent.postValue(Event.LONG_CLICK)
                 super.onLongPress(e)
             }
 
@@ -98,9 +104,12 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         if (event != null){
             if(Math.abs(event.values[0]) > accelerometrThreshold && Math.abs(event.values[1]) > accelerometrThreshold){
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
+                viewConnector.getEvent.postValue(Event.ACCELERATION_CHANGE)
+                println("Działa")
             }
             else if(event.values[0] == 0.0F && event.values[1] == 0.0F){
                 Toast.makeText(this, "Nie wykryto akcelerometra", Toast.LENGTH_SHORT).show()
+                println("Nie działa")
             }
         }
     }
