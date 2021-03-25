@@ -23,18 +23,20 @@ class MainActivity :
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction().replace(
-            R.id.fragment_container,
-            LoginFragment()
-        )
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            .replace(
+                R.id.fragment_container,
+                LoginFragment()
+            )
             .addToBackStack(null)
             .commit()
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
-
-
 
         viewModel.run {
 //            onAccelerometerNotDetected.observe(this@MainActivity) {
