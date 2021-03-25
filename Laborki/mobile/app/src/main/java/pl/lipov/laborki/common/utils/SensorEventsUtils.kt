@@ -3,13 +3,13 @@ package pl.lipov.laborki.common.utils
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import pl.lipov.laborki.data.model.Event
+import pl.lipov.laborki.presentation.MainActivity
 
 class SensorEventsUtils(
-    private val sensorManager: SensorManager,
+    private val sensorManager: MainActivity,
     private val accelerometer: Sensor?
 ) : SensorEventListener {
 
