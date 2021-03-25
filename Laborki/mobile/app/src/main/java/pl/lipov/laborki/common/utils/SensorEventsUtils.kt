@@ -21,10 +21,16 @@ class SensorEventsUtils(
     val onAccelerometerNotDetected = MutableLiveData<Unit>()
 
     override fun onSensorChanged(
-        sensorEvent: SensorEvent
+        event: SensorEvent
     ) {
-        //onAccelerometerNotDetected.postValue(Unit)
-        //sensorEvent.accuracy
+        if ((event.values[0] > 5.0) && (event.values[1] > 5.0)) {
+            val sensorName: String = event?.sensor!!.getName();
+            Log.d(
+                "Sensor",
+                sensorName + ": X: " + event.values[0] + "; Y: " + event.values[1] + "; Z: " + event.values[2] + ";"
+            )
+            onEvent.postValue(Event.ACCELERATION_CHANGE)
+        }
     }
 
     override fun onAccuracyChanged(
@@ -32,5 +38,17 @@ class SensorEventsUtils(
         accuracy: Int
     ) {
         Log.d(TAG, "${sensor.name} accuracy changed to $accuracy.")
+    }
+
+    fun registerEventListener() {
+        if (accelerometer == null) {
+            onAccelerometerNotDetected.postValue(Unit)
+        } else {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    fun unregisterEventListener() {
+        sensorManager.unregisterListener(this, accelerometer)
     }
 }
