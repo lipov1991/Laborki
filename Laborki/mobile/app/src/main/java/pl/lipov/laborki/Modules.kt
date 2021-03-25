@@ -67,8 +67,7 @@ val viewModelsModule = module {
     viewModel {
         MainViewModel(
             gestureDetectorUtils = get(),
-            sensorEventsUtils = get(),
-            loginRepository = get()
+            sensorEventsUtils = get()
         )
     }
 }

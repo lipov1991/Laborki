@@ -9,13 +9,12 @@ import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
 
 class MainViewModel(
-    val gestureDetectorUtils: GestureDetectorUtils,
-    val sensorEventsUtils: SensorEventsUtils,
-    private val loginRepository: LoginRepository
+        val gestureDetectorUtils: GestureDetectorUtils,
+        val sensorEventsUtils: SensorEventsUtils
 ) : ViewModel() {
 
     val onAccelerometerNotDetected: MutableLiveData<Unit> =
-        sensorEventsUtils.onAccelerometerNotDetected
+            sensorEventsUtils.onAccelerometerNotDetected
     val onGestureEvent: MutableLiveData<Event> = gestureDetectorUtils.onEvent
     val onSensorEvent: MutableLiveData<Event> = sensorEventsUtils.onEvent
 
@@ -27,4 +26,5 @@ class MainViewModel(
         sensorEventsUtils.unregisterSensorEventListener()
     }
 
+    val eventList: MutableLiveData<Event> = MutableLiveData()
 }

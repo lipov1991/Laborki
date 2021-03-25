@@ -11,9 +11,9 @@ import pl.lipov.laborki.data.model.Event
 import java.time.chrono.JapaneseEra.values
 
 class SensorEventsUtils(
-    private val sensorManager: SensorManager, //zarejstrowanie Listerenra za pomocą, sensorManager.registerListener(...
-    //sensorManager.unregisterListener(this) wyeretrowanie
-    private val accelerometer: Sensor?
+        private val sensorManager: SensorManager, //zarejstrowanie Listerenra za pomocą, sensorManager.registerListener(...
+        //sensorManager.unregisterListener(this) wyeretrowanie
+        private val accelerometer: Sensor?
 ) : SensorEventListener {
 
     companion object {
@@ -24,8 +24,8 @@ class SensorEventsUtils(
     val onAccelerometerNotDetected = MutableLiveData<Unit>()
 
     override fun onAccuracyChanged(
-        sensor: Sensor,
-        accuracy: Int
+            sensor: Sensor,
+            accuracy: Int
     ) {
         Log.d(TAG, "${sensor.name} accuracy changed to $accuracy.")
     }

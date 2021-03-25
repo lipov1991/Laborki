@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.TrainingActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/ic_emotions"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_emotions"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:id="@+id/ic_emotions_2"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_emotions"
+                android:contentDescription="@null" />
+
+            <View
+                android:id="@+id/ic_emotions_3"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_emotions"
+                android:contentDescription="@null" />
+
+            <View
+                android:id="@+id/ic_emotions_4"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_emotions"
+                android:contentDescription="@null" />
+
+        </LinearLayout>
+
+<!--        <Button-->
+<!--            android:id="@+id/play_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:text="@string/sign_in" />-->
+
+    </RelativeLayout>
+</layout>

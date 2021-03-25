@@ -5,18 +5,17 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.runBlocking
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
-import java.util.concurrent.TimeUnit
 
-//class MainActivity : AppCompatActivity(), LoginCallback {
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), LoginCallback{
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -24,63 +23,40 @@ class MainActivity : AppCompatActivity(){
     private lateinit var sensorManager: SensorManager
     private var mSensor: Sensor? = null
 
-
     override fun onCreate(
-        savedInstanceState: Bundle?
+            savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager
+                .beginTransaction()     //transakcja przejscia do pierwszego fragmentu
+                .replace(R.id.fragment_container, LoginFragment())      //zamiana zawartosci konteneru activity_main.xml na LoginFragment
+                .commit()
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        suspend fun delay(time: Long, unit: TimeUnit = TimeUnit.MILLISECONDS) {}
-
-
-        //       viewModel.loginResult.observe(::getLifecycle) { result->
-        //           Toast.makeText(this, result, Toast.LENGTH_LONG).show()
-//        } //obsługa rezultatu
-
-//        binding.loginButton.setOnClickListener {
-//            viewModel.signIn("Pati", password = "abc")
-//        } //podpięcie akcji,wywołoanie funkcji do logowania w odpowiedzi do przyciśnięcia przycisku
-
         viewModel.run {
             onAccelerometerNotDetected.observe(::getLifecycle) {
-                binding.info.text = getString(R.string.no_accelerometer_detected)
             }
-            runBlocking {
-                delay(10, TimeUnit.SECONDS)
-                onGestureEvent.observe(::getLifecycle){
-                    binding.info.text = it.name
-                }
+            onGestureEvent.observe(::getLifecycle){
+                viewModel.eventList.postValue(it)
             }
             onSensorEvent.observe(::getLifecycle) {
-                binding.info.text = it.name
+                viewModel.eventList.postValue(it)
             }
         }
-    }
-
-//    override fun onLoginSuccess() {
-//        Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show()
-//    }
-
-//    override fun onTouchEvent(
-//        event: MotionEvent?
-//    ): Boolean {
-//        //event?.action
-    //       return super.onTouchEvent(event)
-    //   }//możemy ją nadpisać
+   }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         mDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
     }
 
-    //funkcje do accelerometera
     override fun onResume() { //zarejstrować SensorEventListener
         super.onResume()
         viewModel.registerSensorEventListener()
@@ -90,6 +66,16 @@ class MainActivity : AppCompatActivity(){
         super.onPause()
         viewModel.unregisterSensorEventListener()
     }
+
+    override fun onLoginSuccess() {
+        Toast.makeText(this, "Udało się zalogować", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onLoginUnSuccess() {
+        Toast.makeText(this, "Nie udało się zalogować", Toast.LENGTH_LONG).show()
+    }
+
+    override fun Block() {
+        Toast.makeText(this, "Zablokowano interfejs", Toast.LENGTH_LONG).show()
+    }
 }
-
-
