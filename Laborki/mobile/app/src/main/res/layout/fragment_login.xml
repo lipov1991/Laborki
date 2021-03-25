@@ -13,42 +13,44 @@
             android:orientation="vertical">
 
             <View
-                android:id="@+id/ic_bordered_star"
+                android:id="@+id/ic_fire1"
                 android:layout_width="@dimen/lock_icon_size"
                 android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_bordered_star"
-                android:visibility="invisible"
-                tools:ignore="ContentDescription" />
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"
+                android:visibility="invisible"/>
+
+
 
             <View
-                android:id="@+id/ic_star"
+                android:id="@+id/ic_fire"
                 android:layout_width="@dimen/lock_icon_size"
                 android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
+                android:background="@drawable/ic_fire"
                 android:contentDescription="@null"
                 android:visibility="invisible" />
 
             <View
-                android:id="@+id/ic_star2"
+                android:id="@+id/ic_fire2"
                 android:layout_width="@dimen/lock_icon_size"
                 android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
+                android:background="@drawable/ic_fire"
                 android:contentDescription="@null"
                 android:visibility="invisible" />
 
             <View
-                android:id="@+id/ic_star3"
+                android:id="@+id/ic_fire3"
                 android:layout_width="@dimen/lock_icon_size"
                 android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
+                android:background="@drawable/ic_fire"
                 android:contentDescription="@null"
                 android:visibility="invisible" />
 
             <View
-                android:id="@+id/ic_star4"
+                android:id="@+id/ic_fire4"
                 android:layout_width="@dimen/lock_icon_size"
                 android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
+                android:background="@drawable/ic_fire"
                 android:contentDescription="@null"
                 android:visibility="invisible" />
 
