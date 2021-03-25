@@ -28,30 +28,6 @@
                 android:contentDescription="@null"
                 android:visibility="invisible" />
 
-            <View
-                android:id="@+id/ic_star2"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
-
-            <View
-                android:id="@+id/ic_star3"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
-
-            <View
-                android:id="@+id/ic_star4"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_star"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
-
         </LinearLayout>
 
         <Button

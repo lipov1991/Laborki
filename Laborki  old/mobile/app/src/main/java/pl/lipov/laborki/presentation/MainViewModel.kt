@@ -7,7 +7,7 @@ import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
 
-class MainViewModel( // pozwala na przesyalnie miedzy aktywnosciami aktywanosciami i fragmntami
+class MainViewModel(
     private val gestureDetectorUtils: GestureDetectorUtils,
     private val sensorEventsUtils: SensorEventsUtils,
     private val loginRepository: LoginRepository

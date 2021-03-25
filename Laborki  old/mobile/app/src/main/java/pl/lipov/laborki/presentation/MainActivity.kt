@@ -10,12 +10,10 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
 private const val DEBUG_TAG = "Gestures"
@@ -35,8 +33,6 @@ class MainActivity :
     private lateinit var mDetector: GestureDetectorCompat
 
     private lateinit var sensorManager: SensorManager
-
-    val connector: ConnectFragment by viewModels()
 
     var test = " "
 
@@ -90,13 +86,7 @@ class MainActivity :
     }
 
     override fun onLoginSuccess() {
-        Toast.makeText(this@MainActivity, "Zalogowano pomyślnie!", Toast.LENGTH_LONG).show()
-    }
-    override fun onLoginFail() {
-        Toast.makeText(this@MainActivity, "Błędne hasło!", Toast.LENGTH_LONG).show()
-    }
-    override fun onLoginLock() {
-        Toast.makeText(this@MainActivity, "Zablokowano!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "abc", Toast.LENGTH_LONG).show()
     }
 
 //        viewModel.run {
@@ -125,8 +115,6 @@ class MainActivity :
 
         override fun onLongPress(event: MotionEvent) {
             Toast.makeText(activ, "LONG_PRESS", Toast.LENGTH_SHORT).show()
-            activ.connector.getEvent.postValue(Event.LONG_CLICK)
-
             println("LONG")
 
             activ.OnLongPressFlagchange()
@@ -137,8 +125,6 @@ class MainActivity :
 
         override fun onDoubleTap(event: MotionEvent): Boolean {
             Toast.makeText(activ, "DOUBLE_TAP", Toast.LENGTH_SHORT).show()
-            activ.connector.getEvent.postValue(Event.DOUBLE_TAP)
-
             println("D_TAP")
             activ.OnDoubleTapFlagchange()
             activ.testowa()
@@ -191,8 +177,6 @@ class MainActivity :
         if (event != null) {
             if (Math.abs(event.values[0]) > 5.0F && Math.abs(event.values[1]) > 5.0F) {
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
-                connector.getEvent.postValue(Event.ACCELERATION_CHANGE) // event jest enumeracją
-
                 this.OnAccFlagchange()
 
             } else if (event.values[0] == 0.0F && event.values[1] == 0.0F) {
