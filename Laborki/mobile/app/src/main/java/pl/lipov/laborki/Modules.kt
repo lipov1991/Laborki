@@ -12,6 +12,7 @@ import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginApi
 import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.presentation.LoginViewModel
 import pl.lipov.laborki.presentation.MainViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,11 +28,11 @@ val utilsModule = module {
 }
 
 private fun provideSensorManager(
-    context: Context
+        context: Context
 ): SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
 private fun provideAccelerometer(
-    sensorManager: SensorManager
+        sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
 val networkModule = module {
@@ -46,29 +47,35 @@ private fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().bu
 private fun provideGson(): Gson = GsonBuilder().serializeNulls().setLenient().create()
 
 private fun provideRetrofit(
-    okHttpClient: OkHttpClient,
-    gson: Gson
+        okHttpClient: OkHttpClient,
+        gson: Gson
 ): Retrofit = Retrofit.Builder()
-    .client(okHttpClient)
-    .baseUrl(LOGIN_API_ENDPOINT)
-    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-    .addConverterFactory(GsonConverterFactory.create(gson))
-    .build()
+        .client(okHttpClient)
+        .baseUrl(LOGIN_API_ENDPOINT)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
 
 private fun provideLoginApi(
-    retrofit: Retrofit
+        retrofit: Retrofit
 ): LoginApi = retrofit.create(LoginApi::class.java)
 
 val repositoriesModule = module {
-    factory { LoginRepository(loginApi = get()) }
+    single { LoginRepository(loginApi = get()) }
 }
 
 val viewModelsModule = module {
     viewModel {
         MainViewModel(
-            gestureDetectorUtils = get(),
-            sensorEventsUtils = get(),
-            loginRepository = get()
+                gestureDetectorUtils = get(),
+                sensorEventsUtils = get(),
+                loginRepository = get()
+        )
+    }
+
+    viewModel {
+        LoginViewModel(
+                loginRepository = get()
         )
     }
 }

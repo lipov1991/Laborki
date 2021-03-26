@@ -9,16 +9,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private lateinit var mDetector: GestureDetectorCompat
 
     override fun onCreate(
-        savedInstanceState: Bundle?
+            savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
+//        -> zmiana tematu z poziomu kodu
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity(){
 
         supportFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.fragment_container, LoginFragment())// or .add
                 //.addToBackStack(null)  - optional add to back stack
                 .commit()
@@ -35,10 +38,10 @@ class MainActivity : AppCompatActivity(){
                 Toast.makeText(this@MainActivity, R.string.no_accelerometer_detected, Toast.LENGTH_LONG).show()
             }
             onGestureEvent.observe(this@MainActivity) {
-                attemptEnterPassword.postValue(it)
+                onEvent.postValue(it)
             }
             onSensorEvent.observe(this@MainActivity) {
-                attemptEnterPassword.postValue(it)
+                onEvent.postValue(it)
             }
         }
     }
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onTouchEvent(
-        event: MotionEvent?
+            event: MotionEvent?
     ): Boolean {
         mDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
