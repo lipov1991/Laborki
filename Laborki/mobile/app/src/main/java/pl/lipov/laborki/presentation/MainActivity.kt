@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
@@ -24,7 +25,8 @@ private const val DEBUG_TAG = "Gestures"
 class MainActivity :
         AppCompatActivity(),
         LoginCallback,
-        SensorEventListener
+        SensorEventListener,
+        ViewRouter
         //GestureDetector.SimpleOnGestureListener,
         //GestureDetector.OnDoubleTapListener
 {
@@ -78,18 +80,32 @@ class MainActivity :
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.SplashTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment())
-            .commit()
-
+//        supportFragmentManager.beginTransaction().
+//        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+//        replace(R.id.fragment_container, LoginFirstScreen()).
+//        commit()
+        showFragment(LoginFirstScreen())
         mDetector = GestureDetectorCompat(this, MyGestureListener(this, test))
         setUp()
 
     }
 
+    fun showFragment(
+        fragment: Fragment
+    ) {
+        supportFragmentManager.beginTransaction().
+        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+        replace(R.id.fragment_container, fragment).
+        commit()
+
+    }
+
     override fun onLoginSuccess() {
+
         Toast.makeText(this@MainActivity, "Zalogowano pomyślnie!", Toast.LENGTH_LONG).show()
     }
     override fun onLoginFail() {
@@ -201,5 +217,13 @@ class MainActivity :
         }
 
 
+    }
+
+
+    override fun navigateTo(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().
+        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+        replace(R.id.fragment_container, fragment).
+        commit()
     }
 }

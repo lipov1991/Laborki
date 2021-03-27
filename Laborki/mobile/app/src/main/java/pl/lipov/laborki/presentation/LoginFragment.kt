@@ -30,7 +30,6 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private var loginCallback: LoginCallback? = null
-
     private var iconAnimator: ValueAnimator? = null
     private var iconAnimator2: ValueAnimator? = null
     private var iconAnimator3: ValueAnimator? = null
@@ -72,6 +71,7 @@ class LoginFragment : Fragment() {
         if(userGesturePass.size==screenUnlockKey.size){
             if(listsEqual(userGesturePass,screenUnlockKey)){
                 loginCallback?.onLoginSuccess()
+                binding.icUnlock.visibility = View.VISIBLE
                 loginNo = 0
             }else{
                 //loginCallback?.onTest_nieUdalo() zaimplementowac
@@ -132,6 +132,7 @@ class LoginFragment : Fragment() {
                 iconAnimator2?.cancel()
                 iconAnimator3?.cancel()
                 iconAnimator4?.end()
+                binding.icUnlock.visibility = View.VISIBLE
             }
             addGestureToList(it)
             //borderediconAnimator?.start()
@@ -150,28 +151,6 @@ class LoginFragment : Fragment() {
 
         //binding.loginButton.isEnabled = true
         binding.loginButton.isEnabled = false
-        borderediconAnimator = binding.icFire1
-            .getTintAnimator()
-            .apply {
-                doOnStart {
-                    binding.loginButton.isEnabled = false
-
-                }
-                doOnEnd {
-                    //EventLog == Event.DOUBLE_TAP
-                    //iconAnimator?.start()
-                    //if (OnDoubleTapFlag == true and OnLongPressFlag) {
-                        //iconAnimator?.start()
-                    //}
-                        binding.loginButton.isEnabled = true
-                        //binding.icStar.visibility = View.VISIBLE
-                        //binding.loginButton.isEnabled = true
-
-                            binding.loginButton.isEnabled = false
-
-                    }
-                }
-
 
         //if (OnDoubleTapFlag == true and OnLongPressFlag == true) {
         iconAnimator = binding.icFire

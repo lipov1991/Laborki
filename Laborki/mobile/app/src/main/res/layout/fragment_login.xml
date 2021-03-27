@@ -5,69 +5,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.TrainingActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+    <View
+        android:id="@+id/ic_unlock"
+        android:layout_width="@dimen/unlock_size"
+        android:layout_height="@dimen/unlock_size"
+        android:background="@drawable/ic_unlock"
+        android:visibility="invisible"/>
 
-            <View
-                android:id="@+id/ic_fire1"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_fire"
-                android:contentDescription="@null"
-                android:visibility="invisible"/>
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
-            <View
-                android:id="@+id/ic_fire"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_fire"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
+        <View
+            android:id="@+id/ic_fire"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_fire"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
 
-            <View
-                android:id="@+id/ic_fire2"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_fire"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
+        <View
+            android:id="@+id/ic_fire2"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_fire"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
 
-            <View
-                android:id="@+id/ic_fire3"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_fire"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
 
-            <View
-                android:id="@+id/ic_fire4"
-                android:layout_width="@dimen/lock_icon_size"
-                android:layout_height="@dimen/lock_icon_size"
-                android:background="@drawable/ic_fire"
-                android:contentDescription="@null"
-                android:visibility="invisible" />
+        <View
+            android:id="@+id/ic_fire3"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_fire"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
 
-        </LinearLayout>
+        <View
+            android:id="@+id/ic_fire4"
+            android:layout_width="@dimen/lock_icon_size"
+            android:layout_height="@dimen/lock_icon_size"
+            android:background="@drawable/ic_fire"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in" />
+
+</LinearLayout>
 
         <Button
             android:id="@+id/startLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start" />
-
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/sign_in" />
 
     </RelativeLayout>
 </layout>
