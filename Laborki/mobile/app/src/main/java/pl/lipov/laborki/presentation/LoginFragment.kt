@@ -30,13 +30,12 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private var loginCallback: LoginCallback? = null
+    private var iconAnimator: ValueAnimator? = null
+    private var iconAnimator2: ValueAnimator? = null
+    private var iconAnimator3: ValueAnimator? = null
+    private var iconAnimator4: ValueAnimator? = null
 
-    private var starAnimator: ValueAnimator? = null
-    private var starAnimator2: ValueAnimator? = null
-    private var starAnimator3: ValueAnimator? = null
-    private var starAnimator4: ValueAnimator? = null
-
-    private var borderedStarAnimator: ValueAnimator? = null
+    private var borderediconAnimator: ValueAnimator? = null
 
     private val connector: ConnectFragment by activityViewModels()
 
@@ -69,10 +68,10 @@ class LoginFragment : Fragment() {
 
     fun addGestureToList(event : Event){
         userGesturePass.add(event)
-
         if(userGesturePass.size==screenUnlockKey.size){
             if(listsEqual(userGesturePass,screenUnlockKey)){
                 loginCallback?.onLoginSuccess()
+                binding.icUnlock.visibility = View.VISIBLE
                 loginNo = 0
             }else{
                 //loginCallback?.onTest_nieUdalo() zaimplementowac
@@ -91,14 +90,10 @@ class LoginFragment : Fragment() {
         context: Context
     ) {
         super.onAttach(context)
-
         ACTIVITY = context as MainActivity
-
-
         if (context is LoginCallback){
             loginCallback = context
         }
-
     }
 
     override fun onCreateView(
@@ -117,40 +112,35 @@ class LoginFragment : Fragment() {
         connector.getEvent.observe(viewLifecycleOwner, Observer {
 
             if (userGesturePass.size == 0){
-                binding.icStar.visibility = View.VISIBLE
-                starAnimator?.start()
+                binding.icFire.visibility = View.VISIBLE
+                iconAnimator?.start()
             }
             else if (userGesturePass.size == 1){
-                binding.icStar2.visibility = View.VISIBLE
-                starAnimator2?.start()
+                binding.icFire2.visibility = View.VISIBLE
+                iconAnimator2?.start()
             }
             else if (userGesturePass.size == 2){
-                binding.icStar3.visibility = View.VISIBLE
-                starAnimator3?.start()
+                binding.icFire3.visibility = View.VISIBLE
+                iconAnimator3?.start()
             }
             else if (userGesturePass.size == 3){
-                binding.icStar4.visibility = View.VISIBLE
-                starAnimator4?.start()
+                binding.icFire4.visibility = View.VISIBLE
+                iconAnimator4?.start()
             }
             else if (userGesturePass.size == 4) {
-                starAnimator?.end()
-                starAnimator2?.cancel()
-                starAnimator3?.cancel()
-                starAnimator4?.end()
+                iconAnimator?.end()
+                iconAnimator2?.cancel()
+                iconAnimator3?.cancel()
+                iconAnimator4?.end()
+                binding.icUnlock.visibility = View.VISIBLE
             }
             addGestureToList(it)
-            //borderedStarAnimator?.start()
-
-
+            //borderediconAnimator?.start()
         })
-
         //return inflater.inflate(R.layout.fragment_login,container, false)
-
-
 
         return binding.root
     }
-
 
 
     override fun onViewCreated(
@@ -161,81 +151,59 @@ class LoginFragment : Fragment() {
 
         //binding.loginButton.isEnabled = true
         binding.loginButton.isEnabled = false
-        borderedStarAnimator = binding.icBorderedStar
-            .getTintAnimator()
-            .apply {
-                doOnStart {
-                    binding.loginButton.isEnabled = false
-
-                }
-                doOnEnd {
-                    //EventLog == Event.DOUBLE_TAP
-                    //starAnimator?.start()
-                    //if (OnDoubleTapFlag == true and OnLongPressFlag) {
-                        //starAnimator?.start()
-                    //}
-                        binding.loginButton.isEnabled = true
-                        //binding.icStar.visibility = View.VISIBLE
-                        //binding.loginButton.isEnabled = true
-
-                            binding.loginButton.isEnabled = false
-
-                    }
-                }
-
 
         //if (OnDoubleTapFlag == true and OnLongPressFlag == true) {
-        starAnimator = binding.icStar
+        iconAnimator = binding.icFire
                 .getTintAnimator() //duration = 1000
                 .apply {
                     doOnEnd {
-                        starAnimator?.start() //dodac?
+                        iconAnimator?.start() //dodac?
                         //binding.loginButton.isEnabled = true
                     }
                 }
 
-        starAnimator2 = binding.icStar2
+        iconAnimator2 = binding.icFire2
             .getTintAnimator() //duration = 1000
             .apply {
                 doOnStart {
-                    starAnimator?.start()
+                    iconAnimator?.start()
                 }
                 doOnEnd {
-                    starAnimator2?.start() //dodac?
+                    iconAnimator2?.start() //dodac?
                     //binding.loginButton.isEnabled = true
                 }
             }
 
-        starAnimator3 = binding.icStar3
+        iconAnimator3 = binding.icFire3
             .getTintAnimator() //duration = 1000
             .apply {
                 doOnStart {
-                    starAnimator2?.start()
+                    iconAnimator2?.start()
                 }
                 doOnEnd {
-                    starAnimator3?.start() //dodac?
+                    iconAnimator3?.start() //dodac?
                     //binding.loginButton.isEnabled = true
                 }
             }
 
-        starAnimator4 = binding.icStar4
+        iconAnimator4 = binding.icFire4
             .getTintAnimator() //duration = 1000
             .apply {
                 doOnStart {
-                    starAnimator3?.start()
+                    iconAnimator3?.start()
                 }
                 doOnEnd {
-                   starAnimator4?.start() //dodac?
+                   iconAnimator4?.start() //dodac?
                    // binding.loginButton.isEnabled = true
                 }
             }
        // }
 
         binding.startLoginButton.setOnClickListener {
-            binding.icStar.visibility = View.INVISIBLE
-            binding.icStar2.visibility = View.INVISIBLE
-            binding.icStar3.visibility = View.INVISIBLE
-            binding.icStar4.visibility = View.INVISIBLE
+            binding.icFire.visibility = View.INVISIBLE
+            binding.icFire2.visibility = View.INVISIBLE
+            binding.icFire3.visibility = View.INVISIBLE
+            binding.icFire4.visibility = View.INVISIBLE
 
             binding.loginButton.isEnabled = true
             Toast.makeText(context, "Wykonaj 4 gesty", Toast.LENGTH_SHORT).show()
@@ -247,7 +215,7 @@ class LoginFragment : Fragment() {
 
         }
         binding.loginButton.setOnClickListener {
-            //borderedStarAnimator?.start()
+            //borderediconAnimator?.start()
             if(listsEqual(userGesturePass,screenUnlockKey)) {
                 loginCallback?.onLoginSuccess()}
             else{
@@ -259,13 +227,13 @@ class LoginFragment : Fragment() {
 
 //            if (OnDoubleTapFlag == "D" || OnLongPressFlag == "L") {
 //                //binding.icBorderedStar.visibility = View.VISIBLE
-//                borderedStarAnimator?.start()
+//                borderediconAnimator?.start()
 //                if (OnDoubleTapFlag == "D") {seq += 1}
 //                    if (OnDoubleTapFlag == "L") {seq += 1}
 //            }
 
 //                if (passFlagFragment == "DDLA") {
-//                    starAnimator?.start()
+//                    iconAnimator?.start()
 //                    binding.icStar.visibility = View.VISIBLE
 //                }
 
@@ -274,9 +242,9 @@ class LoginFragment : Fragment() {
 
     }
     private fun View.getTintAnimator(
-        duration: Long = 250,
+        duration: Long = 1000,
         @ColorRes firstColorResId: Int = R.color.army,
-        @ColorRes secondColorResId: Int = R.color.grey
+        @ColorRes secondColorResId: Int = R.color.fire
     ): ValueAnimator{
         return ValueAnimator.ofArgb(
             getColor(context, firstColorResId),

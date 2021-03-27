@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="442dp"
+        android:layout_gravity="center">
+
+        <View
+            android:id="@+id/ic_unlock"
+            android:layout_width="@dimen/unlock_size"
+            android:layout_height="@dimen/unlock_size"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/ic_unlock"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/ic_fire1"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"
+                android:visibility="invisible" />
+
+            <View
+                android:id="@+id/ic_fire"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"/>
+
+
+            <View
+                android:id="@+id/ic_fire2"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"/>
+
+            <View
+                android:id="@+id/ic_fire3"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"
+                android:visibility="invisible"
+            />
+
+            <View
+                android:id="@+id/ic_fire4"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_fire"
+                android:contentDescription="@null"
+                android:visibility="invisible"
+                />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>
+

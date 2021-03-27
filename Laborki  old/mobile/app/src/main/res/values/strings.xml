@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Laborki</string>
-    <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
-    <string name="sign_in">Zaloguj się</string>
-    <string name="start">Rozpocznij</string>
-    <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
-</resources>

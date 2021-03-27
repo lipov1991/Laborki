@@ -4,4 +4,5 @@
     <string name="sign_in">Zaloguj się</string>
     <string name="start">Rozpocznij</string>
     <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
+    <string name="login">Podaj swój login</string>
 </resources>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4b5320</color>
-    <color name="colorPrimaryDark">#3e451b</color>
     <color name="colorAccent">#D81B60</color>
     <color name="army">#4b5320</color>
     <color name="army_dark">#3e451b</color>
     <color name="grey">#9e9e9e</color>
     <color name="error">#f44336</color>
     <color name="gold">#ffc107</color>
-    <color name="pink">#FF07FB</color>
+    <color name="fire">#F2F46233</color>
+    <color name="colorPrimary">#03a9f4</color>
+    <color name="colorPrimaryDark">#007ac1</color>
+    <color name="grey_with_mask">#80ffffff</color>
+
 </resources>
