@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
 import pl.lipov.laborki.presentation.login.LoginCallback
+import pl.lipov.laborki.presentation.login.LoginFirstScreenFragment
 import pl.lipov.laborki.presentation.login.LoginFragment
 
 class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
@@ -46,13 +49,18 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         sm.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL)
 
 
+        showFragment(LoginFirstScreenFragment())
+
 //        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, GestyFragment())
 //            .addToBackStack(null)
 //            .commit()
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment())
-            .addToBackStack(null)
-            .commit()
+//        supportFragmentManager
+//            .beginTransaction()
+//            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+//            .replace(R.id.fragment_container, LoginFragment())
+//            .addToBackStack(null)
+//            .commit()
 
 //        viewModel.run {
 //            onAccelerometerNotDetected.observe(this@MainActivity) {
@@ -68,6 +76,15 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
     }
 
 
+    fun showFragment(
+            fragment: Fragment
+    ) {
+        supportFragmentManager.beginTransaction().run {
+            setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
+            replace(R.id.fragment_container, fragment)
+            commit()
+        }
+    }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         mDetector.onTouchEvent(event)
