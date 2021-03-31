@@ -7,4 +7,6 @@
     <color name="gold">#ffc107</color>
     <color name="blue">#0066ff</color>
     <color name="green">#339933</color>
+    <color name="blue_dark">#007ac1</color>
+    <color name="grey_with_mask">#80ffffff</color>
 </resources>

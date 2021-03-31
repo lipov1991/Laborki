@@ -11,9 +11,8 @@
         android:layout_height="220dp"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
+        android:foreground="@drawable/main_background_gradient"
         app:srcCompat="@drawable/pw" />
-
-<!--    ustawic maske - skorzystac z main background ambient-->
 
     <ImageView
         android:layout_width="wrap_content"

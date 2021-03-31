@@ -5,34 +5,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="@android:dimen/thumbnail_height"
+        android:orientation="horizontal">
 
 
     <View
         android:id="@+id/ic_star1"
-        android:layout_width="@dimen/lock_icon_size"
-        android:layout_height="@dimen/lock_icon_size"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:background="@drawable/ic_star"
         android:contentDescription="@null" />
 
     <View
         android:id="@+id/ic_star2"
-        android:layout_width="@dimen/lock_icon_size"
-        android:layout_height="@dimen/lock_icon_size"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:background="@drawable/ic_star"
         android:contentDescription="@null" />
 
     <View
         android:id="@+id/ic_star3"
-        android:layout_width="@dimen/lock_icon_size"
-        android:layout_height="@dimen/lock_icon_size"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:background="@drawable/ic_star"
         android:contentDescription="@null" />
 
     <View
         android:id="@+id/ic_star4"
-        android:layout_width="@dimen/lock_icon_size"
-        android:layout_height="@dimen/lock_icon_size"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:background="@drawable/ic_star"
         android:contentDescription="@null" />
 
