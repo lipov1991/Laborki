@@ -12,6 +12,7 @@
         android:layout_height="220dp"
         android:contentDescription="@null"
         app:srcCompat="@drawable/pw"
+        android:foreground="@drawable/main_background_gradient"
         android:scaleType="centerCrop"/>
 
     <ImageView
