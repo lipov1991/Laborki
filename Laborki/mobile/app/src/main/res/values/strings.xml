@@ -3,4 +3,5 @@
     <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
     <string name="sign_in_button">Zaloguj się</string>
     <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
+    <string name="authorization_edit_text">Podaj swój login</string>
 </resources>

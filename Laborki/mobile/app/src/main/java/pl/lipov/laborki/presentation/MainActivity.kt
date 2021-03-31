@@ -5,11 +5,13 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
+import pl.lipov.laborki.data.ViewRouter
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ViewRouter {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -26,12 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
-        supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.fragment_container, LoginFragment())// or .add
-                //.addToBackStack(null)  - optional add to back stack
-                .commit()
+        navigateTo(AuthorizationFragment())
 
         viewModel.run {
             onAccelerometerNotDetected.observe(this@MainActivity) {
@@ -61,5 +58,14 @@ class MainActivity : AppCompatActivity() {
     ): Boolean {
         mDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
+    }
+
+    override fun navigateTo(fragment: Fragment) {
+        supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
+                .replace(R.id.fragment_container, fragment)// or .add
+                //.addToBackStack(null)  - optional add to back stack
+                .commit()
     }
 }

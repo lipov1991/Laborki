@@ -12,6 +12,7 @@ import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginApi
 import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.presentation.AuthorizationViewModel
 import pl.lipov.laborki.presentation.LoginViewModel
 import pl.lipov.laborki.presentation.MainViewModel
 import retrofit2.Retrofit
@@ -77,5 +78,9 @@ val viewModelsModule = module {
         LoginViewModel(
                 loginRepository = get()
         )
+    }
+
+    viewModel {
+        AuthorizationViewModel()
     }
 }

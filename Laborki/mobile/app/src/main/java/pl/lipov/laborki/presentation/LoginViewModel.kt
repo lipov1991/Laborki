@@ -28,7 +28,6 @@ class LoginViewModel(
                     Event.ACCELERATION_CHANGE
             )
 
-
     fun addCurrentSample(
             event: Event
     ) {
