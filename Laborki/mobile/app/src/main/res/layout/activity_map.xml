@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="80dp"
+            >
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/removeButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="@color/grey"
+                android:src="@drawable/ic_delete"
+                app:borderWidth="0dp"
+                app:elevation="0dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/marketButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/marketGreen"
+                android:src="@drawable/ic_shopping_cart"
+                app:borderWidth="0dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/restaurantButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/restaurantRed"
+                android:src="@drawable/ic_restaurant"
+                app:borderWidth="0dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/bankButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/bankBlue"
+                android:src="@drawable/ic_money"
+                app:borderWidth="0dp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
