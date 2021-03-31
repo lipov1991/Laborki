@@ -8,12 +8,10 @@ import androidx.core.view.GestureDetectorCompat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMainBinding
-import pl.lipov.laborki.presentation.login.LoginCallback
-import pl.lipov.laborki.presentation.LoginFragment
-import android.util.Log
 import androidx.lifecycle.observe
+import androidx.fragment.app.Fragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ViewRouter {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
@@ -23,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, LoginFragment())
-            .commit()
+        navigateTo(UsernameFragment())
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
@@ -61,6 +59,15 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         viewModel.unregisterSensorEventListener()
+    }
+
+    override fun navigateTo(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
 
