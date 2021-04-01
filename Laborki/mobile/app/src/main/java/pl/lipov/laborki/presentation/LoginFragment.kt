@@ -37,6 +37,8 @@ class LoginFragment : Fragment() {
 
     private var borderediconAnimator: ValueAnimator? = null
 
+    private var onLoginPress: Boolean = false
+
     private val connector: ConnectFragment by activityViewModels()
 
 
@@ -70,17 +72,18 @@ class LoginFragment : Fragment() {
         userGesturePass.add(event)
         if(userGesturePass.size==screenUnlockKey.size){
             if(listsEqual(userGesturePass,screenUnlockKey)){
-                loginCallback?.onLoginSuccess()
-                binding.icUnlock.visibility = View.VISIBLE
+                //loginCallback?.onLoginSuccess()
+               // binding.icUnlock.visibility = View.VISIBLE
                 loginNo = 0
             }else{
                 //loginCallback?.onTest_nieUdalo() zaimplementowac
                 loginNo += 1
             }
-            userGesturePass.clear()
+            if (onLoginPress){
+                userGesturePass.clear() }
         }
         if(loginNo == 3){
-            //loginCallback?.onLoginLock()
+            loginCallback?.onLoginLock()
             loginNo = 0
         }
     }
@@ -126,13 +129,11 @@ class LoginFragment : Fragment() {
             else if (userGesturePass.size == 3){
                 binding.icFire4.visibility = View.VISIBLE
                 iconAnimator4?.start()
+                binding.loginButton.visibility = View.VISIBLE
             }
             else if (userGesturePass.size == 4) {
-                iconAnimator?.end()
-                iconAnimator2?.cancel()
-                iconAnimator3?.cancel()
-                iconAnimator4?.end()
-                binding.icUnlock.visibility = View.VISIBLE
+
+                //binding.icUnlock.visibility = View.VISIBLE
             }
             addGestureToList(it)
             //borderediconAnimator?.start()
@@ -205,38 +206,29 @@ class LoginFragment : Fragment() {
             binding.icFire3.visibility = View.INVISIBLE
             binding.icFire4.visibility = View.INVISIBLE
 
+            binding.icUnlock.visibility = View.INVISIBLE
+
             binding.loginButton.isEnabled = true
             Toast.makeText(context, "Wykonaj 4 gesty", Toast.LENGTH_SHORT).show()
 
         }
 
-        binding.loginButton.setOnClickListener {
-            loginCallback?.onLoginSuccess()
+       // binding.loginButton.setOnClickListener {
+          //  loginCallback?.onLoginSuccess()
 
-        }
+        //}
         binding.loginButton.setOnClickListener {
-            //borderediconAnimator?.start()
+
+            onLoginPress = true
+
             if(listsEqual(userGesturePass,screenUnlockKey)) {
-                loginCallback?.onLoginSuccess()}
-            else{
+                loginCallback?.onLoginSuccess()
+                binding.icUnlock.visibility = View.VISIBLE
+            }
+            if(!listsEqual(userGesturePass,screenUnlockKey )){
                 loginCallback?.onLoginFail()
                 binding.loginButton.isEnabled = false
             }
-
-
-
-//            if (OnDoubleTapFlag == "D" || OnLongPressFlag == "L") {
-//                //binding.icBorderedStar.visibility = View.VISIBLE
-//                borderediconAnimator?.start()
-//                if (OnDoubleTapFlag == "D") {seq += 1}
-//                    if (OnDoubleTapFlag == "L") {seq += 1}
-//            }
-
-//                if (passFlagFragment == "DDLA") {
-//                    iconAnimator?.start()
-//                    binding.icStar.visibility = View.VISIBLE
-//                }
-
             }
 
 

@@ -19,7 +19,6 @@ import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
-private const val DEBUG_TAG = "Gestures"
 
 
 class MainActivity :
@@ -40,40 +39,40 @@ class MainActivity :
 
     val connector: ConnectFragment by viewModels()
 
-    var test = " "
-
-    var OnDoubleTapFlag = ""
-    var OnDoubleTapFlag2 = false
-    var OnLongPressFlag = ""
-    var OnAccChange = false
-    var passwordFlag = ""
-
-    fun testowa() {
-        test = "DZIALA"
-    }
+//    var test = " "
+//
+//    var OnDoubleTapFlag = ""
+//    var OnDoubleTapFlag2 = false
+//    var OnLongPressFlag = ""
+//    var OnAccChange = false
+//    var passwordFlag = ""
+//
+//    fun testowa() {
+//        test = "DZIALA"
+//    }
 
     // fun that changes var state
-    fun OnDoubleTapFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        // to prevent form very long variable
-        passwordFlag += "D"
-    }
-
-    fun OnLongPressFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        passwordFlag += "L"
-    }
-
-    fun OnAccFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        passwordFlag += "A"
-    }
+//    fun OnDoubleTapFlagchange() {
+//        if (passwordFlag.length == 4) {
+//            passwordFlag = ""
+//        }
+//        // to prevent form very long variable
+//        passwordFlag += "D"
+//    }
+//
+//    fun OnLongPressFlagchange() {
+//        if (passwordFlag.length == 4) {
+//            passwordFlag = ""
+//        }
+//        passwordFlag += "L"
+//    }
+//
+//    fun OnAccFlagchange() {
+//        if (passwordFlag.length == 4) {
+//            passwordFlag = ""
+//        }
+//        passwordFlag += "A"
+//    }
 
 
     override fun onCreate(
@@ -84,12 +83,8 @@ class MainActivity :
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportFragmentManager.beginTransaction().
-//        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
-//        replace(R.id.fragment_container, LoginFirstScreen()).
-//        commit()
         showFragment(LoginFirstScreen())
-        mDetector = GestureDetectorCompat(this, MyGestureListener(this, test))
+        mDetector = GestureDetectorCompat(this, MyGestureListener(this))
         setUp()
 
     }
@@ -97,6 +92,7 @@ class MainActivity :
     fun showFragment(
         fragment: Fragment
     ) {
+        // animacja przejscia
         supportFragmentManager.beginTransaction().
         setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
         replace(R.id.fragment_container, fragment).
@@ -134,20 +130,15 @@ class MainActivity :
     }
 
 
-    private class MyGestureListener(private var activ: MainActivity, var test: String) :
+    private class MyGestureListener(private var activ: MainActivity) :
         GestureDetector.SimpleOnGestureListener() {
 
-        var wykryjDoubleTap = test
 
         override fun onLongPress(event: MotionEvent) {
             Toast.makeText(activ, "LONG_PRESS", Toast.LENGTH_SHORT).show()
             activ.connector.getEvent.postValue(Event.LONG_CLICK)
 
             println("LONG")
-
-            activ.OnLongPressFlagchange()
-
-            //ttest = "Fragment ok"
 
         }
 
@@ -156,10 +147,8 @@ class MainActivity :
             activ.connector.getEvent.postValue(Event.DOUBLE_TAP)
 
             println("D_TAP")
-            activ.OnDoubleTapFlagchange()
-            activ.testowa()
             println("OnDoubleTapFlagchange()")
-            println(activ.OnDoubleTapFlag)
+
             return true
         }
 
@@ -209,7 +198,7 @@ class MainActivity :
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
                 connector.getEvent.postValue(Event.ACCELERATION_CHANGE) // event jest enumeracją
 
-                this.OnAccFlagchange()
+
 
             } else if (event.values[0] == 0.0F && event.values[1] == 0.0F) {
                 Toast.makeText(this, "Nie wykryto akcelerometra", Toast.LENGTH_SHORT).show()
