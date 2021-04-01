@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
                 binding.icLoginAttempt.getBackgroundAnimator().start()
                 binding.icLoginAttempt.getBackgroundAnimator(
                     1000,
-                    R.color.blue,
+                    R.color.colorPrimary,
                     R.color.grey
                 ).start()
             }
@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
                 binding.icLoginAttempt.getBackgroundAnimator().start()
                 binding.icLoginAttempt.getBackgroundAnimator(
                     1000,
-                    R.color.blue,
+                    R.color.colorPrimary,
                     R.color.grey
                 ).start()
             }
@@ -74,7 +74,7 @@ class LoginFragment : Fragment() {
                 binding.icLoginAttempt.getBackgroundAnimator().start()
                 binding.icLoginAttempt.getBackgroundAnimator(
                     1000,
-                    R.color.blue,
+                    R.color.colorPrimary,
                     R.color.grey
                 ).start()
             }
@@ -125,7 +125,7 @@ class LoginFragment : Fragment() {
     private fun View.getBackgroundAnimator(
         duration: Long = 500,
         @ColorRes firstColorResId: Int = R.color.grey,
-        @ColorRes secondColorResId: Int = R.color.blue
+        @ColorRes secondColorResId: Int = R.color.colorPrimary
     ): ValueAnimator {
         return ValueAnimator.ofArgb(
             getColor(context, firstColorResId),
