@@ -67,8 +67,6 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 //        }
     }
 
-
-
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         mDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
@@ -95,14 +93,6 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 
     override fun onLoginSuccess() {
         Toast.makeText(this, "Zalogowano", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onUnsuccess() {
-        Toast.makeText(this, "Nie zalogowano sie", Toast.LENGTH_LONG).show()
-    }
-
-    override fun blocked() {
-        Toast.makeText(this, "Zablokowano", Toast.LENGTH_LONG).show()
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

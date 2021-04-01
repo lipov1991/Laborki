@@ -54,10 +54,11 @@ class LoginFragment : Fragment() {
         if (userSeq.size == screenUnlockKey.size) {
             if(listsEqual(userSeq,screenUnlockKey)){
                 loginCallback?.onLoginSuccess()
+                println("Udało się")
                 counter = 0
             }
             else{
-                loginCallback?.onUnsuccess()
+                println("Nie udało się")
                 counter++
             }
             userSeq.clear()
@@ -67,7 +68,7 @@ class LoginFragment : Fragment() {
 //            StarAnimator4?.cancel()
         }
         if(counter == 3){
-            loginCallback?.blocked()
+            println("Zalogowano")
         }
 
     }
@@ -159,7 +160,7 @@ class LoginFragment : Fragment() {
             }
     }
     private fun View.getBackgroundAnimator(
-        duration: Long = 500,
+        duration: Long = 9999999,
         @ColorRes firstColorResId: Int = R.color.army,
         @ColorRes secondColorResId: Int = R.color.grey
     ): ValueAnimator {
