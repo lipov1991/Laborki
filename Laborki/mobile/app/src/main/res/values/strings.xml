@@ -5,6 +5,4 @@
     <string name="no_accelerometer_detected">Nie wykryto akcelerometru.</string>
     <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
     <string name="play_button_text">PLAY</string>
-    <string name="edit_text_login">Wpisz login</string>
-    <string name="button_login">Zaloguj</string>
 </resources>
