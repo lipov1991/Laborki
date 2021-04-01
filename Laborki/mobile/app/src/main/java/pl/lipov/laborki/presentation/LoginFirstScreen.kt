@@ -45,8 +45,8 @@ class LoginFirstScreen: Fragment() {
         }
         binding.login.doOnTextChanged { text, start, before, count ->
             if (text != null) {
-                if(text.length > 6 || text.isNullOrEmpty()){
-                    binding.login.error = "Login jest za długi"
+                if(text.length < 6 || text.isNullOrEmpty()){
+                    binding.login.error = "Login jest za krótki"
                     binding.login.setBackgroundResource(R.drawable.edit_text_error_background)
                 } else{
                     binding.login.error = null
