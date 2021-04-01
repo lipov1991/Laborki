@@ -30,6 +30,8 @@ class LoginFragment : Fragment() {
 
     lateinit var ACTIVITY: MainActivity
 
+    //lateinit var text_view: View.OnClickListener
+
     private val screenUnlockKey =
         mutableListOf(
             Event.DOUBLE_TAP.toString(),
@@ -67,6 +69,12 @@ class LoginFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         var counter: Int = 1
+
+
+
+//        text_view.setOnClickListene {
+//            (activity as? MainActivity)?.showFragment(LoginFragment())
+//        }
 
         borderedStarAnimator = binding.icBorderedStar.wrongPasswordAnimation().apply {
             doOnStart {
@@ -119,6 +127,7 @@ class LoginFragment : Fragment() {
 
         }
     }
+
 
 
     private fun View.getTintAnimator(

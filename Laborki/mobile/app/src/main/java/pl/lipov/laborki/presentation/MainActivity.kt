@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
@@ -34,6 +35,7 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
     var counter: Int = 0
 
 
+
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
@@ -46,16 +48,36 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
         setContentView(binding.root)
 
         setUpSensorStuff()
-
-
         mDetector = GestureDetectorCompat(this, this)
 
         mDetector.setOnDoubleTapListener(this)
+
+
 
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
             .replace(R.id.fragment_container, LoginFragment())
             .commit()
+
+        navigateTo(LoginFirstScreen())
+
+        //Przygotowanie do integracji z firebase
+
+        //val database = Firebase.database
+        //database.getReference("Test-1").setValue("test-2")
+        //val myRef = database.getReference("Test-1").setValue("test-2")
+        // myRef.setValue("Test-1")
+
+    }
+
+    fun showFragment(
+        fragment: Fragment
+    ) {
+        supportFragmentManager.beginTransaction().
+        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+        replace(R.id.fragment_container, fragment).
+        commit()
+
     }
 
     override fun onLoginSuccess() {
@@ -174,7 +196,12 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
     }
 
 
-
+     fun navigateTo(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().
+        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+        replace(R.id.fragment_container, fragment).
+        commit()
+    }
 
 
 

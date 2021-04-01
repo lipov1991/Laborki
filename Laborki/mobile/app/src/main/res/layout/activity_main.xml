@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:contentDescription="@null"
-
         app:srcCompat = "@drawable/pw"
-
         android:scaleType="centerCrop"
+        android:foreground="@drawable/main_background_gradient"
         />
+
+
+
 
 
 </LinearLayout>

@@ -5,4 +5,5 @@
     <string name="play_button_text">PLAY</string>
     <string name="login_button_text">Login</string>
     <string name="test_message">Hello world</string>
+    <string name="login">Login</string>
 </resources>
