@@ -29,7 +29,6 @@ class LoginFragment : Fragment() {
     private var StarAnimator2: ValueAnimator? = null
     private var StarAnimator3: ValueAnimator? = null
     private var StarAnimator4: ValueAnimator? = null
-    private var LockAnimator: ValueAnimator? = null
     private val viewConnector: ConnectViewModel by activityViewModels()
     val POSITIVE_INFINITY: Float = 0.0f
     private var counter = 0
@@ -56,15 +55,10 @@ class LoginFragment : Fragment() {
             if(listsEqual(userSeq,screenUnlockKey)){
                 loginCallback?.onLoginSuccess()
                 counter = 0
-//                LockAnimator?.start()
-
-                binding.icLock.setBackgroundResource(R.drawable.ic_lock_open)
             }
             else{
                 loginCallback?.onUnsuccess()
                 counter++
-//                LockAnimator?.start()
-                binding.icLock.setBackgroundResource(R.drawable.ic_lock_closed)
             }
             userSeq.clear()
 //            StarAnimator1?.cancel()
@@ -120,9 +114,9 @@ class LoginFragment : Fragment() {
     ) {
        super.onViewCreated(view, savedInstanceState)
 
-//       binding.loginButton.setOnClickListener {
-//           loginCallback?.onLoginSuccess()
-//       }
+       binding.loginButton.setOnClickListener {
+           loginCallback?.onLoginSuccess()
+       }
         StarAnimator1 = binding.icStar1
             .getBackgroundAnimator()
             .apply {
@@ -163,31 +157,6 @@ class LoginFragment : Fragment() {
 
                 }
             }
-        LockAnimator = binding.icLock
-            .getLockAnimator()
-            .apply {
-                doOnStart {
-
-                }
-                doOnEnd {
-
-                }
-            }
-    }
-    private fun View.getLockAnimator(
-        duration: Long = 500
-    ):ValueAnimator{
-        return ValueAnimator.ofArgb(
-            ContextCompat.getColor(context, R.color.blue),
-            ContextCompat.getColor(context, R.color.blue)
-        ).apply {
-            addUpdateListener {
-                setBackgroundResource(R.drawable.ic_lock_open)
-
-
-            }
-            this.duration = duration
-        }
     }
     private fun View.getBackgroundAnimator(
         duration: Long = 500,
