@@ -24,6 +24,7 @@ import org.koin.android.ext.android.bind
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.FragmentLoginBinding
+import java.time.Duration
 
 
 class LoginFragment : Fragment() {
@@ -34,16 +35,7 @@ class LoginFragment : Fragment() {
     private var iconAnimator2: ValueAnimator? = null
     private var iconAnimator3: ValueAnimator? = null
     private var iconAnimator4: ValueAnimator? = null
-
-    private var borderediconAnimator: ValueAnimator? = null
-
-    private var onLoginPress: Boolean = false
-
     private val connector: ConnectFragment by activityViewModels()
-
-
-    //(activity as MainActivity).te
-
     private var seq: Int = 1
     lateinit var ACTIVITY: MainActivity
 
@@ -55,7 +47,7 @@ class LoginFragment : Fragment() {
             Event.ACCELERATION_CHANGE
         )
 
-    private val userGesturePass = mutableListOf<Event>() // mutable zapewnia to ze mozna dodawac i usuwac z listy
+    private val userGesturePass = mutableListOf<Event>()
     private var loginNo = 0
 
     fun listsEqual(list1: List<Any>, list2: List<Any>): Boolean {
@@ -70,20 +62,17 @@ class LoginFragment : Fragment() {
 
     fun addGestureToList(event : Event){
         userGesturePass.add(event)
+
         if(userGesturePass.size==screenUnlockKey.size){
             if(listsEqual(userGesturePass,screenUnlockKey)){
-                //loginCallback?.onLoginSuccess()
-               // binding.icUnlock.visibility = View.VISIBLE
+                loginCallback?.onLoginSuccess()
                 loginNo = 0
             }else{
-                //loginCallback?.onTest_nieUdalo() zaimplementowac
                 loginNo += 1
             }
-            if (onLoginPress){
-                userGesturePass.clear() }
+            userGesturePass.clear()
         }
         if(loginNo == 3){
-            loginCallback?.onLoginLock()
             loginNo = 0
         }
     }
@@ -93,10 +82,14 @@ class LoginFragment : Fragment() {
         context: Context
     ) {
         super.onAttach(context)
+
         ACTIVITY = context as MainActivity
+
+
         if (context is LoginCallback){
             loginCallback = context
         }
+
     }
 
     override fun onCreateView(
@@ -107,10 +100,6 @@ class LoginFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
-
-//        connector.getEvent.observe(viewLifecycleOwner, Observer {
-//
-//        }
 
         connector.getEvent.observe(viewLifecycleOwner, Observer {
 
@@ -129,19 +118,22 @@ class LoginFragment : Fragment() {
             else if (userGesturePass.size == 3){
                 binding.icFire4.visibility = View.VISIBLE
                 iconAnimator4?.start()
-                binding.loginButton.visibility = View.VISIBLE
             }
             else if (userGesturePass.size == 4) {
-
-                //binding.icUnlock.visibility = View.VISIBLE
+                iconAnimator?.end()
+                iconAnimator2?.cancel()
+                iconAnimator3?.cancel()
+                iconAnimator4?.end()
             }
             addGestureToList(it)
-            //borderediconAnimator?.start()
+
         })
-        //return inflater.inflate(R.layout.fragment_login,container, false)
+
+
 
         return binding.root
     }
+
 
 
     override fun onViewCreated(
@@ -150,55 +142,51 @@ class LoginFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        //binding.loginButton.isEnabled = true
         binding.loginButton.isEnabled = false
 
-        //if (OnDoubleTapFlag == true and OnLongPressFlag == true) {
+
         iconAnimator = binding.icFire
-                .getTintAnimator() //duration = 1000
-                .apply {
-                    doOnEnd {
-                        iconAnimator?.start() //dodac?
-                        //binding.loginButton.isEnabled = true
-                    }
+            .getTintAnimator()
+            .apply {
+                doOnEnd {
+                    iconAnimator?.start()
                 }
+            }
 
         iconAnimator2 = binding.icFire2
-            .getTintAnimator() //duration = 1000
+            .getTintAnimator()
             .apply {
                 doOnStart {
                     iconAnimator?.start()
                 }
                 doOnEnd {
-                    iconAnimator2?.start() //dodac?
-                    //binding.loginButton.isEnabled = true
+                    iconAnimator2?.start()
                 }
             }
 
         iconAnimator3 = binding.icFire3
-            .getTintAnimator() //duration = 1000
+            .getTintAnimator()
             .apply {
                 doOnStart {
                     iconAnimator2?.start()
                 }
                 doOnEnd {
-                    iconAnimator3?.start() //dodac?
-                    //binding.loginButton.isEnabled = true
+                    iconAnimator3?.start()
                 }
             }
 
         iconAnimator4 = binding.icFire4
-            .getTintAnimator() //duration = 1000
+            .getTintAnimator()
             .apply {
                 doOnStart {
                     iconAnimator3?.start()
                 }
                 doOnEnd {
-                   iconAnimator4?.start() //dodac?
-                   // binding.loginButton.isEnabled = true
+                    iconAnimator4?.start()
+
                 }
             }
-       // }
+
 
         binding.startLoginButton.setOnClickListener {
             binding.icFire.visibility = View.INVISIBLE
@@ -206,35 +194,30 @@ class LoginFragment : Fragment() {
             binding.icFire3.visibility = View.INVISIBLE
             binding.icFire4.visibility = View.INVISIBLE
 
-            binding.icUnlock.visibility = View.INVISIBLE
-
             binding.loginButton.isEnabled = true
             Toast.makeText(context, "Wykonaj 4 gesty", Toast.LENGTH_SHORT).show()
 
         }
 
-       // binding.loginButton.setOnClickListener {
-          //  loginCallback?.onLoginSuccess()
-
-        //}
         binding.loginButton.setOnClickListener {
+            loginCallback?.onLoginSuccess()
 
-            onLoginPress = true
-
+        }
+        binding.loginButton.setOnClickListener {
             if(listsEqual(userGesturePass,screenUnlockKey)) {
                 loginCallback?.onLoginSuccess()
-                binding.icUnlock.visibility = View.VISIBLE
             }
-            if(!listsEqual(userGesturePass,screenUnlockKey )){
+            else{
                 loginCallback?.onLoginFail()
                 binding.loginButton.isEnabled = false
             }
-            }
+
+        }
 
 
     }
     private fun View.getTintAnimator(
-        duration: Long = 1000,
+        duration: Long = 500,
         @ColorRes firstColorResId: Int = R.color.army,
         @ColorRes secondColorResId: Int = R.color.fire
     ): ValueAnimator{
