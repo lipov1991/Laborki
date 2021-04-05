@@ -39,41 +39,6 @@ class MainActivity :
 
     val connector: ConnectFragment by viewModels()
 
-//    var test = " "
-//
-//    var OnDoubleTapFlag = ""
-//    var OnDoubleTapFlag2 = false
-//    var OnLongPressFlag = ""
-//    var OnAccChange = false
-//    var passwordFlag = ""
-//
-//    fun testowa() {
-//        test = "DZIALA"
-//    }
-
-    // fun that changes var state
-//    fun OnDoubleTapFlagchange() {
-//        if (passwordFlag.length == 4) {
-//            passwordFlag = ""
-//        }
-//        // to prevent form very long variable
-//        passwordFlag += "D"
-//    }
-//
-//    fun OnLongPressFlagchange() {
-//        if (passwordFlag.length == 4) {
-//            passwordFlag = ""
-//        }
-//        passwordFlag += "L"
-//    }
-//
-//    fun OnAccFlagchange() {
-//        if (passwordFlag.length == 4) {
-//            passwordFlag = ""
-//        }
-//        passwordFlag += "A"
-//    }
-
 
     override fun onCreate(
         savedInstanceState: Bundle?
