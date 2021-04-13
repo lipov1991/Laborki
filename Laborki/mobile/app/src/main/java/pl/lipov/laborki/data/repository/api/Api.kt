@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface Api {
 
     @GET("/users.json")
-    fun getUsers(): Single<List<UserDto>> // sygnatura // single wrapper
+    fun getUsers(): Single<List<UserDto>>
 
 }

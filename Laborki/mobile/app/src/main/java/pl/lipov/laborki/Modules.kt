@@ -61,7 +61,7 @@ private fun provideLoginApi(
 ): Api = retrofit.create(Api::class.java)
 
 val repositoriesModule = module {
-    factory { LoginRepository(loginApi = get()) }
+    factory { LoginRepository(api = get()) }
 }
 
 val viewModelsModule = module {
