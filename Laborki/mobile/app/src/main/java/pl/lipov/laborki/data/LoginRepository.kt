@@ -1,24 +1,13 @@
 package pl.lipov.laborki.data
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.lang.reflect.Executable
+import io.reactivex.Single
+import pl.lipov.laborki.data.repository.api.Api
+import pl.lipov.laborki.data.repository.api.dto.UserDto
 
 class LoginRepository(
-    private val loginApi: LoginApi
+    private val api: Api
 ) {
 
-    val loginResult:  MutableLiveData<String> = MutableLiveData()
-
-    fun signIn(
-        login: String,
-        password: String
-    ){
-        try{
-            // TODO login logic
-            loginResult.postValue("Witaj $login")
-        } catch (exception: Exception) {
-            loginResult.postValue(exception.localizedMessage)
-        }
-    }
+    fun getUsers(): Single<List<UserDto>> = api.getUsers()
 }

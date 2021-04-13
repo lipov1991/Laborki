@@ -31,8 +31,6 @@
                 android:layout_marginTop="35dp"
                 android:backgroundTint="#03a9f4"
                 android:text="@string/sign_in"
-                android:background="@drawable/edit_text_background"
-                android:padding="15dp"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

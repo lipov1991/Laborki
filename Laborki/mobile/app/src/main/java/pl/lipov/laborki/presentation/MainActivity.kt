@@ -6,6 +6,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -14,23 +15,30 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
+//private const val DEBUG_TAG = "Gestures"
 
 
 class MainActivity :
         AppCompatActivity(),
         LoginCallback,
         SensorEventListener,
-        ViewRouter
-        //GestureDetector.SimpleOnGestureListener,
-        //GestureDetector.OnDoubleTapListener
+        ViewRouter,
+        LoginFirstScreenInterface
 {
 
     private val viewModel: MainViewModel by viewModel()
+
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var mDetector: GestureDetectorCompat
@@ -38,6 +46,41 @@ class MainActivity :
     private lateinit var sensorManager: SensorManager
 
     val connector: ConnectFragment by viewModels()
+
+    var test = " "
+
+    var OnDoubleTapFlag = ""
+    var OnDoubleTapFlag2 = false
+    var OnLongPressFlag = ""
+    var OnAccChange = false
+    var passwordFlag = ""
+
+    fun testowa() {
+        test = "DZIALA"
+    }
+
+    // fun that changes var state
+    fun OnDoubleTapFlagchange() {
+        if (passwordFlag.length == 4) {
+            passwordFlag = ""
+        }
+        // to prevent form very long variable
+        passwordFlag += "D"
+    }
+
+    fun OnLongPressFlagchange() {
+        if (passwordFlag.length == 4) {
+            passwordFlag = ""
+        }
+        passwordFlag += "L"
+    }
+
+    fun OnAccFlagchange() {
+        if (passwordFlag.length == 4) {
+            passwordFlag = ""
+        }
+        passwordFlag += "A"
+    }
 
 
     override fun onCreate(
@@ -48,16 +91,39 @@ class MainActivity :
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        supportFragmentManager.beginTransaction().
+//        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
+//        replace(R.id.fragment_container, LoginFirstScreen()).
+//        commit()
         showFragment(LoginFirstScreen())
-        mDetector = GestureDetectorCompat(this, MyGestureListener(this))
+        mDetector = GestureDetectorCompat(this, MyGestureListener(this, test))
         setUp()
 
+        //val database = Firebase.database
+       // val myRef = database.getReference("kas")
+
+       //myRef.setValue("it works!")
+
+//        myRef.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                dataSnapshot.getValue<String>()?.let {value ->
+//                    showToast(value)
+//                }
+//
+//            }
+
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//
+//            }
+       // })
     }
 
     fun showFragment(
         fragment: Fragment
     ) {
-        // animacja przejscia
         supportFragmentManager.beginTransaction().
         setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
         replace(R.id.fragment_container, fragment).
@@ -75,6 +141,18 @@ class MainActivity :
     override fun onLoginLock() {
         Toast.makeText(this@MainActivity, "Zablokowano!", Toast.LENGTH_LONG).show()
     }
+
+    override fun onLoginDBSuccess(){
+        Toast.makeText(this@MainActivity, "Zalogowano pomyślni!", Toast.LENGTH_LONG).show()
+    }
+    override fun onLoginDBNoUser(){
+        Toast.makeText(this@MainActivity, "Nie ma takiego użytkownika", Toast.LENGTH_LONG).show()
+
+    }
+    override fun onLoginDBError(){
+        Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
+    }
+
 
 //        viewModel.run {
 //            onAccelerometerNotDetected.observe(::getLifecycle) {
@@ -95,15 +173,20 @@ class MainActivity :
     }
 
 
-    private class MyGestureListener(private var activ: MainActivity) :
+    private class MyGestureListener(private var activ: MainActivity, var test: String) :
         GestureDetector.SimpleOnGestureListener() {
 
+        var wykryjDoubleTap = test
 
         override fun onLongPress(event: MotionEvent) {
             Toast.makeText(activ, "LONG_PRESS", Toast.LENGTH_SHORT).show()
             activ.connector.getEvent.postValue(Event.LONG_CLICK)
 
             println("LONG")
+
+            activ.OnLongPressFlagchange()
+
+            //ttest = "Fragment ok"
 
         }
 
@@ -112,8 +195,10 @@ class MainActivity :
             activ.connector.getEvent.postValue(Event.DOUBLE_TAP)
 
             println("D_TAP")
+            activ.OnDoubleTapFlagchange()
+            activ.testowa()
             println("OnDoubleTapFlagchange()")
-
+            println(activ.OnDoubleTapFlag)
             return true
         }
 
@@ -135,35 +220,14 @@ class MainActivity :
         return // we do not use this
     }
 
-    //    override fun onSensorChanged(event: SensorEvent?) {
-//
-//        //Log.d("SENSORS", "onSensorChanged: The values are }")
-//
-//        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-//
-//            val currentX = event.values[0]
-//            //val currentY = event.values[1]
-//            //val currentZ = event.values[2]
-//
-//
-//            if (currentX.toInt() > 5  ) {
-//                //println("ACCif")
-//                Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
-//                this.OnAccFlagchange()
-//            }
-//                else {
-//                    //Toast.makeText(this, "Nie wykryto akcelerometra.", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
-//    }
+
     override fun onSensorChanged(event: SensorEvent?) {
         if (event != null) {
             if (Math.abs(event.values[0]) > 5.0F && Math.abs(event.values[1]) > 5.0F) {
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
                 connector.getEvent.postValue(Event.ACCELERATION_CHANGE) // event jest enumeracją
 
-
+                this.OnAccFlagchange()
 
             } else if (event.values[0] == 0.0F && event.values[1] == 0.0F) {
                 Toast.makeText(this, "Nie wykryto akcelerometra", Toast.LENGTH_SHORT).show()
@@ -179,5 +243,10 @@ class MainActivity :
         setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
         replace(R.id.fragment_container, fragment).
         commit()
+    }
+    fun showToast(
+        text: String
+    ){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 }

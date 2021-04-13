@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="lock_icon_size">96dp</dimen>
+    <dimen name="lock_icon_size">28dp</dimen>
     <dimen name="edit_text_corner_radius">32dp</dimen>
     <dimen name="unlock_size">96dp</dimen>
 </resources>
