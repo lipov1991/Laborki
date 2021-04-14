@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
-import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.model.Event
 
 class MainViewModel(
@@ -26,5 +26,9 @@ class MainViewModel(
     fun unregisterSensorEventListener() {
         sensorEventsUtils.unregisterEventListener()
     }
+
+//    fun getLogin() {
+//        loginRepository.getLogin()
+//    }
 
 }

@@ -9,8 +9,9 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
+import pl.lipov.laborki.data.model.LoginSuccess
+import pl.lipov.laborki.data.repository.LoginRepository
 
 class LoginViewModel(
         private val loginRepository: LoginRepository
@@ -20,12 +21,13 @@ class LoginViewModel(
     private var currentSampleList: MutableList<Event> = mutableListOf()
     val onEvent: MutableLiveData<Event> = loginRepository.attemptEnterPassword
 
-    private val screenUnlockKey =
+
+    private val screenUnlockKey: List<Event> =
             listOf(
-                    Event.DOUBLE_TAP,
-                    Event.DOUBLE_TAP,
-                    Event.LONG_CLICK,
-                    Event.ACCELERATION_CHANGE
+                    Event.valueOf(loginRepository.screenUnlockKey.event1),
+                    Event.valueOf(loginRepository.screenUnlockKey.event2),
+                    Event.valueOf(loginRepository.screenUnlockKey.event3),
+                    Event.valueOf(loginRepository.screenUnlockKey.event4)
             )
 
     fun addCurrentSample(
@@ -51,17 +53,17 @@ class LoginViewModel(
         if (currentSampleList.size == 4) {
             if (currentSampleList == screenUnlockKey) {
                 list.forEachIndexed { index, element -> element.getTintAnimator(duration = ((index + 1) * 500).toLong()).start() }
-                return Pair(1, "Zostałeś zalogowany")
+                return Pair(1, LoginSuccess.SUCCESS.value)
             }
             incorrectLoginAttempts += 1
             list.forEach { it.setIconAnimator(IconFromId = R.drawable.ic_star, IconToId = R.drawable.ic_star_border).start() }
             currentSampleList.clear()
 
             if (incorrectLoginAttempts == 3) {
-                return Pair(1, "Zostałeś zablokowany")
+                return Pair(1, LoginSuccess.BLOCK.value)
             }
 
-            return Pair(null, "Nieudana próba logowania.\nPozostała liczba prób: ${3 - incorrectLoginAttempts}")
+            return Pair(null, "${LoginSuccess.UNSUCCESS.value} ${3 -incorrectLoginAttempts}")
         }
         return null
     }

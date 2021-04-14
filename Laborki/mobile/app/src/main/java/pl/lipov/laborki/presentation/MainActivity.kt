@@ -8,7 +8,6 @@ import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.data.ViewRouter
 import pl.lipov.laborki.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ViewRouter {
@@ -25,12 +24,13 @@ class MainActivity : AppCompatActivity(), ViewRouter {
 //        -> zmiana tematu z poziomu kodu
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
         navigateTo(AuthorizationFragment())
 
         viewModel.run {
+//            getLogin()
+
             onAccelerometerNotDetected.observe(this@MainActivity) {
                 Toast.makeText(this@MainActivity, R.string.no_accelerometer_detected, Toast.LENGTH_LONG).show()
             }

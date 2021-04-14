@@ -1,4 +1,4 @@
-package pl.lipov.laborki.data
+package pl.lipov.laborki.presentation
 
 import androidx.fragment.app.Fragment
 

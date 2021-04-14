@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.data.ViewRouter
+import pl.lipov.laborki.data.model.AuthorizationSuccess
 import pl.lipov.laborki.databinding.FragmentAuthorizationBinding
 
 class AuthorizationFragment : Fragment() {
@@ -44,16 +44,16 @@ class AuthorizationFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        viewModel.getUsers()
         binding.editTextLogin.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (viewModel.loginValidator(binding.editTextLogin.text)) {
                     binding.editTextLogin.setBackgroundResource(R.drawable.edit_text_background)
-                    Toast.makeText(context, "Login poprawny", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, AuthorizationSuccess.SUCCESS.value, Toast.LENGTH_LONG).show()
                     viewRouter?.navigateTo(LoginFragment())
                 } else {
                     binding.editTextLogin.setBackgroundResource(R.drawable.edit_text_error_background)
-                    binding.editTextLogin.error = "Login niepoprawny"
+                    binding.editTextLogin.error = AuthorizationSuccess.UNSUCCESS.value
                 }
                 binding.root.hideKeyboard()
                 return@setOnKeyListener true
@@ -61,11 +61,16 @@ class AuthorizationFragment : Fragment() {
             false
         }
 
-
     }
 
     fun View.hideKeyboard() {
         val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
+
+    override fun onDestroy() {
+        viewModel.clearCompositeDisposable()
+        super.onDestroy()
+    }
+
 }

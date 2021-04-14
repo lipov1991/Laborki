@@ -10,8 +10,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
-import pl.lipov.laborki.data.LoginApi
-import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.data.repository.api.Api
+import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.presentation.AuthorizationViewModel
 import pl.lipov.laborki.presentation.LoginViewModel
 import pl.lipov.laborki.presentation.MainViewModel
@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val LOGIN_API_ENDPOINT = "http://apka.targislubne.pl/"
+private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
     single { GestureDetectorUtils() }
@@ -40,7 +40,7 @@ val networkModule = module {
     factory { provideOkHttpClient() }
     single { provideGson() }
     single { provideRetrofit(okHttpClient = get(), gson = get()) }
-    factory { provideLoginApi(get()) }
+    factory { provideApi(get()) }
 }
 
 private fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().build()
@@ -57,12 +57,12 @@ private fun provideRetrofit(
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
-private fun provideLoginApi(
+private fun provideApi(
         retrofit: Retrofit
-): LoginApi = retrofit.create(LoginApi::class.java)
+): Api = retrofit.create(Api::class.java)
 
 val repositoriesModule = module {
-    single { LoginRepository(loginApi = get()) }
+    single { LoginRepository(api = get()) }
 }
 
 val viewModelsModule = module {
@@ -81,6 +81,8 @@ val viewModelsModule = module {
     }
 
     viewModel {
-        AuthorizationViewModel()
+        AuthorizationViewModel(
+                loginRepository = get()
+        )
     }
 }
