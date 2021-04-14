@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 
@@ -14,9 +15,17 @@ import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.FragmentLoginFirstScreenBinding
+import pl.lipov.laborki.presentation.JsonPlaceHolderApi
 import pl.lipov.laborki.presentation.LoginFirstViewModel
 
 import pl.lipov.laborki.presentation.MainActivity
+import pl.lipov.laborki.presentation.Post
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class LoginFirstScreenFragment: Fragment() {
@@ -42,8 +51,31 @@ class LoginFirstScreenFragment: Fragment() {
             savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(JsonPlaceHolderApi::class.java)
+        val call = service.getPosts()
+        call.enqueue(object: Callback<List<Post>>{
+            override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+                TODO("Not yet implemented")
+                Toast.makeText(activity,"nie udalo sie",Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                TODO("Not yet implemented")
+
+                    var post = response.body()
+                    Toast.makeText(activity,"udalo sie",Toast.LENGTH_LONG).show()
+
+
+            }
+
+        })
         binding.buttonLogin.setOnClickListener{
             if (login){
+                login("byleco")
                 (activity as? MainActivity)?.showFragment(LoginFragment())
             }
         }
