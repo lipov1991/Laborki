@@ -10,12 +10,22 @@ import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMainBinding
 import androidx.lifecycle.observe
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import pl.lipov.laborki.data.repository.LoginRepository
 
-class MainActivity : AppCompatActivity(), ViewRouter {
+class MainActivity : AppCompatActivity(), ViewRouter, LoginCallback {
 
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
     private lateinit var mDetector: GestureDetectorCompat
+    private val loginRepository: LoginRepository? = null
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -26,6 +36,27 @@ class MainActivity : AppCompatActivity(), ViewRouter {
         setContentView(binding.root)
 
         navigateTo(UsernameFragment())
+
+//        // Write a message to the database
+//        val database = Firebase.database
+//        val myRef = database.getReference("Zatorski")
+////
+////        myRef.setValue("Tekst")
+//
+//        // Read from the database
+//        myRef.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                dataSnapshot.getValue<String>()?.let {
+//                    showToast(it)
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//            }
+//        })
 
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
 
@@ -38,10 +69,10 @@ class MainActivity : AppCompatActivity(), ViewRouter {
                 ).show()
             }
             onGestureEvent.observe(this@MainActivity) {
-                attemptEnterPassword.postValue(it)
+                loginRepository?.attemptEnterPassword?.postValue(it)
             }
             onSensorEvent.observe(this@MainActivity) {
-                attemptEnterPassword.postValue(it)
+                loginRepository?.attemptEnterPassword?.postValue(it)
             }
         }
     }
@@ -69,5 +100,26 @@ class MainActivity : AppCompatActivity(), ViewRouter {
             .addToBackStack(null)
             .commit()
     }
+
+    override fun onUsernameSuccess() {
+        Toast.makeText(this@MainActivity, "Poprawna nazwa uzytkownika", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUsernameError() {
+        Toast.makeText(this@MainActivity, "Błąd. Nieporawna nazwa uzytkownika", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPasswordSuccess() {
+        Toast.makeText(this@MainActivity, "Poprawna sekwencja gestów. Zalogowano do bazy", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onPasswordError() {
+        Toast.makeText(this@MainActivity, "Błąd. Niepoprawna sekwencja gestów", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onAttemptLimit() {
+        Toast.makeText(this@MainActivity, "Urządzenie zostało zablokowane z powodu przekroczenia liczby prób", Toast.LENGTH_LONG).show()
+    }
+
 }
 
