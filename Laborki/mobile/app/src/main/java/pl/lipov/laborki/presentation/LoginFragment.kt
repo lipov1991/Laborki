@@ -20,7 +20,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import org.koin.android.ext.android.bind
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
@@ -39,6 +41,7 @@ class LoginFragment : Fragment( ) {
     private var borderediconAnimator: ValueAnimator? = null
 
     private val connector: ConnectFragment by activityViewModels()
+    private val loginViewModel: LoginFragmentViewModel by viewModel()
 
     //private val loginRepository: LoginRepository
 
@@ -49,7 +52,7 @@ class LoginFragment : Fragment( ) {
     private var seq: Int = 1
     lateinit var ACTIVITY: MainActivity
 
-    private val screenUnlockKey =
+    private var screenUnlockKey =
         listOf(
             Event.DOUBLE_TAP,
             Event.DOUBLE_TAP,
@@ -99,6 +102,7 @@ class LoginFragment : Fragment( ) {
             //loginCallback?.onLoginLock()
             loginNo = 0
         }
+
     }
 
 
@@ -155,6 +159,9 @@ class LoginFragment : Fragment( ) {
         })
         //return inflater.inflate(R.layout.fragment_login,container, false)
 
+        loginViewModel.myPass.observe(viewLifecycleOwner, Observer{
+            screenUnlockKey = it
+        } )
         return binding.root
     }
 

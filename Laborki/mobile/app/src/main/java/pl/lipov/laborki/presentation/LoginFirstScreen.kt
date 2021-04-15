@@ -39,9 +39,6 @@ class LoginFirstScreen: Fragment() {
 
     private var loginFirstScreenInterface: LoginFirstScreenInterface? = null
 
-    //private val mainViewModel: MainViewModel by activityViewModels()
-    //private val mainViewModel by inject<MainViewModel>()
-
     private val viewModel: LoginFirstViewModel by viewModel()
 
     private var loginStatus: Boolean = false
@@ -49,8 +46,6 @@ class LoginFirstScreen: Fragment() {
     private var myUsers: List<UserDto>? = null
 
 
-
-    // private val disposable
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -87,7 +82,7 @@ class LoginFirstScreen: Fragment() {
             }
 
         }
-        loginEntered="user_1"
+        //loginEntered="user_1"
         viewModel.login()
 
         binding.login.doOnTextChanged { text, start, before, count ->
@@ -107,43 +102,6 @@ class LoginFirstScreen: Fragment() {
 
     }
 
-
-//    private fun login(
-//        userName: String
-//
-//    ){
-//        Log.i("log", "fun")
-//        compositeDisposable.add(
-//            loginFirstViewModel.getUsers()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({users->
-//
-////                    for (item in users){
-////                        Log.i("log", item.name )
-//                    //}
-//                    myUsers = users
-//
-//
-//                    if(users.findLast { it.name == userName }!= null){
-//                        loginFirstScreenInterface?.onLoginDBSuccess()
-//                        Log.i("log", "udało sie")
-//
-//                        loginStatus = true
-//                    }
-//                    else{
-//                        loginFirstScreenInterface?.onLoginDBNoUser()
-//                        Log.i("log", "no user")
-//                    }
-//
-//                }, {
-//                    loginFirstScreenInterface?.onLoginDBError()
-//                    Log.i("log", "error")
-//                    //Toast.makeText(this, it.localizedMessage ?: "$it", Toast.LENGTH_LONG).show()
-//                })
-//        )
-//
-//    }
 
     override fun onDestroy() {
         //compositeDisposable.clear()

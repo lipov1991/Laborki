@@ -1,6 +1,7 @@
 package pl.lipov.laborki.presentation
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -25,8 +26,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
+//import pl.lipov.laborki.presentation.map.MapActivity
 
-//private const val DEBUG_TAG = "Gestures"
+
 
 
 class MainActivity :
@@ -47,40 +49,6 @@ class MainActivity :
 
     val connector: ConnectFragment by viewModels()
 
-    var test = " "
-
-    var OnDoubleTapFlag = ""
-    var OnDoubleTapFlag2 = false
-    var OnLongPressFlag = ""
-    var OnAccChange = false
-    var passwordFlag = ""
-
-    fun testowa() {
-        test = "DZIALA"
-    }
-
-    // fun that changes var state
-    fun OnDoubleTapFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        // to prevent form very long variable
-        passwordFlag += "D"
-    }
-
-    fun OnLongPressFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        passwordFlag += "L"
-    }
-
-    fun OnAccFlagchange() {
-        if (passwordFlag.length == 4) {
-            passwordFlag = ""
-        }
-        passwordFlag += "A"
-    }
 
 
     override fun onCreate(
@@ -91,12 +59,9 @@ class MainActivity :
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportFragmentManager.beginTransaction().
-//        setCustomAnimations(R.anim.fade_in,R.anim.fade_out).
-//        replace(R.id.fragment_container, LoginFirstScreen()).
-//        commit()
+
         showFragment(LoginFirstScreen())
-        mDetector = GestureDetectorCompat(this, MyGestureListener(this, test))
+        mDetector = GestureDetectorCompat(this, MyGestureListener(this))
         setUp()
 
         //val database = Firebase.database
@@ -154,18 +119,6 @@ class MainActivity :
     }
 
 
-//        viewModel.run {
-//            onAccelerometerNotDetected.observe(::getLifecycle) {
-//                binding.info.text = getString(R.string.no_accelerometer_detected)
-//            }
-//            onGestureEvent.observe(::getLifecycle) {
-//                binding.info.text = it.name
-//            }
-//            onSensorEvent.observe(::getLifecycle) {
-//                binding.info.text = it.name
-//            }
-//        }
-//    }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         mDetector.onTouchEvent(event)
@@ -173,10 +126,9 @@ class MainActivity :
     }
 
 
-    private class MyGestureListener(private var activ: MainActivity, var test: String) :
+    private class MyGestureListener(private var activ: MainActivity) :
         GestureDetector.SimpleOnGestureListener() {
 
-        var wykryjDoubleTap = test
 
         override fun onLongPress(event: MotionEvent) {
             Toast.makeText(activ, "LONG_PRESS", Toast.LENGTH_SHORT).show()
@@ -184,9 +136,7 @@ class MainActivity :
 
             println("LONG")
 
-            activ.OnLongPressFlagchange()
 
-            //ttest = "Fragment ok"
 
         }
 
@@ -194,11 +144,6 @@ class MainActivity :
             Toast.makeText(activ, "DOUBLE_TAP", Toast.LENGTH_SHORT).show()
             activ.connector.getEvent.postValue(Event.DOUBLE_TAP)
 
-            println("D_TAP")
-            activ.OnDoubleTapFlagchange()
-            activ.testowa()
-            println("OnDoubleTapFlagchange()")
-            println(activ.OnDoubleTapFlag)
             return true
         }
 
@@ -227,7 +172,6 @@ class MainActivity :
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
                 connector.getEvent.postValue(Event.ACCELERATION_CHANGE) // event jest enumeracją
 
-                this.OnAccFlagchange()
 
             } else if (event.values[0] == 0.0F && event.values[1] == 0.0F) {
                 Toast.makeText(this, "Nie wykryto akcelerometra", Toast.LENGTH_SHORT).show()
@@ -250,3 +194,9 @@ class MainActivity :
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 }
+
+// 15.04
+// ceryfikat
+// domysle podpisywane kluczem debug
+// sklep -> kl. produkcyjny
+// aktywnosc per moduł

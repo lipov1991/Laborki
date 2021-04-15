@@ -13,6 +13,7 @@ import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.presentation.LoginFirstViewModel
+import pl.lipov.laborki.presentation.LoginFragmentViewModel
 import pl.lipov.laborki.presentation.MainViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -62,7 +63,7 @@ private fun provideLoginApi(
 ): Api = retrofit.create(Api::class.java)
 
 val repositoriesModule = module {
-    factory { LoginRepository(api = get()) }
+    single { LoginRepository(api = get()) } // bylo factory
 }
 
 val viewModelsModule = module {
@@ -72,11 +73,18 @@ val viewModelsModule = module {
             sensorEventsUtils = get()
             //loginRepository = get()
         )
+    }
+
+    viewModel {
         LoginFirstViewModel(
+            loginRepository = get()
+
+        )
+    }
+    viewModel{
+        LoginFragmentViewModel(
             loginRepository = get()
         )
     }
-
-
 
 }
