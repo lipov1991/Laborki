@@ -143,14 +143,14 @@ class MainActivity :
     }
 
     override fun onLoginDBSuccess(){
-        Toast.makeText(this@MainActivity, "Zalogowano pomyślni!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "Login ok!", Toast.LENGTH_LONG).show()
     }
     override fun onLoginDBNoUser(){
         Toast.makeText(this@MainActivity, "Nie ma takiego użytkownika", Toast.LENGTH_LONG).show()
 
     }
     override fun onLoginDBError(){
-        Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@MainActivity, "Database error", Toast.LENGTH_LONG).show()
     }
 
 

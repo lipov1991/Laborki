@@ -11,7 +11,7 @@ class LoginRepository(
     private val api: Api
 ) {
 
-    
+    lateinit var screenUnlockKey: UnlockKeyDto
 
     fun getUsers(): Single<List<UserDto>> {
         Log.i("log", "LoginRepository")

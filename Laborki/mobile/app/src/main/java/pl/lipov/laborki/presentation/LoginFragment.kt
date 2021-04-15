@@ -22,11 +22,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import org.koin.android.ext.android.bind
 import pl.lipov.laborki.R
+import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.FragmentLoginBinding
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment( ) {
 
     private lateinit var binding: FragmentLoginBinding
     private var loginCallback: LoginCallback? = null
@@ -39,6 +40,9 @@ class LoginFragment : Fragment() {
 
     private val connector: ConnectFragment by activityViewModels()
 
+    //private val loginRepository: LoginRepository
+
+
 
     //(activity as MainActivity).te
 
@@ -50,7 +54,14 @@ class LoginFragment : Fragment() {
             Event.DOUBLE_TAP,
             Event.DOUBLE_TAP,
             Event.LONG_CLICK,
-            Event.ACCELERATION_CHANGE
+            Event.ACCELERATION_CHANGE,
+
+            //Event.valueOf()
+
+//            Event.valueOf(loginRepository.screenUnlockKey.event1),
+//            Event.valueOf(loginRepository.screenUnlockKey.event2),
+//            Event.valueOf(loginRepository.screenUnlockKey.event3),
+//            Event.valueOf(loginRepository.screenUnlockKey.event4)
         )
 
 

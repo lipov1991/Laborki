@@ -64,6 +64,7 @@
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_background"
         android:text="@string/sign_in" />
 
 </LinearLayout>
@@ -72,6 +73,7 @@
             android:id="@+id/startLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
             android:text="@string/start" />
 
     </RelativeLayout>

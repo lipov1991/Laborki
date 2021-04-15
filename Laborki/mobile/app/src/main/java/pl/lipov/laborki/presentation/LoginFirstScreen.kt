@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers.io
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
+import pl.lipov.laborki.data.repository.api.dto.UserDto
 import pl.lipov.laborki.databinding.FragmentLoginFirstBinding
 
 
@@ -39,9 +40,13 @@ class LoginFirstScreen: Fragment() {
     private var loginFirstScreenInterface: LoginFirstScreenInterface? = null
 
     //private val mainViewModel: MainViewModel by activityViewModels()
-    private val mainViewModel by inject<MainViewModel>()
+    //private val mainViewModel by inject<MainViewModel>()
+
+    private val viewModel: LoginFirstViewModel by viewModel()
 
     private var loginStatus: Boolean = false
+
+    private var myUsers: List<UserDto>? = null
 
 
 
@@ -73,10 +78,17 @@ class LoginFirstScreen: Fragment() {
 
         binding.loginButton.setOnClickListener {
 
-            login(loginEntered.toString())
-            (activity as? MainActivity)?.showFragment(LoginFragment())
+            if (viewModel.checkLogin(loginEntered.toString())) {
+                (activity as? MainActivity)?.showFragment(LoginFragment())
+                loginFirstScreenInterface?.onLoginDBSuccess()
+            }
+            else{
+                loginFirstScreenInterface?.onLoginDBNoUser()
+            }
 
         }
+        loginEntered="user_1"
+        viewModel.login()
 
         binding.login.doOnTextChanged { text, start, before, count ->
             if (text != null) {
@@ -91,50 +103,51 @@ class LoginFirstScreen: Fragment() {
                 }
             }
 
-
         }
 
     }
 
 
-    private fun login(
-        userName: String
-
-
-    ){
-        Log.i("log", "fun")
-        compositeDisposable.add(
-            loginFirstViewModel.getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({users->
-
-                    for (item in users){
-                        Log.i("log", item.name )
-                    }
-
-                    if(users.findLast { it.name == userName }!= null){
-                        loginFirstScreenInterface?.onLoginDBSuccess()
-                        Log.i("log", "udało sie")
-
-                        loginStatus = true
-                    }
-                    else{
-                        loginFirstScreenInterface?.onLoginDBNoUser()
-                        Log.i("log", "no user")
-                    }
-
-                }, {
-                    loginFirstScreenInterface?.onLoginDBError()
-                    Log.i("log", "error")
-                    //Toast.makeText(this, it.localizedMessage ?: "$it", Toast.LENGTH_LONG).show()
-                })
-        )
-
-    }
+//    private fun login(
+//        userName: String
+//
+//    ){
+//        Log.i("log", "fun")
+//        compositeDisposable.add(
+//            loginFirstViewModel.getUsers()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({users->
+//
+////                    for (item in users){
+////                        Log.i("log", item.name )
+//                    //}
+//                    myUsers = users
+//
+//
+//                    if(users.findLast { it.name == userName }!= null){
+//                        loginFirstScreenInterface?.onLoginDBSuccess()
+//                        Log.i("log", "udało sie")
+//
+//                        loginStatus = true
+//                    }
+//                    else{
+//                        loginFirstScreenInterface?.onLoginDBNoUser()
+//                        Log.i("log", "no user")
+//                    }
+//
+//                }, {
+//                    loginFirstScreenInterface?.onLoginDBError()
+//                    Log.i("log", "error")
+//                    //Toast.makeText(this, it.localizedMessage ?: "$it", Toast.LENGTH_LONG).show()
+//                })
+//        )
+//
+//    }
 
     override fun onDestroy() {
-        compositeDisposable.clear()
+        //compositeDisposable.clear()
+        viewModel.clear2()
         super.onDestroy()
     }
 
