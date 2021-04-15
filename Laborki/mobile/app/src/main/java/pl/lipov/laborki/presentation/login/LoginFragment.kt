@@ -3,6 +3,7 @@ package pl.lipov.laborki.presentation.login
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,15 @@ import androidx.core.graphics.drawable.DrawableCompat.setTint
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.FragmentLoginBinding
 import pl.lipov.laborki.presentation.ConnectViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import pl.lipov.laborki.presentation.LoginStatus
 
 class LoginFragment : Fragment() {
 
@@ -30,53 +35,59 @@ class LoginFragment : Fragment() {
     private var StarAnimator3: ValueAnimator? = null
     private var StarAnimator4: ValueAnimator? = null
     private var LockAnimator: ValueAnimator? = null
-    private val viewConnector: ConnectViewModel by activityViewModels()
-    val POSITIVE_INFINITY: Float = 0.0f
-    private var counter = 0
-    private val screenUnlockKey =
-        listOf(
-            Event.DOUBLE_TAP,
-            Event.DOUBLE_TAP,
-            Event.LONG_CLICK,
-            Event.ACCELERATION_CHANGE)
-    private val userSeq = mutableListOf<Event>()
+    private val viewModel: LoginFragmentViewModel by viewModel()
 
-    fun listsEqual(list1: List<Any>, list2: List<Any>): Boolean {
-        if (list1.size != list2.size)
-            return false
-        val pairList = list1.zip(list2)
-        return pairList.all { (elt1, elt2) ->
-            elt1 == elt2
-        }
-    }
+    private var count = 0
 
-    fun addEvent(event: Event){
-        userSeq.add(event)
-        if (userSeq.size == screenUnlockKey.size) {
-            if(listsEqual(userSeq,screenUnlockKey)){
-                loginCallback?.onLoginSuccess()
-                counter = 0
-//                LockAnimator?.start()
+//    val POSITIVE_INFINITY: Float = 0.0f
+//    private var counter = 0
+//    private var screenUnlockKey =
+//        listOf(
+//            Event.DOUBLE_TAP,
+//            Event.DOUBLE_TAP,
+//            Event.LONG_CLICK,
+//            Event.ACCELERATION_CHANGE)
+    //private var screenUnlockKey: List<Event>? = null
+    //private val userSeq = mutableListOf<Event>()
 
-                binding.icLock.setBackgroundResource(R.drawable.ic_lock_open)
-            }
-            else{
-                loginCallback?.onUnsuccess()
-                counter++
-//                LockAnimator?.start()
-                binding.icLock.setBackgroundResource(R.drawable.ic_lock_closed)
-            }
-            userSeq.clear()
-//            StarAnimator1?.cancel()
-//            StarAnimator2?.cancel()
-//            StarAnimator3?.cancel()
-//            StarAnimator4?.cancel()
-        }
-        if(counter == 3){
-            loginCallback?.blocked()
-        }
+//    fun listsEqual(list1: List<Any>, list2: List<Any>?): Boolean {
+//        if (list1.size != list2.size)
+//            return false
+//        val pairList = list1.zip(list2)
+//        return pairList.all { (elt1, elt2) ->
+//            elt1 == elt2
+//        }
+//    }
 
-    }
+//    fun addEvent(event: Event){
+//        userSeq.add(event)
+//        if (userSeq.size == screenUnlockKey?.size) {
+//            if(userSeq==screenUnlockKey){
+//                loginCallback?.onLoginSuccess()
+//                counter = 0
+////                LockAnimator?.start()
+//
+//                binding.icLock.setBackgroundResource(R.drawable.ic_lock_open)
+//            }
+//            else{
+//                loginCallback?.onUnsuccess()
+//                counter++
+////                LockAnimator?.start()
+//                binding.icLock.setBackgroundResource(R.drawable.ic_lock_closed)
+//            }
+//            userSeq.clear()
+////            StarAnimator1?.cancel()
+////            StarAnimator2?.cancel()
+////            StarAnimator3?.cancel()
+////            StarAnimator4?.cancel()
+//        }
+//        if(counter == 3){
+//            loginCallback?.blocked()
+//        }
+//
+//    }
+
+
 
 
     override fun onAttach(
@@ -95,22 +106,94 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        viewConnector.getEvent.observe(viewLifecycleOwner, Observer {
+//        viewModel.getEvent.observe(viewLifecycleOwner, Observer {
+//
+////            if(screenUnlockKey != null){
+////                screenUnlockKey?.forEach {
+////                    if(it == Event.LONG_CLICK){
+////                        Log.i("LOG","LONG_CLICK")
+////                    }
+////                    else if(it == Event.DOUBLE_TAP){
+////                        Log.i("LOG","DOUBLE_TAP")
+////                    }
+////                    else
+////                        Log.i("LOG","ACCeletdsds")
+////
+////                }
+////            }
+//
+////            if(userSeq.size == 0){
+////                StarAnimator1?.start()
+////            }
+////            if(userSeq.size == 1){
+////                StarAnimator2?.start()
+////            }
+////            if(userSeq.size == 2){
+////                StarAnimator3?.start()
+////            }
+////            if(userSeq.size == 3){
+////                StarAnimator4?.start()
+////            }
+//            viewModel.addEvent(it)
+//
+//            Log.i("LOG","eeeee")
+//        })
 
-            if(userSeq.size == 0){
-                StarAnimator1?.start()
-            }
-            if(userSeq.size == 1){
-                StarAnimator2?.start()
-            }
-            if(userSeq.size == 2){
-                StarAnimator3?.start()
-            }
-            if(userSeq.size == 3){
-                StarAnimator4?.start()
-            }
-            addEvent(it)
-        })
+//        viewModel.loginStatus.observe(viewLifecycleOwner, Observer {
+//            if (it == LoginStatus.CORRECT){
+//                loginCallback?.onLoginSuccess()
+//                binding.icLock.setBackgroundResource(R.drawable.ic_lock_open)
+//            }
+//            else if(it == LoginStatus.UNCORRECT){
+//                loginCallback?.onUnsuccess()
+//                binding.icLock.setBackgroundResource(R.drawable.ic_lock_closed)
+//            }
+//            else if(it == LoginStatus.BLOCKED){
+//                loginCallback?.blocked()
+//            }
+//        })
+
+//        viewModel.password.observe(viewLifecycleOwner, Observer {
+//            screenUnlockKey = it
+//
+//        })
+        viewModel.run{
+            getEvent.observe(viewLifecycleOwner, Observer {
+                Log.i("LOG","eeeee")
+                if(count==0){
+                    count++
+                    StarAnimator1?.start()
+                }
+                else if(count==1){
+                    count++
+                    StarAnimator2?.start()
+                }
+                else if(count==2){
+                    count++
+                    StarAnimator3?.start()
+                }
+                else if(count==3){
+                    count = 0
+                    StarAnimator4?.start()
+                }
+
+                viewModel.addEvent(it)
+            })
+            loginStatus.observe(viewLifecycleOwner, Observer {
+                if (it == LoginStatus.CORRECT){
+                loginCallback?.onLoginSuccess()
+                binding.icLock.setBackgroundResource(R.drawable.ic_lock_open)
+                }
+                else if(it == LoginStatus.UNCORRECT){
+                loginCallback?.onUnsuccess()
+                binding.icLock.setBackgroundResource(R.drawable.ic_lock_closed)
+                }
+                else if(it == LoginStatus.BLOCKED){
+                loginCallback?.blocked()
+                }
+            })
+        }
+
         return binding.root
     }
 
@@ -119,6 +202,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
        super.onViewCreated(view, savedInstanceState)
+
 
 //       binding.loginButton.setOnClickListener {
 //           loginCallback?.onLoginSuccess()

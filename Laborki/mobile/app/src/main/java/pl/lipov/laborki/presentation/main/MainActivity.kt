@@ -1,6 +1,7 @@
-package pl.lipov.laborki.presentation
+package pl.lipov.laborki.presentation.main
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.*
 import android.os.Bundle
 import android.view.GestureDetector
@@ -10,13 +11,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
+import pl.lipov.laborki.presentation.ConnectViewModel
+import pl.lipov.laborki.presentation.MainViewModel
 import pl.lipov.laborki.presentation.login.LoginCallback
 import pl.lipov.laborki.presentation.login.LoginFirstScreenFragment
-import pl.lipov.laborki.presentation.login.LoginFragment
+import pl.lipov.laborki.presentation.map.MapActivity
 
 class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 
@@ -24,7 +29,6 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
     private val accelerometrThreshold : Float = 5.0F
 
 
-    val viewConnector: ConnectViewModel by viewModels()
     private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
@@ -41,16 +45,23 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        mDetector = GestureDetectorCompat(this,MyGestureListener(this))
+
+        binding.button.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        mDetector = GestureDetectorCompat(this, MyGestureListener(this))
 
         sm = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
-        sm.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL)
+
 
 
         showFragment(LoginFirstScreenFragment())
-
+    
+        //val database = Firebase.database
 //        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, GestyFragment())
 //            .addToBackStack(null)
 //            .commit()
@@ -75,6 +86,15 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 //        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        sm.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sm.unregisterListener(this,accelerometer)
+    }
 
     fun showFragment(
             fragment: Fragment
@@ -98,13 +118,13 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
 
             override fun onDoubleTap(e: MotionEvent?): Boolean {
                 Toast.makeText(mainactiviy, "DOUBLE_TAP", Toast.LENGTH_SHORT).show()
-                mainactiviy.viewConnector.getEvent.postValue(Event.DOUBLE_TAP)
+                mainactiviy.viewModel.getEvent.postValue(Event.DOUBLE_TAP)
                 return super.onDoubleTap(e)
             }
 
             override fun onLongPress(e: MotionEvent?) {
                 Toast.makeText(mainactiviy, "LONG_PRESS", Toast.LENGTH_SHORT).show()
-                mainactiviy.viewConnector.getEvent.postValue(Event.LONG_CLICK)
+                mainactiviy.viewModel.getEvent.postValue(Event.LONG_CLICK)
                 super.onLongPress(e)
             }
 
@@ -122,6 +142,10 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         Toast.makeText(this, "Zablokowano", Toast.LENGTH_LONG).show()
     }
 
+    override fun uncorrectUser() {
+        Toast.makeText(this, "Nieprawidlowy uzytkownik", Toast.LENGTH_LONG).show()
+    }
+
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
     }
@@ -131,7 +155,7 @@ class MainActivity : AppCompatActivity(), LoginCallback, SensorEventListener {
         if (event != null){
             if(Math.abs(event.values[0]) > accelerometrThreshold && Math.abs(event.values[1]) > accelerometrThreshold){
                 Toast.makeText(this, "ACCELERATION_CHANGE", Toast.LENGTH_SHORT).show()
-                viewConnector.getEvent.postValue(Event.ACCELERATION_CHANGE)
+                viewModel.getEvent.postValue(Event.ACCELERATION_CHANGE)
                 println("Działa")
             }
             else if(event.values[0] == 0.0F && event.values[1] == 0.0F){

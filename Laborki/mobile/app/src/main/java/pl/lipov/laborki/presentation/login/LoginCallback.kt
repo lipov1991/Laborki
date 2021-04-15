@@ -5,5 +5,6 @@ interface LoginCallback {
     fun onLoginSuccess()
     fun onUnsuccess()
     fun blocked()
+    fun uncorrectUser()
 
 }

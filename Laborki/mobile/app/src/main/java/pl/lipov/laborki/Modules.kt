@@ -13,12 +13,15 @@ import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginApi
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.repository.api.Api
+import pl.lipov.laborki.presentation.LoginFirstViewModel
 import pl.lipov.laborki.presentation.MainViewModel
+import pl.lipov.laborki.presentation.login.LoginFragmentViewModel
+import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/users.json"
+private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
     single { GestureDetectorUtils() }
@@ -61,7 +64,7 @@ private fun provideLoginApi(
 ): Api = retrofit.create(Api::class.java)
 
 val repositoriesModule = module {
-    factory { LoginRepository(api = get()) }
+    single { LoginRepository(api = get()) }
 }
 
 val viewModelsModule = module {
@@ -70,6 +73,19 @@ val viewModelsModule = module {
             gestureDetectorUtils = get(),
             sensorEventsUtils = get(),
             loginRepository = get()
+        )
+    }
+    viewModel {
+        MapViewModel()
+    }
+    viewModel {
+        LoginFirstViewModel(
+                loginRepository = get()
+        )
+    }
+    viewModel {
+        LoginFragmentViewModel(
+                loginRepository = get()
         )
     }
 }

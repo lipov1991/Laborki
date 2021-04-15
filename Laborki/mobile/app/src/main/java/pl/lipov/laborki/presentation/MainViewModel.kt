@@ -17,4 +17,6 @@ class MainViewModel(
         sensorEventsUtils.onAccelerometerNotDetected
     val onGestureEvent: MutableLiveData<Event> = gestureDetectorUtils.onEvent
     val onSensorEvent: MutableLiveData<Event> = sensorEventsUtils.onEvent
+
+    val getEvent:MutableLiveData<Event> = loginRepository.getEvent
 }
