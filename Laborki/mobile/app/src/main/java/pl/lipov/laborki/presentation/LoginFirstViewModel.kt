@@ -11,4 +11,5 @@ class LoginFirstViewModel (
 
 ) : ViewModel(){
     fun getUsers(): Single<List<UserDto>> = loginRepository.getUsers()
+
 }

@@ -12,18 +12,20 @@ import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.presentation.LoginFirstViewModel
 import pl.lipov.laborki.presentation.MainViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/users.json"
+private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
     single { GestureDetectorUtils() }
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+
 }
 
 private fun provideSensorManager(
@@ -67,8 +69,14 @@ val viewModelsModule = module {
     viewModel {
         MainViewModel(
             gestureDetectorUtils = get(),
-            sensorEventsUtils = get(),
+            sensorEventsUtils = get()
+            //loginRepository = get()
+        )
+        LoginFirstViewModel(
             loginRepository = get()
         )
     }
+
+
+
 }

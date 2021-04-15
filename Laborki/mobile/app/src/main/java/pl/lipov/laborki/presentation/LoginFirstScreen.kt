@@ -2,6 +2,7 @@ package pl.lipov.laborki.presentation
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,13 +30,18 @@ class LoginFirstScreen: Fragment() {
     private lateinit var binding: FragmentLoginFirstBinding
     private lateinit var button: Button
 
-    private val loginFirstViewModel: LoginFirstViewModel by viewModels()
+    private val loginFirstViewModel by inject<LoginFirstViewModel>()
 
     private val compositeDisposable = CompositeDisposable()
 
     private var loginEntered: CharSequence? = null
 
     private var loginFirstScreenInterface: LoginFirstScreenInterface? = null
+
+    //private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel by inject<MainViewModel>()
+
+    private var loginStatus: Boolean = false
 
 
 
@@ -66,18 +72,22 @@ class LoginFirstScreen: Fragment() {
 
 
         binding.loginButton.setOnClickListener {
-            (activity as? MainActivity)?.showFragment(LoginFragment())
+
             login(loginEntered.toString())
+            (activity as? MainActivity)?.showFragment(LoginFragment())
+
         }
+
         binding.login.doOnTextChanged { text, start, before, count ->
             if (text != null) {
-                if(text.length > 6 || text.isNullOrEmpty()){
-                    binding.login.error = "Login jest za długi"
+                if(text.length < 5 || text.isNullOrEmpty()){
+                    binding.login.error = "Login jest za krótki"
                     binding.login.setBackgroundResource(R.drawable.edit_text_error_background)
                 } else{
                     binding.login.error = null
                     binding.login.setBackgroundResource(R.drawable.edit_text_background)
                     loginEntered = text
+
                 }
             }
 
@@ -89,22 +99,34 @@ class LoginFirstScreen: Fragment() {
 
     private fun login(
         userName: String
+
+
     ){
+        Log.i("log", "fun")
         compositeDisposable.add(
             loginFirstViewModel.getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({users->
+
+                    for (item in users){
+                        Log.i("log", item.name )
+                    }
+
                     if(users.findLast { it.name == userName }!= null){
                         loginFirstScreenInterface?.onLoginDBSuccess()
+                        Log.i("log", "udało sie")
 
+                        loginStatus = true
                     }
                     else{
                         loginFirstScreenInterface?.onLoginDBNoUser()
+                        Log.i("log", "no user")
                     }
 
                 }, {
                     loginFirstScreenInterface?.onLoginDBError()
+                    Log.i("log", "error")
                     //Toast.makeText(this, it.localizedMessage ?: "$it", Toast.LENGTH_LONG).show()
                 })
         )
