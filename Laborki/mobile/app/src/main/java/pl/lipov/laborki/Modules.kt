@@ -15,6 +15,7 @@ import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.presentation.LoginFirstViewModel
 import pl.lipov.laborki.presentation.LoginFragmentViewModel
 import pl.lipov.laborki.presentation.MainViewModel
+import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -84,6 +85,11 @@ val viewModelsModule = module {
     viewModel{
         LoginFragmentViewModel(
             loginRepository = get()
+        )
+    }
+    viewModel{
+        MapViewModel(
+            //loginRepository = get()
         )
     }
 

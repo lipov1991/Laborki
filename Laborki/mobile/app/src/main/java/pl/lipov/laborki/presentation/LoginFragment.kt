@@ -2,6 +2,7 @@ package pl.lipov.laborki.presentation
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
@@ -21,12 +22,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.common.internal.FallbackServiceBroker
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.FragmentLoginBinding
+import pl.lipov.laborki.presentation.map.MapActivity
 
 
 class LoginFragment : Fragment( ) {
@@ -38,16 +41,10 @@ class LoginFragment : Fragment( ) {
     private var iconAnimator3: ValueAnimator? = null
     private var iconAnimator4: ValueAnimator? = null
 
-    private var borderediconAnimator: ValueAnimator? = null
+   // private var borderediconAnimator: ValueAnimator? = null
 
     private val connector: ConnectFragment by activityViewModels()
     private val loginViewModel: LoginFragmentViewModel by viewModel()
-
-    //private val loginRepository: LoginRepository
-
-
-
-    //(activity as MainActivity).te
 
     private var seq: Int = 1
     lateinit var ACTIVITY: MainActivity
@@ -58,18 +55,7 @@ class LoginFragment : Fragment( ) {
             Event.DOUBLE_TAP,
             Event.LONG_CLICK,
             Event.ACCELERATION_CHANGE,
-
-            //Event.valueOf()
-
-//            Event.valueOf(loginRepository.screenUnlockKey.event1),
-//            Event.valueOf(loginRepository.screenUnlockKey.event2),
-//            Event.valueOf(loginRepository.screenUnlockKey.event3),
-//            Event.valueOf(loginRepository.screenUnlockKey.event4)
         )
-
-
-
-
 
 
     private val userGesturePass = mutableListOf<Event>() // mutable zapewnia to ze mozna dodawac i usuwac z listy
@@ -245,22 +231,16 @@ class LoginFragment : Fragment( ) {
                 loginCallback?.onLoginFail()
                 binding.loginButton.isEnabled = false
             }
+        }
 
+        binding.mapButton.setOnClickListener {
 
-
-//            if (OnDoubleTapFlag == "D" || OnLongPressFlag == "L") {
-//                //binding.icBorderedStar.visibility = View.VISIBLE
-//                borderediconAnimator?.start()
-//                if (OnDoubleTapFlag == "D") {seq += 1}
-//                    if (OnDoubleTapFlag == "L") {seq += 1}
-//            }
-
-//                if (passFlagFragment == "DDLA") {
-//                    iconAnimator?.start()
-//                    binding.icStar.visibility = View.VISIBLE
-//                }
-
+            activity?.let { parentActivity ->
+                val intent = Intent(parentActivity, MapActivity::class.java)
+            startActivity(intent)
             }
+           binding.mapButton.isEnabled = false
+        }
 
 
     }

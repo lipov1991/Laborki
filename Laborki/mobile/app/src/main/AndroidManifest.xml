@@ -25,9 +25,9 @@
             </intent-filter>
         </activity>
 
-<!--        <activity-->
-<!--            android:name=".presentation.map.MapActivity"-->
-<!--            android:screenOrientation="portrait"/>-->
+        <activity
+            android:name=".presentation.map.MapActivity"
+            android:screenOrientation="portrait"/>
 
 
         <meta-data
