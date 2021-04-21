@@ -26,10 +26,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
-//import pl.lipov.laborki.presentation.map.MapActivity
-
-
-
 
 class MainActivity :
         AppCompatActivity(),

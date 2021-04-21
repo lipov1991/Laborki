@@ -5,20 +5,25 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapViewModel : ViewModel() {
 
     private val placeCoordinates = LatLng(52.2550, 21.0378)
+    var categoryMarker : String? = null
+    var market : Marker? = null
+    var food : Marker?=null
+    var bank : Marker?= null
 
     fun setUpMap(
         googleMap: GoogleMap
     )
     {
         val cameraPosition = CameraPosition.Builder()
-            .target(placeCoordinates) // Sets the center of the map to Mountain View
-            .zoom(18f)            // Sets the zoom
-            .build()              // Creates a CameraPosition from the builder
+            .target(placeCoordinates)
+            .zoom(18f)
+            .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
         googleMap.addMarker(
@@ -29,4 +34,51 @@ class MapViewModel : ViewModel() {
 
 
     }
+
+    fun setMarker(map: GoogleMap){
+        map.setOnMapLongClickListener { latLng ->
+            if (categoryMarker == "market") {
+                if (market != null) {
+                    market?.remove()
+                }
+                market = map.addMarker(
+                    MarkerOptions()
+                        .position(latLng)
+                        .title(categoryMarker)
+                        .draggable(true)
+
+                )
+            }
+
+
+            if (categoryMarker == "restauracja") {
+                if (food != null) {
+                    food?.remove()
+                }
+                food = map.addMarker(
+                    MarkerOptions()
+                        .position(latLng)
+                        .title(categoryMarker)
+                        .draggable(true)
+
+                )
+            }
+
+            if(categoryMarker=="bank"){
+                if(bank!=null){
+                    bank?.remove()
+                }
+                    bank = map.addMarker(
+                        MarkerOptions()
+                            .position(latLng)
+                            .title(categoryMarker)
+                            .draggable(true)
+
+                    )
+                }
+
+        }
+
+    }
+
 }
