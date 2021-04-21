@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.databinding.ActivityMainBinding
 import pl.lipov.laborki.databinding.ActivityMapBinding
-import pl.lipov.laborki.presentation.MainViewModel
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 
 class MapActivity : AppCompatActivity(),OnMapReadyCallback {
 
@@ -23,11 +21,25 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback {
         setTheme(R.style.AppTheme)
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        binding.buttonMarket.setOnClickListener {
+            viewModel.markercategory = MarkerCategory.Market
+        }
+        binding.buttonRestauracja.setOnClickListener {
+            viewModel.markercategory = MarkerCategory.Restauracja
+        }
+        binding.buttonBank.setOnClickListener {
+            viewModel.markercategory = MarkerCategory.Bank
+        }
     }
 
-    override fun onMapReady(p0: GoogleMap?) {
-        TODO("Not yet implemented")
+    override fun onMapReady(
+            googleMap: GoogleMap
+    ) {
+        viewModel.setUpMap(googleMap)
+        viewModel.addMarket(googleMap)
     }
-
 
 }

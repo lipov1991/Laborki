@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
+import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.LoginApi
 import pl.lipov.laborki.data.LoginRepository
@@ -28,6 +29,8 @@ val utilsModule = module {
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+    single {MapUtils()}
+
 }
 
 private fun provideSensorManager(
@@ -76,7 +79,7 @@ val viewModelsModule = module {
         )
     }
     viewModel {
-        MapViewModel()
+        MapViewModel(mapUtils = get())
     }
     viewModel {
         LoginFirstViewModel(
