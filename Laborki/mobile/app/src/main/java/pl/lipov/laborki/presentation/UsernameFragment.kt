@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import io.reactivex.disposables.CompositeDisposable
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.FragmentLoginUsernameBinding
@@ -17,7 +17,7 @@ class UsernameFragment : Fragment() {
 
     private val compositeDisposable = CompositeDisposable()
     private var loginCallback: LoginCallback? = null
-    private val viewModel: UsernameViewModel by viewModels()
+    private val viewModel: UsernameViewModel by viewModel()
     private lateinit var binding: FragmentLoginUsernameBinding
     private var viewRouter: ViewRouter? = null
 

@@ -20,14 +20,16 @@
                 android:background="@drawable/ic_person"
                 android:contentDescription="@null" />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/map_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="150dp"
+                android:background="@color/colorPrimary"
+                android:text="Open Map" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/play_button"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_alignParentBottom="true"-->
-        <!--            android:text="@string/play_button_text" />-->
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>
