@@ -52,7 +52,7 @@
             app:srcCompat="@drawable/ic_money" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/deleteMarkerBtn"
+            android:id="@+id/delete_marker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"

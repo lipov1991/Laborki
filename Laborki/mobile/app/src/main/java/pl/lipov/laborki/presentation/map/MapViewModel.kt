@@ -3,10 +3,7 @@ package pl.lipov.laborki.presentation.map
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class MapViewModel : ViewModel() {
 
@@ -15,6 +12,8 @@ class MapViewModel : ViewModel() {
     var market : Marker? = null
     var food : Marker?=null
     var bank : Marker?= null
+    var pin : Marker? = null
+    var pin_gallery : Marker? = null
 
     fun setUpMap(
         googleMap: GoogleMap
@@ -26,7 +25,7 @@ class MapViewModel : ViewModel() {
             .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
-        googleMap.addMarker(
+       pin_gallery= googleMap.addMarker(
             MarkerOptions()
                 .position(placeCoordinates)
                 .title("Galeria Wileńska")
@@ -35,7 +34,9 @@ class MapViewModel : ViewModel() {
 
     }
 
-    fun setMarker(map: GoogleMap){
+    fun setMarker(
+        map: GoogleMap,
+    ){
         map.setOnMapLongClickListener { latLng ->
             if (categoryMarker == "market") {
                 if (market != null) {
@@ -80,5 +81,7 @@ class MapViewModel : ViewModel() {
         }
 
     }
+
+
 
 }

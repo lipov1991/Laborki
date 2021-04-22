@@ -12,10 +12,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
 
-class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var binding : ActivityMapBinding
     private val mapViewModel by inject<MapViewModel>()
@@ -42,6 +43,12 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDr
         binding.floatingBtn3.setOnClickListener{
             onFABButtonClick3()
         }
+        binding.deleteMarker.setOnClickListener{
+            mapViewModel.pin?.remove()
+            mapViewModel.pin = null
+            binding.deleteMarker.visibility = View.INVISIBLE
+        }
+
 
 
     }
@@ -51,64 +58,38 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDr
     ) {
             mapViewModel.setUpMap(googleMap)
             mapViewModel.setMarker(googleMap)
-        with(googleMap){
-            setOnMarkerDragListener(this@MapActivity)
+        googleMap.setOnMapClickListener {
+            binding.deleteMarker.visibility = View.INVISIBLE
+            mapViewModel.pin = null
         }
+        googleMap.setOnMarkerClickListener(this)
     }
 
 
     private fun onFABButtonClick() {
         Toast.makeText(this, "Kategoria MARKET", Toast.LENGTH_SHORT).show()
         mapViewModel.categoryMarker = "market"
-
+        binding.deleteMarker.visibility = View.INVISIBLE
     }
     private fun onFABButtonClick2() {
         Toast.makeText(this, "Kategoria RESTAURACJA", Toast.LENGTH_SHORT).show()
         mapViewModel.categoryMarker = "restauracja"
+        binding.deleteMarker.visibility = View.INVISIBLE
 
     }
     private fun onFABButtonClick3() {
         Toast.makeText(this, "Kategoria BANK", Toast.LENGTH_SHORT).show()
         mapViewModel.categoryMarker = "bank"
-
+        binding.deleteMarker.visibility = View.INVISIBLE
     }
 
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        if(p0 == mapViewModel.pin_gallery) return false
+        binding.deleteMarker.visibility = View.VISIBLE
+        mapViewModel.pin = p0
 
-    private fun overlap(point: Point, imgview: ImageView): Boolean {
-        val imgCoords = IntArray(2)
-
-        imgview.getLocationOnScreen(imgCoords)
-        val overlapX =
-            point.x < imgCoords[0] + imgview.width && point.x > imgCoords[0] - imgview.width
-        val overlapY =
-            point.y < imgCoords[1] + imgview.height && point.y > imgCoords[1] - imgview.width
-        return overlapX && overlapY
+        return false
     }
 
-
-    override fun onMarkerDragStart(p0: Marker?) {
-        //Toast.makeText(this, "onMarkerDragStart", Toast.LENGTH_SHORT).show()
-
-        // show trash FAB
-        binding.deleteMarkerBtn.visibility=View.VISIBLE
-    }
-
-    override fun onMarkerDrag(p0: Marker?) {
-        //Toast.makeText(this, "onMarkerDrag", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onMarkerDragEnd(marker : Marker) {
-
-// pass somehow map or in other way to overlap function
-//        val markerScreenPosition = map.projection.toScreenLocation(marker.position)
-//        if (overlap(markerScreenPosition, binding.deleteMarkerBtn)){
-//
-//            Toast.makeText(this, "dziala!", Toast.LENGTH_SHORT).show()
-            //marker.remove()
-
-        println("POS")
-        println(marker.position)
-        binding.deleteMarkerBtn.visibility=View.INVISIBLE
-    }
 
 }
