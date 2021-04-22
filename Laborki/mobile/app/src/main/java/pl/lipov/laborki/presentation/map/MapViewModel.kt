@@ -1,5 +1,6 @@
 package pl.lipov.laborki.presentation.map
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
@@ -16,18 +17,29 @@ class MapViewModel(
     var markerrestauracja: Marker? = null
     var markerbank: Marker? = null
 
+    var focusedMarker: Marker? = null
+
     fun setUpMap(
-        googleMap: GoogleMap
+        googleMap: GoogleMap,
+        context: Context
     ) {
-       mapUtils.setUpMap(googleMap)
+       mapUtils.setUpMap(googleMap,context)
     }
 
 
-    fun addMarket(
+    fun checkMarkerGallery(marker: Marker?):Boolean{
+        if(marker == mapUtils.markerGallery) return true
 
+        return false
+    }
+
+
+
+    fun addMarket(
         googleMap: GoogleMap
     ){
         googleMap.setOnMapLongClickListener { latLng ->
+
 
 
             if(markercategory == MarkerCategory.Market) {
