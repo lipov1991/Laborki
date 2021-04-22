@@ -2,6 +2,7 @@ package pl.lipov.laborki.presentation.login
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +15,14 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.core.graphics.drawable.DrawableCompat.setTint
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import io.reactivex.disposables.CompositeDisposable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.FragmentLoginBinding
-import pl.lipov.laborki.presentation.MainActivity
+import pl.lipov.laborki.presentation.main.MainActivity
+import pl.lipov.laborki.presentation.main.MainViewModel
+import pl.lipov.laborki.presentation.map.MapActivity
 
 
 class LoginFragment : Fragment() {
@@ -29,6 +34,9 @@ class LoginFragment : Fragment() {
     private var borderedStarAnimator: ValueAnimator? = null
 
     lateinit var ACTIVITY: MainActivity
+
+    private val viewModel: MainViewModel by viewModel()
+    private val compositeDisposable = CompositeDisposable()
 
     //lateinit var text_view: View.OnClickListener
 
@@ -59,7 +67,30 @@ class LoginFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
+
+
+//        compositeDisposable.add(
+//            viewModel.getUsers()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    var message = ""
+//                    it.forEach { user ->
+//                        message += "${user.name}: ${user.unlockKey.event1}" +
+//                                "${user.unlockKey.event2}, ${user.unlockKey.event3}" +
+//                                "${user.unlockKey.event4}\n\n"
+//                    }
+//                }, {
+//                    binding.textView.text = message
+//                    binding.textView.text = it.LocalizedMessage?: "$it"
+//
+//                })
+//        )
+
+
+
         return binding.root
+
     }
 
     override fun onViewCreated(
@@ -69,6 +100,28 @@ class LoginFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         var counter: Int = 1
+
+
+//        compositeDisposable.add(
+//            viewModel.getUsers()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    var message = ""
+//                    it.forEach { user ->
+//                        message += "${user.name}: ${user.unlockKey.event1}" +
+//                                "${user.unlockKey.event2}, ${user.unlockKey.event3}" +
+//                                "${user.unlockKey.event4}\n\n"
+//
+//                    }
+//                }, {
+//                   // binding.textView.text = message
+//                   // binding.textView.text = it.LocalizedMessage?: "$it"
+//                    //Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//
+//                })
+//        )
+
 
 
 
@@ -109,6 +162,11 @@ class LoginFragment : Fragment() {
             {
                 Toast.makeText(context, "Zalogowano", Toast.LENGTH_SHORT).show()
                 starAnimator?.start()
+
+                activity?.let {parentFragment ->
+                    val intent = Intent(parentFragment, MapActivity::class.java)
+                    startActivity(intent)}
+
 
             }
 
@@ -163,6 +221,9 @@ class LoginFragment : Fragment() {
             this.duration = duration
         }
     }
+
+
+
 
 }
 

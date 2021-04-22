@@ -1,4 +1,4 @@
-package pl.lipov.laborki.presentation
+package pl.lipov.laborki.presentation.main
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -16,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.databinding.ActivityMainBinding
+import pl.lipov.laborki.presentation.LoginFirstScreen
 import pl.lipov.laborki.presentation.login.LoginCallback
 import pl.lipov.laborki.presentation.login.LoginFragment
 
@@ -42,6 +43,7 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
 
 
         super.onCreate(savedInstanceState)
+
         setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -53,6 +55,11 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
         mDetector.setOnDoubleTapListener(this)
 
 
+//        binding.testButton.setOnClickListener {
+//            val intent = Intent(this, MapActivity::class.java)
+//            startActivity(intent)
+//            }
+
 
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
@@ -60,6 +67,25 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
             .commit()
 
         navigateTo(LoginFirstScreen())
+
+
+
+//       compositeDisposable.add(
+//            viewModel.getUsers()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//                    var message = ""
+//                    it.forEach { user ->
+//                        message += "${user.name}: ${user.unlockKey.event1}" +
+//                                "${user.unlockKey.event2}, ${user.unlockKey.event3}" +
+//                                "${user.unlockKey.event4}\n\n"
+//                    }
+//                }, {  binding.textView.text = message
+//                    binding.textView.text = it.LocalizedMessage?: "$it"
+//                })
+//        )
+
 
         //Przygotowanie do integracji z firebase
 
