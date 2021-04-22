@@ -1,11 +1,11 @@
-package pl.lipov.laborki.presentation
+package pl.lipov.laborki.presentation.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
-import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Event
+import pl.lipov.laborki.data.repository.api.LoginRepository
 
 class MainViewModel(
     val gestureDetectorUtils: GestureDetectorUtils,

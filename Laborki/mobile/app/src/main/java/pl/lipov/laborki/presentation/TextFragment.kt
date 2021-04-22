@@ -8,20 +8,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.ViewRouter
 import pl.lipov.laborki.databinding.FragmentLoginTextBinding
+import pl.lipov.laborki.presentation.login.TextViewModel
 
 class TextFragment : Fragment() {
 
-    private val sharedVM: MainViewModel by activityViewModels()
+    private val viewModel: TextViewModel by viewModel()
     private lateinit var binding: FragmentLoginTextBinding
     private var viewRouter: ViewRouter? = null
-    private val correctLogin = "Antonijestfajny"
     override fun onAttach(
         context: Context
     ) {
@@ -49,28 +48,44 @@ class TextFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getUsers()
+
         binding.editTextLogin.addTextChangedListener(
-            object: TextWatcher {
+            object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     Log.d("tag", s.toString())
-                    if (s.toString() == correctLogin) {
-                        viewRouter?.navigateTo(LoginFragment())
-                    }
-                    else {
-                        if (s.toString().length >= correctLogin.length) {
-                            binding.editTextLogin.setBackgroundResource(R.drawable.edit_text_error_background)
-                            binding.editTextLogin.error = "Hasło niepoprawne"
+                    Log.d("tag", "${viewModel.userList}")
+
+                    viewModel.userList?.forEach {
+                        if (it.name == s.toString()) {
+                            viewModel.loginRepository.unlockPassword = it.unlockKey
+                            viewRouter?.navigateTo(LoginFragment())
+                        } else {
+                            if (s.toString().length >= it.name.length) {
+                                binding.editTextLogin.setBackgroundResource(R.drawable.edit_text_error_background)
+                                binding.editTextLogin.error = "Hasło niepoprawne"
+                            }
                         }
                     }
                 }
             }
         )
+    }
 
+    override fun onDestroy() {
+        viewModel.clearCompositeDisposable()
+        super.onDestroy()
     }
 }
