@@ -8,7 +8,7 @@ import pl.lipov.laborki.data.repository.api.dto.UnlockKeyDto
 import pl.lipov.laborki.data.repository.api.dto.UserDto
 
 class LoginRepository(
-        private val api: Api
+    private val api: Api
 ) {
 
     val attemptEnterPassword = MutableLiveData<Event>()
@@ -16,7 +16,5 @@ class LoginRepository(
     lateinit var screenUnlockKey: UnlockKeyDto
 
     fun getUsers(): Single<List<UserDto>> = api.getUsers()
-
-
 
 }

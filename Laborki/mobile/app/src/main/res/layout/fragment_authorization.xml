@@ -23,7 +23,9 @@
                 android:paddingEnd="10dp"
                 android:lines="1"
                 android:inputType="text"
+                android:visibility="gone"
                 android:background="@drawable/edit_text_background"/>
+
 
         </LinearLayout>
 

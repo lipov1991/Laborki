@@ -4,4 +4,5 @@
     <string name="sign_in_button">Zaloguj się</string>
     <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
     <string name="authorization_edit_text">Podaj swój login</string>
+    <string name="gallety_name">Galeria Wileńska</string>
 </resources>

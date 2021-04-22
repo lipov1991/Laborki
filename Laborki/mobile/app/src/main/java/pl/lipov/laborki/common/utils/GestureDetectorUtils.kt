@@ -10,13 +10,13 @@ class GestureDetectorUtils : GestureDetector.SimpleOnGestureListener() {
     val onEvent = MutableLiveData<Event>()
 
     override fun onLongPress(
-            e: MotionEvent?
+        e: MotionEvent?
     ) {
         onEvent.postValue(Event.LONG_CLICK)
     }
 
     override fun onDoubleTap(
-            e: MotionEvent?
+        e: MotionEvent?
     ): Boolean {
         onEvent.postValue(Event.DOUBLE_TAP)
         return super.onDoubleTap(e)

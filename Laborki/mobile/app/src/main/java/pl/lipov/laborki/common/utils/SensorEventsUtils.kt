@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData
 import pl.lipov.laborki.data.model.Event
 
 class SensorEventsUtils(
-        private val sensorManager: SensorManager,
-        private val accelerometer: Sensor?
+    private val sensorManager: SensorManager,
+    private val accelerometer: Sensor?
 ) : SensorEventListener {
 
     companion object {
@@ -21,7 +21,7 @@ class SensorEventsUtils(
     val onAccelerometerNotDetected = MutableLiveData<Unit>()
 
     override fun onSensorChanged(
-            sensorEvent: SensorEvent
+        sensorEvent: SensorEvent
     ) {
 
         val x = sensorEvent.values[0]
@@ -34,8 +34,8 @@ class SensorEventsUtils(
     }
 
     override fun onAccuracyChanged(
-            sensor: Sensor?,
-            accuracy: Int
+        sensor: Sensor?,
+        accuracy: Int
     ) {
         Log.d(TAG, "${sensor?.name} accuracy changed to $accuracy.")
     }

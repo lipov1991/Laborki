@@ -1,7 +1,7 @@
 package pl.lipov.laborki.data.model
 
-enum class LoginSuccess(
-        val value: String
+enum class LoginStatus(
+    val value: String
 ) {
     SUCCESS("Password correct"),
     BLOCK("You've been blocked"),

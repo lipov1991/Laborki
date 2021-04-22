@@ -9,12 +9,14 @@ import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
+import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
-import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.data.repository.LoginRepository
+import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.presentation.AuthorizationViewModel
 import pl.lipov.laborki.presentation.LoginViewModel
 import pl.lipov.laborki.presentation.MainViewModel
+import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,14 +28,15 @@ val utilsModule = module {
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+    single { MapUtils() }
 }
 
 private fun provideSensorManager(
-        context: Context
+    context: Context
 ): SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
 private fun provideAccelerometer(
-        sensorManager: SensorManager
+    sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
 val networkModule = module {
@@ -48,17 +51,17 @@ private fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().bu
 private fun provideGson(): Gson = GsonBuilder().serializeNulls().setLenient().create()
 
 private fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        gson: Gson
+    okHttpClient: OkHttpClient,
+    gson: Gson
 ): Retrofit = Retrofit.Builder()
-        .client(okHttpClient)
-        .baseUrl(LOGIN_API_ENDPOINT)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
+    .client(okHttpClient)
+    .baseUrl(LOGIN_API_ENDPOINT)
+    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    .addConverterFactory(GsonConverterFactory.create(gson))
+    .build()
 
 private fun provideApi(
-        retrofit: Retrofit
+    retrofit: Retrofit
 ): Api = retrofit.create(Api::class.java)
 
 val repositoriesModule = module {
@@ -68,21 +71,25 @@ val repositoriesModule = module {
 val viewModelsModule = module {
     viewModel {
         MainViewModel(
-                gestureDetectorUtils = get(),
-                sensorEventsUtils = get(),
-                loginRepository = get()
+            gestureDetectorUtils = get(),
+            sensorEventsUtils = get(),
+            loginRepository = get()
         )
     }
 
     viewModel {
         LoginViewModel(
-                loginRepository = get()
+            loginRepository = get()
         )
     }
 
     viewModel {
         AuthorizationViewModel(
-                loginRepository = get()
+            loginRepository = get()
         )
+    }
+
+    viewModel {
+        MapViewModel(mapUtils = get())
     }
 }

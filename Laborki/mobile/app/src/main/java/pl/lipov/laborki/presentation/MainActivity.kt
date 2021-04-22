@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), ViewRouter {
     private lateinit var mDetector: GestureDetectorCompat
 
     override fun onCreate(
-            savedInstanceState: Bundle?
+        savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity(), ViewRouter {
         navigateTo(AuthorizationFragment())
 
         viewModel.run {
-//            getLogin()
-
             onAccelerometerNotDetected.observe(this@MainActivity) {
-                Toast.makeText(this@MainActivity, R.string.no_accelerometer_detected, Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    R.string.no_accelerometer_detected,
+                    Toast.LENGTH_LONG
+                ).show()
             }
             onGestureEvent.observe(this@MainActivity) {
                 onEvent.postValue(it)
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity(), ViewRouter {
     }
 
     override fun onTouchEvent(
-            event: MotionEvent?
+        event: MotionEvent?
     ): Boolean {
         mDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
@@ -62,10 +64,10 @@ class MainActivity : AppCompatActivity(), ViewRouter {
 
     override fun navigateTo(fragment: Fragment) {
         supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
-                .replace(R.id.fragment_container, fragment)// or .add
-                //.addToBackStack(null)  - optional add to back stack
-                .commit()
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, 0, 0, R.anim.fade_out)
+            .replace(R.id.fragment_container, fragment)// or .add
+            //.addToBackStack(null)  - optional add to back stack
+            .commit()
     }
 }

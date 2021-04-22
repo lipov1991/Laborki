@@ -1,7 +1,7 @@
 package pl.lipov.laborki.data.model
 
-enum class AuthorizationSuccess (
-        val value: String
+enum class AuthorizationStatus(
+    val value: String
 ) {
     SUCCESS("Login correct"),
     UNSUCCESS("Login incorrect")
