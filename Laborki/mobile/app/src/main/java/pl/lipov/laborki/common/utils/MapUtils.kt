@@ -2,14 +2,14 @@ package pl.lipov.laborki.common.utils
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class MapUtils {
 
     private val galleryLatLon = LatLng(52.2550, 21.0378)
+    var currentIndoorLevel = -1
+    var onIndoorBuildingFocused = false
+    var markersList: MutableList<Pair<Marker, Int>> = mutableListOf()
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -28,16 +28,24 @@ class MapUtils {
                 .title(markerTitle)
         )
 
-//        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
-//            override fun onIndoorBuildingFocused() {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
+        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
+            override fun onIndoorBuildingFocused() {
+                onIndoorBuildingFocused = googleMap.focusedBuilding != null
+
+                if (onIndoorBuildingFocused == false) {
+                    markersList.forEach {
+                        it.first.isVisible = false
+                    }
+                } else {
+                    checkIndoorLevel()
+                }
+            }
+
+            override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding) {
+                currentIndoorLevel = indoorBuilding.activeLevelIndex
+                checkIndoorLevel()
+            }
+        })
     }
 
     fun setMarker(
@@ -46,27 +54,19 @@ class MapUtils {
         markerIcon: Int,
         coord: LatLng
     ) {
-        googleMap.addMarker(
+        val marker = googleMap.addMarker(
             MarkerOptions()
                 .position(coord)
                 .title(markerTitle)
                 .draggable(true)
                 .icon(BitmapDescriptorFactory.fromResource(markerIcon))
         )
+        markersList.add(Pair(marker, currentIndoorLevel))
     }
 
-//    override fun onMapReady(
-//        googleMap: GoogleMap
-//    ) {
-//        myMap = googleMap
-//        setUpMap(googleMap, "Wileniak")
-//        googleMap.setOnMapLongClickListener(this)
-//        googleMap.setOnMarkerDragListener(this)
-//    }
-
-//    override fun onMapLongClick(coord: LatLng) {
-//        setMarker(myMap, currentMarkerType, currentMarkerColor, coord)
-//    }
-
-
+    fun checkIndoorLevel() {
+        markersList.forEach {
+            it.first.isVisible = it.second == currentIndoorLevel
+        }
+    }
 }

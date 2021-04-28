@@ -12,22 +12,23 @@ class MapViewModel(
     val mapUtils: MapUtils
 ) : ViewModel() {
 
-    var markersList: MutableList<String> = mutableListOf()
-    var currentMarkerType = "Bank"
-    var currentMarkerIcon = R.drawable.bitmap_bank
+    var currentMarkerType = "Shop"
+    var currentMarkerIcon = R.drawable.bitmap_shop
 
     fun deleteMarker(
         markerType: String
     ) {
-        markersList.remove(markerType)
+        mapUtils.markersList.removeAll { (it.second == mapUtils.currentIndoorLevel) and (it.first.title == markerType) }
     }
 
     fun markerChecker(): Boolean {
-        if (markersList.contains(currentMarkerType)) {
-            return false
+        if (mapUtils.markersList
+                .filter { (it.second == mapUtils.currentIndoorLevel) and (it.first.title == currentMarkerType) }
+                .isEmpty()
+        ) {
+            return true
         }
-        markersList.add(currentMarkerType)
-        return true
+        return false
     }
 
     fun changeMarker(
