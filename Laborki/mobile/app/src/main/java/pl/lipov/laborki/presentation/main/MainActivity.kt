@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity(), LoginCallback, AuthCallback {
                 auth.postValue(it)
             }
         }
+
+//        For testing
+//        binding.testButton.setOnClickListener {
+//            showMap()
+//        }
     }
 
     override fun showMap() {

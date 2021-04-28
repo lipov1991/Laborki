@@ -52,3 +52,10 @@
         android:layout_height="match_parent"/>
 
 </RelativeLayout>
+
+<!--For testing-->
+<!--<Button-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="test"-->
+<!--android:id="@+id/testButton"/>-->

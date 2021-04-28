@@ -1,12 +1,16 @@
 package pl.lipov.laborki.presentation.map
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.IndoorBuilding
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
@@ -23,6 +27,12 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
     private var restaurantCount: Int = 0
     private var bankCount: Int = 0
     private var isRemoving: Int = 0
+    private var currentFloor: Int = 0
+    private var markerArray = mutableListOf<Marker>()
+
+    private lateinit var markerMarket: Marker
+    private lateinit var markerRestaurant: Marker
+    private lateinit var markerBank: Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,23 +78,30 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
 
             map!!.setOnMapLongClickListener {
                 if (cat == "Market" && marketCount == 0) {
-                    googleMap.addMarker(
+                    markerMarket = googleMap.addMarker(
                             MarkerOptions().position(it).title(cat).draggable(true)
                     )
+                    markerMarket.tag = currentFloor
+                    markerArray.add(markerMarket)
                     marketCount += 1
                 }
                 if (cat == "Restaurant" && restaurantCount == 0) {
-                    googleMap.addMarker(
+                    markerRestaurant = googleMap.addMarker(
                             MarkerOptions().position(it).title(cat).draggable(true)
                     )
+                    markerRestaurant.tag = currentFloor
+                    markerArray.add(markerRestaurant)
                     restaurantCount += 1
                 }
                 if (cat == "Bank" && bankCount == 0) {
-                    googleMap.addMarker(
+                    markerBank = googleMap.addMarker(
                             MarkerOptions().position(it).title(cat).draggable(true)
                     )
+                    markerBank.tag = currentFloor
+                    markerArray.add(markerBank)
                     bankCount += 1
                 }
+
             }
 
             map!!.setOnMarkerClickListener { marker ->
@@ -104,6 +121,42 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
                 }
                 true
             }
+
+            map!!.setOnCameraMoveListener() {
+                if (googleMap.focusedBuilding == null) {
+                    binding.marketButton.visibility = View.GONE
+                    binding.restaurantButton.visibility = View.GONE
+                    binding.bankButton.visibility = View.GONE
+                    binding.removeButton.visibility = View.GONE
+                } else {
+                    binding.marketButton.visibility = View.VISIBLE
+                    binding.restaurantButton.visibility = View.VISIBLE
+                    binding.bankButton.visibility = View.VISIBLE
+                    binding.removeButton.visibility = View.VISIBLE
+                }
+            }
+
+            googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
+
+                override fun onIndoorBuildingFocused() {}
+
+                override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding) {
+                    val levels = indoorBuilding.levels
+
+                    val level = indoorBuilding.activeLevelIndex
+//                    Log.d("Tag", "Level Index: $level") // For testing
+                    currentFloor = levels[level].name.toInt()
+//                    Log.d("Tag", "Level: $currentFloor") // For testing
+
+                    for (marker: Marker in markerArray) {
+                        if (marker.tag != currentFloor) {
+                            marker.isVisible = false
+                        } else {
+                            marker.isVisible = true
+                        }
+                    }
+                }
+            })
         }
     }
 }
