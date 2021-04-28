@@ -28,7 +28,7 @@
             android:id="@+id/floatingBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="bottom|left"
             android:layout_margin="5dp"
             android:clickable="true"
             app:srcCompat="@drawable/ic_shop" />
@@ -37,7 +37,7 @@
             android:id="@+id/floatingBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_gravity="bottom|left"
             android:layout_margin="5dp"
             android:clickable="true"
             app:srcCompat="@drawable/ic_food" />
@@ -46,7 +46,7 @@
             android:id="@+id/floatingBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
+            android:layout_gravity="left|bottom"
             android:layout_margin="5dp"
             android:clickable="true"
             app:srcCompat="@drawable/ic_money" />

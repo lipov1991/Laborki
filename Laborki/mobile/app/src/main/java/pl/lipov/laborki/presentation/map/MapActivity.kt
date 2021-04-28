@@ -58,6 +58,8 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
     ) {
             mapViewModel.setUpMap(googleMap)
             mapViewModel.setMarker(googleMap)
+            mapViewModel.indoor(googleMap, this)
+
         googleMap.setOnMapClickListener {
             binding.deleteMarker.visibility = View.INVISIBLE
             mapViewModel.pin = null
