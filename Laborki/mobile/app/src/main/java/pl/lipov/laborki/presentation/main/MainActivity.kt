@@ -1,5 +1,6 @@
 package pl.lipov.laborki.presentation.main
 
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -19,6 +20,7 @@ import pl.lipov.laborki.databinding.ActivityMainBinding
 import pl.lipov.laborki.presentation.LoginFirstScreen
 import pl.lipov.laborki.presentation.login.LoginCallback
 import pl.lipov.laborki.presentation.login.LoginFragment
+import pl.lipov.laborki.presentation.map.MapActivity
 
 private const val DEBUG_TAG = "Gestures"
 
@@ -55,10 +57,10 @@ class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,Ge
         mDetector.setOnDoubleTapListener(this)
 
 
-//        binding.testButton.setOnClickListener {
-//            val intent = Intent(this, MapActivity::class.java)
-//            startActivity(intent)
-//            }
+        binding.testButton.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+            }
 
 
         supportFragmentManager.beginTransaction()
