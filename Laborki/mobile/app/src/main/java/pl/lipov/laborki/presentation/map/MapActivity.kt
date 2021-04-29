@@ -1,8 +1,10 @@
 package pl.lipov.laborki.presentation.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.maps.GoogleMap
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
@@ -52,6 +54,10 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
             googleMap: GoogleMap
     ) {
         viewModel.setUpMap(googleMap,this)
+        PoliceStationDialogFragment().show(supportFragmentManager,"policeStations")
+
+        viewModel.addHeatMap(googleMap,this)
+
         viewModel.addMarket(googleMap)
 
         googleMap.setOnMarkerClickListener(this)
@@ -61,7 +67,22 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
             viewModel.focusedMarker = null
         }
 
+        viewModel.setUpIndoor(googleMap)
+
     }
+
+    override fun onBackPressed() {
+        MaterialDialog(this).show {
+            title(text = "Wyjscie z aplikacji")
+            message(text = "Czy na pewno chcesz wyjsc z aplikacji")
+            positiveButton(text = "Tak") {
+                super.onBackPressed()
+            }
+            negativeButton(text = "Nie")
+        }
+
+    }
+
 
     override fun onMarkerClick(marker: Marker?): Boolean {
 

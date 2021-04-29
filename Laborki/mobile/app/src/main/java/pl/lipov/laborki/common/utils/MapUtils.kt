@@ -31,18 +31,19 @@ class MapUtils {
                 .title("Galeria Wileńska")
         )
 
-        googleMap.setOnIndoorStateChangeListener(object: GoogleMap.OnIndoorStateChangeListener{
-            override fun onIndoorBuildingFocused() {
-                context.showToast("onIndoorBuildingFocused")
-            }
-
-            override fun onIndoorLevelActivated(
-                    indoorBuilding: IndoorBuilding?
-            ) {
-                context.showToast("onIndoorLevelAcvtivated")
-            }
-
-        })
+//        googleMap.setOnIndoorStateChangeListener(object: GoogleMap.OnIndoorStateChangeListener{
+//            override fun onIndoorBuildingFocused() {
+//                context.showToast("onIndoorBuildingFocused")
+//
+//            }
+//
+//            override fun onIndoorLevelActivated(
+//                    indoorBuilding: IndoorBuilding?
+//            ) {
+//                context.showToast("onIndoorLevelAcvtivated")
+//            }
+//
+//        })
 
 
     }
