@@ -63,5 +63,5 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
     implementation 'com.google.firebase:firebase-database-ktx'
-//    implementation 'com.squareup.picasso:picasso:' --> podac wersje
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

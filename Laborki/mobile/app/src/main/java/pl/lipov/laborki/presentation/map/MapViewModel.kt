@@ -9,7 +9,6 @@ class MapViewModel(
     val mapUtils: MapUtils
 ) : ViewModel() {
     var currentMarkerType = "Sklep"
-    var markersList: MutableList<String> = mutableListOf()
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -36,10 +35,10 @@ class MapViewModel(
     }
 
     fun checkMarker(): Boolean {
-        if (markersList.contains(currentMarkerType)) {
-            return false
+        if (mapUtils.pinsList.none { (it.second == mapUtils.currentLevel) and (it.first.title == currentMarkerType) }
+        ) {
+            return true
         }
-        markersList.add(currentMarkerType)
-        return true
+        return false
     }
 }

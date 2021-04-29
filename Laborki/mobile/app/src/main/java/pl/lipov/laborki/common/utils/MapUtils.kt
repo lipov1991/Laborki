@@ -2,15 +2,15 @@ package pl.lipov.laborki.common.utils
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.IndoorBuilding
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class MapUtils {
     private val galleryLatLon = LatLng(52.2550, 21.0378)
 
     var focusedFlag = false
+    var currentLevel = -1
+
+    var pinsList: MutableList<Pair<Marker, Int>> = mutableListOf()
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -28,6 +28,32 @@ class MapUtils {
                 .position(galleryLatLon)
                 .title(markerTitle)
         )
+
+        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
+            override fun onIndoorBuildingFocused() {
+                focusedFlag = googleMap.focusedBuilding != null
+
+                if (!focusedFlag) {
+                    pinsList.forEach {
+                        it.first.isVisible = false
+                    }
+                } else {
+                    pinsList.forEach {
+                        it.first.isVisible = it.second == currentLevel
+                    }
+                }
+            }
+
+            override fun onIndoorLevelActivated(p0: IndoorBuilding) {
+                currentLevel = p0.activeLevelIndex
+
+                pinsList.forEach {
+                    it.first.isVisible = it.second == currentLevel
+                }
+            }
+
+        })
+
     }
 
     fun addMarker(
@@ -36,7 +62,7 @@ class MapUtils {
 //        markerIcon: Int,
         coord: LatLng
     ) {
-        googleMap.addMarker(
+        val googleMarkers = googleMap.addMarker(
             MarkerOptions()
                 .position(coord)
                 .title(markerTitle)
@@ -44,19 +70,8 @@ class MapUtils {
 //                .icon(BitmapDescriptorFactory.fromResource(markerIcon))
         )
 
-        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
-            override fun onIndoorBuildingFocused() {
-                focusedFlag = !focusedFlag
+        pinsList.add(Pair(googleMarkers, currentLevel))
 
-                //print toast testowo costamcostam
-                // tutaj wszystko nalezy zaimplemetowac do zad 5
-            }
 
-            override fun onIndoorLevelActivated(p0: IndoorBuilding?) {
-
-                //print toast testowo costamcostam
-            }
-
-        })
     }
 }
