@@ -111,7 +111,7 @@ Tematy:
 - BottomSheetDialogFragment
 - RecyclerView
 
-<b>Zadanie 6 (2p).</b> 
+<b>Zadanie 6 (3p).</b> 
 
 Dodać przycisk (w lewym dolnym rogu) umożliwiający wybór bydynku. Po kliknięciu w przycisk ma się wyświetlić komponent bottom sheet 
 z listą dostępnych budynków. Po wybraniu budynku:
@@ -119,10 +119,7 @@ z listą dostępnych budynków. Po wybraniu budynku:
 - usunąć markery: Market, Fast food, Bank (jeśli znajdują się na mapie),
 - zresetować statusy przycisków: Market, Fast food, Bank (domyślnie aktywnym przyciskiem powinien być Market).
 
-Współrzędne budynków:
-- Galeria Mokotów (52.1797645,21.0035337)
-- Galeria Wileńska (52.2550, 21.0378) 
-- Westfield Arkadia (52.2571543,20.9823334)
+Informacje o budynkach należy pobrać z https://laborki-7e3b1.firebaseio.com/galeries.json.
 
 #### Termin realizacji zadania: 22.04.2021 godz. 23.59
 
