@@ -5,20 +5,12 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
-import pl.lipov.laborki.databinding.ActivityMainBinding
-import androidx.lifecycle.observe
-import androidx.fragment.app.Fragment
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import pl.lipov.laborki.data.repository.LoginRepository
+import pl.lipov.laborki.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ViewRouter, LoginCallback {
 

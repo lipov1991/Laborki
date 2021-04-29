@@ -62,6 +62,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.setUpMap(googleMap)
         viewModel.addLocation(googleMap)
         viewModel.removeMarker(googleMap)
+        viewModel.indoorBuildingMarkerManagement(
+            googleMap,
+            binding.fab1,
+            binding.fab2,
+            binding.fab3
+        )
     }
 }
 

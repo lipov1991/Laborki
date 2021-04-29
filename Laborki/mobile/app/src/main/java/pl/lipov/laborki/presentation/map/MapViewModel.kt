@@ -1,9 +1,12 @@
 package pl.lipov.laborki.presentation.map
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.IndoorBuilding
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pl.lipov.laborki.common.utils.MapUtils
 
 class MapViewModel(
@@ -14,6 +17,8 @@ class MapViewModel(
     var markerMarket: Marker? = null
     var markerRestaurant: Marker? = null
     var markerBank: Marker? = null
+    private var markerList = mutableListOf<Marker>()
+    private var currentFloor: Int = 0
 
     fun setUpMap(
         googleMap: GoogleMap
@@ -37,6 +42,8 @@ class MapViewModel(
                         .title(markerCategory.toString())
                         .draggable(true)
                 )
+                    markerMarket!!.tag = currentFloor
+                    markerList.add(markerMarket!!)
             }
 
             if (markerCategory == MarkerCategory.restauracja) {
@@ -50,6 +57,8 @@ class MapViewModel(
                         .title(markerCategory.toString())
                         .draggable(true)
                 )
+                    markerRestaurant!!.tag = currentFloor
+                    markerList.add(markerRestaurant!!)
             }
 
             if (markerCategory == MarkerCategory.bank) {
@@ -62,11 +71,12 @@ class MapViewModel(
                         .title(markerCategory.toString())
                         .draggable(true)
                 )
+                    markerBank!!.tag = currentFloor
+                    markerList.add(markerBank!!)
             }
         }
     }
 
-    //usuń marker poprzez long click na okno informacyjne - work in progress
     fun removeMarker(
         googleMap: GoogleMap
     ) {
@@ -80,4 +90,42 @@ class MapViewModel(
         }
     }
 
+    fun indoorBuildingMarkerManagement(
+        googleMap: GoogleMap,
+        marketButton: FloatingActionButton?,
+        restaurantButton: FloatingActionButton?,
+        bankButton: FloatingActionButton?
+    ) {
+
+        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
+
+            override fun onIndoorBuildingFocused() {
+                googleMap.setOnCameraMoveListener {
+                    if (googleMap.focusedBuilding == null) {
+                        marketButton?.visibility = View.GONE
+                        restaurantButton?.visibility = View.GONE
+                        bankButton?.visibility = View.GONE
+                    } else {
+                        marketButton?.visibility = View.VISIBLE
+                        restaurantButton?.visibility = View.VISIBLE
+                        bankButton?.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onIndoorLevelActivated(p0: IndoorBuilding) {
+                val levels = p0.levels
+                val activeLevel = p0.activeLevelIndex
+                currentFloor = levels[activeLevel].name.toInt()
+
+                for (m: Marker in markerList) {
+                    if (m.tag != currentFloor) {
+                        m.isVisible = false
+                    } else {
+                        m.isVisible = true
+                    }
+                }
+            }
+        })
+    }
 }
