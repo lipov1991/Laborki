@@ -9,6 +9,7 @@ class MapUtils {
 
     var focusedFlag = false
     var currentLevel = -1
+    var currentMarkerType = "Sklep"
 
     var pinsList: MutableList<Pair<Marker, Int>> = mutableListOf()
 
@@ -73,5 +74,28 @@ class MapUtils {
         pinsList.add(Pair(googleMarkers, currentLevel))
 
 
+    }
+
+    fun setUpGallery(
+        googleMap: GoogleMap,
+        markerName: String,
+        latLonGallery: LatLng
+    ) {
+
+        val cameraPosition = CameraPosition.Builder()
+            .target(latLonGallery)
+            .zoom(18f)
+            .build()
+
+        currentMarkerType = "Sklep"
+        pinsList.clear()
+        googleMap.clear()
+
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(latLonGallery)
+                .title(markerName)
+        )
     }
 }

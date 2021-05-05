@@ -5,4 +5,5 @@
     <string name="play_button_text">PLAY</string>
     <string name="encourage_login">Wpisz swój login</string>
     <string name="wilenska_galeria">Galeria Wileńska</string>
+    <string name="title_bottom_sheet">Galerie</string>
 </resources>
