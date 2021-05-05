@@ -227,7 +227,7 @@ Skala ocen:
 60%-51%  - 3<br/>
  <50%    - 2
  
-## Punkty z zadań są sumowane z punktami za kolokwium (23 + 10 = 33p).
+## Punkty z zadań są sumowane z punktami za kolokwium (24 + 10 = 33p).
 
 
 # Warunki zaliczenia laboratoriów na ocenę dostateczną
