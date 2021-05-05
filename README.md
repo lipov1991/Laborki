@@ -190,19 +190,7 @@ Materiały pomocnicze:
 
 # Laboratorium 10
 
-Tematy:
-
-- Wykorzystanie informacji o sile sygnału Wi-Fi do lokalizacji urządzenia
-- Implementacja kompasu
-
-<b>Zadanie 10 (2p).</b> Proszę utworzyć prosty kompas zgodnie z następującym filmem: 
-https://drive.google.com/open?id=1-Uo18J18W0Jez_u6URccsC_5iYvQiVHE
-
-Materiały pomocnicze:
-
-- https://github.com/lipov1991/PMAG/tree/master/Materia%C5%82y%20pomocnicze/Laboratorium%2010
-
-#### Termin realizacji zadania: 20.05.2021 godz. 23.59
+Temat: Implementacja kompasu
 
 
 # Laboratorium 11
@@ -220,29 +208,10 @@ Materiały pomocnicze:
 - https://developer.android.com/guide/components/services
 
 
-# Laboratorium 12
-
-Tematy:
-
-- Klasa IntentService
-- Lokalizowanie użytkownika
-- Uprawnienia
-
-Materiały pomocnicze:
-
-- https://developer.android.com/reference/android/app/IntentService
-- https://developer.android.com/training/location/retrieve-current
-- https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
-- https://developer.android.com/guide/topics/permissions/overview
-
-<b>Zadanie 12 (2p).</b> Zaproponować prosty algorytm dla systemu wspomagania decyzji wyboru najlepszej dzielnicy pod kątem rozmieszczania w niej lokali określonego typu (banki, fast-foody, markety). W kryterium oceny dzielnicy można uwzględnić na przykład liczbę mieszkańców. 
-
-#### Termin realizacji zadania: 27.05.2021 godz. 23.59
+# Laboratorium 12 - Kolokwium
 
 
-# Laboratorium 13
-
-Ostatnie laboratoria są poświęcone na konsultacje.
+# Laboratorium 13 - Konslutacje + poprawa kolokwium
 
 
 # Ocena końcowa
@@ -257,6 +226,8 @@ Skala ocen:
 70%-61%  - 3.5<br/>
 60%-51%  - 3<br/>
  <50%    - 2
+ 
+# Punkty z zadań są sumowane z punktami za kolokwium (20 + 10 = 30p).
 
 
 # Warunki zaliczenia laboratoriów na ocenę dostateczną
