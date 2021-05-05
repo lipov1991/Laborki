@@ -76,4 +76,14 @@
 
     </FrameLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/placeButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/placePurple"
+        android:src="@drawable/ic_arrow_up"
+        app:borderWidth="0dp"/>
+
 </FrameLayout>
