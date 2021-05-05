@@ -179,7 +179,7 @@ Tematy:
 - Menu w toolbarze
 - STT (Speech To Text)
 
-<b>Zadanie 9 (3p).</b> Po załadowaniu mapy proszę przybliżyć kamerę w taki sposób, aby cała Warszawa była widoczna. Zablokować możliwość zmniejszania zooma do wartości mniejszej niż początkowa (widok miasta). Dodać ikonę mikrofonu do toolbara. Po kliknięciu w mikrofon wyświetlić dialog STT. Proszę obsłużyć następujące hasła: "zaludnienie", "markety", "banki", "fast-foody". Aktywowana opcja ma być zwizualizowana za pomocą Heatmapy. U dołu ekranu ma się wyświetlać się tylko 1 przycisk - do rozwijania listy z galeriami. Pozostałe przyciski (market, fast-food, bank) mają być widoczne dopiero po wybraniu galerii z listy. Proszę ukrywać przyciski (market, fast-food, bank) w momencie znikania panelu do wyboru piętra.
+<b>Zadanie 9 (3p).</b> Po załadowaniu mapy proszę przybliżyć kamerę w taki sposób, aby cała Warszawa była widoczna. Zablokować możliwość zmniejszania zooma do wartości mniejszej niż początkowa (widok miasta). Dodać ikonę mikrofonu do toolbara. Po kliknięciu w mikrofon wyświetlić dialog STT. Proszę obsłużyć następujące hasła: "markety", "banki", "fast-foody". Po wykryciu hasła, mają się pokazać markery dla aktywnej kategorii. U dołu ekranu ma się wyświetlać tylko 1 przycisk - do rozwijania listy z galeriami. Pozostałe przyciski (market, fast-food, bank) mają być widoczne dopiero po wybraniu galerii z listy. Proszę ukrywać przyciski (market, fast-food, bank) w momencie znikania panelu do wyboru piętra.
 
 Materiały pomocnicze:
 
