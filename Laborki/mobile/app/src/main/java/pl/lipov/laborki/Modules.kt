@@ -24,7 +24,16 @@ val utilsModule = module {
     single { GestureDetectorUtils() }
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
+//    single { provideMagnetometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+
+//    single (named("accelerometer")){
+//        provideAccelerometer(sensorManager = get())
+//    }
+//
+//    single (named("magnetometer")){
+//        provideMagnetometer(sensorManager = get())
+//    }
 }
 
 private fun provideSensorManager(
@@ -34,6 +43,10 @@ private fun provideSensorManager(
 private fun provideAccelerometer(
     sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+//private fun provideMagnetometer(
+//    sensorManager: SensorManager
+//): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
 
 val networkModule = module {
     factory { provideOkHttpClient() }

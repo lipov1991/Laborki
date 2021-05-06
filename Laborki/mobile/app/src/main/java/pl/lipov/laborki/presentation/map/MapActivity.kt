@@ -3,13 +3,22 @@ package pl.lipov.laborki.presentation.map
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.listItems
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.IndoorBuilding
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import org.json.JSONArray
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
@@ -25,6 +34,12 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
     var mapRestauracja: Marker? = null
 
     var Floor: Int = 0
+
+    val dataBase = Firebase.database
+    val dbRef = dataBase.getReference()
+
+    private var galeriesNames = mutableListOf<String>()
+    private var galeriesLatLng = mutableListOf<LatLng>()
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -48,6 +63,18 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
             onMarketBtnClick()
         }
 
+        dbRef.child("galeries").get().addOnSuccessListener {
+            var array = JSONArray(Gson().toJson(it.value))
+            for (i in 0 until array.length()) {
+                var name = array.getJSONObject(i).get("name")
+                var lat = array.getJSONObject(i).get("lat")
+                var lng = array.getJSONObject(i).get("lng")
+                galeriesNames.add(name as String)
+                galeriesLatLng.add(LatLng(lat as Double, lng as Double))
+            }
+            }
+
+
     }
 
     override fun onMapReady(
@@ -58,7 +85,24 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
         viewModel.addHeatMap(googleMap, this)
        // PoliceStationsDialogFragment().show(supportFragmentManager,"policeStations")
 
+        binding.galeriesNames.setOnClickListener {
+            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                listItems(items = galeriesNames) { _, index, _ ->
+                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(galeriesLatLng[index], 18f), 2000, null)
+                    Toast.makeText(this@MapActivity, galeriesLatLng[index].toString(), Toast.LENGTH_SHORT).show()
+
+                    mapRestauracja?.remove()
+                    mapBank?.remove()
+                    mapMarket?.remove()
+                    category = "Market"
+
+                }
+
+            }
+        }
     }
+
+
 
     override fun onBackPressed(){
         super.onBackPressed()

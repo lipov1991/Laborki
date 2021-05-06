@@ -14,8 +14,9 @@
         android:id="@+id/BankBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="5dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="5dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_bank" />
 
@@ -23,8 +24,9 @@
         android:id="@+id/ResBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:layout_margin="5dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="140dp"
+        android:layout_marginBottom="5dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_restaurant" />
 
@@ -36,5 +38,24 @@
         android:layout_margin="5dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_market" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ic_compass"
+        android:src="@drawable/ic_compass"
+        android:layout_margin="16dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galeries_names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:clickable="true"
+        app:srcCompat="@drawable/galeries"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"/>
+
+
 
 </FrameLayout>
