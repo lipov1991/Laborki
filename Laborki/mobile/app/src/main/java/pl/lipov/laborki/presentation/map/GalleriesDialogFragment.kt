@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Gallery
 
@@ -18,6 +20,7 @@ class GalleriesDialogFragment(
 ): BottomSheetDialogFragment() {
 
     private var recyclerView: RecyclerView? = null
+    private val viewModel by inject<GalleryDialogViewModel>()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,9 +36,8 @@ class GalleriesDialogFragment(
         recyclerView?.run {
             adapter = GalleryListAdapter(galleries,object : OnItemClickListener{
                 override fun onItemClick(position: Int) {
-                    val name = galleries[position].name
-                    dismiss()
-                    Toast.makeText(activity, "Wybrano $name na pozycji $position",Toast.LENGTH_LONG).show()                }
+                    viewModel.setActualGallery(position)
+                    dismiss() }
             })
             val itemDecoration = DividerItemDecoration(activity,LinearLayoutManager.HORIZONTAL)
             addItemDecoration(itemDecoration)

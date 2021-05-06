@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.maps.GoogleMap
 import org.koin.android.ext.android.inject
@@ -12,6 +15,7 @@ import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 
 class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerClickListener{
@@ -37,6 +41,25 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
 //        viewModel.setUpCompass(this){ rotation->
 //            binding.compass.rotation = rotation
 //        }
+
+        viewModel.run {
+            actualGallery.observe(this@MapActivity, Observer {
+                val gallery = viewModel.galleries?.get(it)
+                val name = gallery?.name
+                Toast.makeText(this@MapActivity, "Wybrano $name na pozycji $it", Toast.LENGTH_LONG).show()
+                viewModel.googleMap?.let { it1 ->
+                    if (gallery != null) {
+                        if (name != null) {
+                            viewModel.setGalleryPosition(LatLng(gallery.lat,gallery.lng),name, it1)
+                        }
+                    }
+                }
+
+                viewModel.clearAllMarkers()
+                viewModel.markercategory = MarkerCategory.Market
+
+            })
+        }
 
         binding.buttonGalleries.setOnClickListener {
             viewModel.galleries?.let { it1 -> GalleriesDialogFragment(it1).show(supportFragmentManager,"Galleries") }

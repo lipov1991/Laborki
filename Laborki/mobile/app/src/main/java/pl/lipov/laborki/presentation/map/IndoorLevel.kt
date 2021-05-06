@@ -36,4 +36,14 @@ data class IndoorLevel(
         markerBank?.isVisible = visibility
     }
 
+    fun clearMarkers(){
+        markerMarket?.remove()
+        markerRestauracja?.remove()
+        markerBank?.remove()
+
+        markerMarket = null
+        markerRestauracja = null
+        markerBank = null
+    }
+
 }

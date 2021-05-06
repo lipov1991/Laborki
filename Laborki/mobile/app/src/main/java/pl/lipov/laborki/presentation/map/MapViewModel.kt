@@ -51,13 +51,30 @@ class MapViewModel(
     private val compositeDisposable = CompositeDisposable()
     var galleries: List<Gallery>? = null
 
+    var actualGallery = mapUtils.actualGallery
+    var googleMap: GoogleMap? = null
+
     fun setUpMap(
         googleMap: GoogleMap,
         context: Context
     ) {
        mapUtils.setUpMap(googleMap,context)
+       this.googleMap = googleMap
     }
 
+    fun setGalleryPosition(
+            latLng: LatLng,
+            name: String,
+            googleMap: GoogleMap
+    ){
+        mapUtils.setGalleryPosition(latLng,name,googleMap)
+    }
+
+    fun clearAllMarkers(){
+        galeriaLevelList.forEach {
+            it.clearMarkers()
+        }
+    }
 
     fun checkMarkerGallery(marker: Marker?):Boolean{
         if(marker == mapUtils.markerGallery) return true

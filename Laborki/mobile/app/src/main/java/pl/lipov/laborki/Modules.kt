@@ -16,6 +16,7 @@ import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.presentation.LoginFirstViewModel
 import pl.lipov.laborki.presentation.MainViewModel
 import pl.lipov.laborki.presentation.login.LoginFragmentViewModel
+import pl.lipov.laborki.presentation.map.GalleryDialogViewModel
 import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -105,6 +106,11 @@ val viewModelsModule = module {
     viewModel {
         LoginFragmentViewModel(
                 loginRepository = get()
+        )
+    }
+    viewModel {
+        GalleryDialogViewModel(
+                mapUtils = get()
         )
     }
 }
