@@ -7,10 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.lipov.laborki.R
 
 class GalleryViewHolder(
-        view: View
-): RecyclerView.ViewHolder(view) {
+        view: View,
+        private val listener: OnItemClickListener
+): RecyclerView.ViewHolder(view), View.OnClickListener {
 
     val image: ImageView = view.findViewById(R.id.image)
     val name: TextView = view.findViewById(R.id.name)
+
+    init{
+        view.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        val position = adapterPosition
+        if(position != RecyclerView.NO_POSITION) listener.onItemClick(position)
+    }
 
 }

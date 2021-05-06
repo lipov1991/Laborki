@@ -8,7 +8,8 @@ import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Gallery
 
 class GalleryListAdapter(
-        private val galleries: List<Gallery>
+        private val galleries: List<Gallery>,
+        private val listener: OnItemClickListener
 ): RecyclerView.Adapter<GalleryViewHolder>() {
     override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -17,7 +18,7 @@ class GalleryListAdapter(
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_gallery, parent, false)
 
-        return GalleryViewHolder(view)
+        return GalleryViewHolder(view,listener)
     }
 
     override fun getItemCount(): Int = galleries.size
@@ -27,9 +28,9 @@ class GalleryListAdapter(
             position: Int
     ) {
         val gallery = galleries[position]
-        Picasso.get().load(gallery.imageUrl).into(holder.image)
+        //Picasso.get().load(gallery.url).into(holder.image)
         //holder.name
+        holder.name.text = gallery.name
     }
-
 
 }

@@ -1,9 +1,12 @@
 package pl.lipov.laborki.presentation.map
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RawRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -11,18 +14,28 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 import com.google.maps.android.heatmaps.WeightedLatLng
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import org.json.JSONArray
 import org.json.JSONException
 import pl.lipov.laborki.R
+import pl.lipov.laborki.common.utils.CompassUtils
 import pl.lipov.laborki.common.utils.MapUtils
+import pl.lipov.laborki.common.utils.STTUtils
+import pl.lipov.laborki.data.LoginRepository
+import pl.lipov.laborki.data.model.Gallery
 import pl.lipov.laborki.data.model.PoliceStation
+import pl.lipov.laborki.data.repository.api.dto.UserDto
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.jvm.Throws
 
 class MapViewModel(
-    private val mapUtils: MapUtils
-
+    private val mapUtils: MapUtils,
+    private val loginRepository: LoginRepository,
+    private val sttUtils: STTUtils
+    //private val compassUtils: CompassUtils
 ) : ViewModel() {
 
     var markercategory: MarkerCategory? = null
@@ -34,6 +47,9 @@ class MapViewModel(
         IndoorLevel(1),
         IndoorLevel(2)
     )
+
+    private val compositeDisposable = CompositeDisposable()
+    var galleries: List<Gallery>? = null
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -47,6 +63,52 @@ class MapViewModel(
         if(marker == mapUtils.markerGallery) return true
 
         return false
+    }
+
+    fun getGalleries(){
+        compositeDisposable.add(
+                loginRepository.getGalleries()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({gallery->
+                            galleries = gallery
+                            //if(users.findLast { it.name == userName }!= null)
+
+                        }, {
+
+                            //Toast.makeText(this, it.localizedMessage ?: "$it", Toast.LENGTH_LONG).show()
+                        })
+        )
+    }
+
+    fun disposableclear(){
+        compositeDisposable.clear()
+    }
+
+    fun listenForSpeechRecognize(
+            activity: AppCompatActivity,
+            resultCode: Int
+    ){
+        sttUtils.listenForSpeechRecognise(activity,resultCode)
+    }
+
+    fun handleSpeechRecognizeResult(
+            resultCode: Int,
+            data: Intent?,
+            context: Context
+    ){
+        if(resultCode == Activity.RESULT_OK){
+            data?.let {
+                sttUtils.handleSpeechRecognizeResult(data,context)
+            }
+        }
+    }
+
+    fun setUpCompass(
+        context: Context,
+        rotationCallback:(Float) -> Unit
+    ){
+
     }
 
 

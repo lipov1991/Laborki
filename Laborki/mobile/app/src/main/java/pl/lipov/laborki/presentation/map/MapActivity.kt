@@ -1,5 +1,6 @@
 package pl.lipov.laborki.presentation.map
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,6 +29,19 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        viewModel.getGalleries()
+
+        //viewModel.listenForSpeechRecognize(this,REQUEST_CODE)
+
+//        viewModel.setUpCompass(this){ rotation->
+//            binding.compass.rotation = rotation
+//        }
+
+        binding.buttonGalleries.setOnClickListener {
+            viewModel.galleries?.let { it1 -> GalleriesDialogFragment(it1).show(supportFragmentManager,"Galleries") }
+        }
+
         binding.buttonMarket.setOnClickListener {
             viewModel.markercategory = MarkerCategory.Market
             binding.buttonBin.visibility = View.INVISIBLE
@@ -54,7 +68,9 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
             googleMap: GoogleMap
     ) {
         viewModel.setUpMap(googleMap,this)
-        PoliceStationDialogFragment().show(supportFragmentManager,"policeStations")
+
+
+        //PoliceStationDialogFragment().show(supportFragmentManager,"policeStations")
 
         viewModel.addHeatMap(googleMap,this)
 
@@ -96,6 +112,24 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
 
     }
 
+//    override fun onActivityResult(
+//            requestCode: Int,
+//            resultCode: Int,
+//            data: Intent?
+//    ) {
+//        if(requestCode == REQUEST_CODE_SPEECH_RECOGNIZE){
+//            viewModel.handleActivityResult(resultCode,data,this)
+//        }else {
+//            /// TODO
+//            super.onActivityResult(requestCode, resultCode, data)
+//        }
+//    }
+
+
+    override fun onDestroy() {
+        viewModel.disposableclear()
+        super.onDestroy()
+    }
 
 
 }

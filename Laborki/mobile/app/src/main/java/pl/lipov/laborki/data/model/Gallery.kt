@@ -1,6 +1,9 @@
 package pl.lipov.laborki.data.model
 
 data class Gallery(
-    val imageUrl: String,
-    val name: String
+        val lat: Double,
+        val lng: Double,
+        val name: String,
+        val overcrowdingLevel: String,
+        val url: String,
 )
