@@ -1,27 +1,34 @@
 package pl.lipov.laborki.presentation.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.customListAdapter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.model.Gallery
+import pl.lipov.laborki.data.repository.api.dto.GalleriesDto
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback,
-    GoogleMap.OnMapLongClickListener, GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
 
     private val viewModel by inject<MapViewModel>()
     private lateinit var binding: ActivityMapBinding
     private lateinit var myMap: GoogleMap
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -31,82 +38,82 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        compositeDisposable.add(
+            viewModel.getGalleries()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    it.forEach {
+                        viewModel.galleryList.add(
+                            GalleriesDto(
+                                it.lat,
+                                it.lng,
+                                it.name,
+                                it.overcrowdingLevel,
+                                it.url
+                            )
+                        )
+                        Log.d("TEST", "${viewModel.galleryList}")
+                    }
+                }, {
+                    Log.d("Api Error", it.localizedMessage)
+                    Toast.makeText(this, "Problem z połączeniem z internetem", Toast.LENGTH_LONG)
+                        .show()
+                })
+        )
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val galleries = listOf(
-            Gallery(
-                "https://play-lh.googleusercontent.com/7bGL5dRj25LtArovAdZmBQl5snL_-feJ4t3RXjEWYF7fV6DVcqv5zJgcdJrP_rH4V5g",
-                "Galeria Wileńska"
-            ),
-            Gallery(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMdAfMuTqiAQSOVikkVBC-7ixoWRApy_cQMKIIzcLb26KouMWKYFfLZSRZcBfPDxdDF_Y&usqp=CAU",
-                "Arkadia"
-            ),
-            Gallery(
-                "https://static1.money.pl/i/msp/znaki_towarowe/134/394364",
-                "Galeria Mokotów"
-            )
-        )
 
-        binding.galleries.run {
-            adapter = GalleryAdapter(galleries)
-            val itemDecoration = DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL)
-            addItemDecoration(itemDecoration)
-        }
 
         binding.bankButton.setOnClickListener {
             viewModel.changeMarker("Bank", R.drawable.bitmap_bank)
-            Toast.makeText(this, viewModel.currentMarkerType, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, viewModel.mapUtils.currentMarkerType, Toast.LENGTH_LONG).show()
         }
 
         binding.marketButton.setOnClickListener {
             viewModel.changeMarker("Shop", R.drawable.bitmap_shop)
-            Toast.makeText(this, viewModel.currentMarkerType, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, viewModel.mapUtils.currentMarkerType, Toast.LENGTH_LONG).show()
         }
 
         binding.restaurantButton.setOnClickListener {
             viewModel.changeMarker("Restaurant", R.drawable.bitmap_restaurant)
-            Toast.makeText(this, viewModel.currentMarkerType, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, viewModel.mapUtils.currentMarkerType, Toast.LENGTH_LONG).show()
         }
 
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
     }
 
     override fun onMapReady(
         googleMap: GoogleMap
     ) {
         myMap = googleMap
-        viewModel.setUpMap(googleMap, getString(R.string.gallety_name))
-        googleMap.setOnMapLongClickListener(this)
+        viewModel.setUpMap(googleMap, this)
         googleMap.setOnMarkerDragListener(this)
+//        addHeatMap(googleMap, this)
+        binding.bottomSheetButton.setOnClickListener {
+            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                title(text = getString(R.string.bottom_sheet_title))
+                customListAdapter(GalleryAdapter(viewModel.galleryList, viewModel.mapUtils, googleMap))
+            }
+        }
     }
 
-    override fun onMapLongClick(coord: LatLng) {
-        if (viewModel.mapUtils.onIndoorBuildingFocused) {
-            viewModel.markerChecker().apply {
-                if (this) {
-                    viewModel.setMarker(
-                        myMap,
-                        viewModel.currentMarkerType,
-                        viewModel.currentMarkerIcon,
-                        coord
-                    )
-
-                } else {
-                    Toast.makeText(
-                        this@MapActivity,
-                        "The ${viewModel.currentMarkerType} icon limit has been reached ",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+    override fun onBackPressed() {
+        MaterialDialog(this).show {
+            title(text = getString(R.string.on_press_back_title))
+            message(text = getString(R.string.on_press_back_msg))
+            positiveButton(text = getString(R.string.on_press_back_positive_btn)) {
+                super.onBackPressed()
             }
-        } else {
-            Toast.makeText(
-                this@MapActivity,
-                "Markers can only be placed indoors",
-                Toast.LENGTH_LONG
-            ).show()
+            negativeButton(text = getString(R.string.on_press_back_negative_btn))
         }
     }
 
@@ -139,4 +146,30 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onMarkerDrag(p0: Marker) {
     }
+
+//    private fun addHeatMap(map: GoogleMap, context: Context) {
+//        try {
+//            val policeStations = getPoliceStations(context)
+//            val weightedLatLngs = policeStations.map {
+//                val latLng = LatLng(it.lat, it.lng)
+//                WeightedLatLng(latLng, it.weight)
+//            }
+//            val provider = HeatmapTileProvider.Builder()
+//                .weightedData(weightedLatLngs)
+//                .build()
+//            map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+//        } catch (e: JSONException) {
+//            Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
+//                .show()
+//        }
+//    }
+//
+//    @Throws(JSONException::class)
+//    private fun getPoliceStations(context: Context): List<PoliceStation> {
+//        val result: MutableList<LatLng?> = ArrayList()
+//        val inputStream = context.resources.openRawResource(R.raw.police_stations)
+//        val json = Scanner(inputStream).useDelimiter("\\A").next()
+//        val itemType = object : TypeToken<List<PoliceStation>>() {}.type
+//        return Gson().fromJson<List<PoliceStation>>(json, itemType)
+//    }
 }

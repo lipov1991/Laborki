@@ -7,7 +7,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import pl.lipov.laborki.common.utils.CompassUtils
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
@@ -24,10 +26,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
+//    single {STTUtils()}
     single { GestureDetectorUtils() }
-    factory { provideSensorManager(context = get()) }
-    factory { provideAccelerometer(sensorManager = get()) }
-    single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+    single { provideSensorManager(context = get()) }
+    single(named("accelerometer")) { provideAccelerometer(sensorManager = get()) }
+//    single {
+//        CompassUtils(
+//            accelerometer = get(named("accelerometer")),
+//            megnetometer = get(named("megnetometer")),
+//            sensorManager = get(),
+//        )
+//    }
+    single { SensorEventsUtils(sensorManager = get(), accelerometer = get(named("accelerometer"))) }
     single { MapUtils() }
 }
 
@@ -38,6 +48,10 @@ private fun provideSensorManager(
 private fun provideAccelerometer(
     sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+//private fun provideMegnetometer(
+//    sensorManager: SensorManager
+//): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE)
 
 val networkModule = module {
     factory { provideOkHttpClient() }
@@ -90,6 +104,9 @@ val viewModelsModule = module {
     }
 
     viewModel {
-        MapViewModel(mapUtils = get())
+        MapViewModel(
+            mapUtils = get(),
+            loginRepository = get()
+        )
     }
 }

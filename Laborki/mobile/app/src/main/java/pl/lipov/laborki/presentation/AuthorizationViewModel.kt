@@ -10,7 +10,6 @@ class AuthorizationViewModel(
     private val loginRepository: LoginRepository
 ) : ViewModel() {
 
-
     var userList: List<UserDto>? = null
 
     fun loginValidate(

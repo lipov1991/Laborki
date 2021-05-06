@@ -5,4 +5,10 @@
     <string name="num_of_remaining_attempts">Pozostało %d prób.</string>
     <string name="authorization_edit_text">Podaj swój login</string>
     <string name="gallety_name">Galeria Wileńska</string>
+    <string name="on_press_back_title">Exit the application</string>
+    <string name="on_press_back_msg">Are you sure you want to exit the application</string>
+    <string name="on_press_back_positive_btn">Yes</string>
+    <string name="on_press_back_negative_btn">No</string>
+    <string name="bottom_sheet_title">Galleries</string>
+
 </resources>
