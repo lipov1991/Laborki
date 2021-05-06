@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/margin_standard"
+    android:paddingTop="24dp"
+    android:paddingEnd="@dimen/margin_standard"
+    android:paddingBottom="24dp">
+
+    <CheckBox
+        android:id="@+id/option1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Police station 1" />
+
+    <CheckBox
+        android:id="@+id/option2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Police station 2" />
+
+    <CheckBox
+        android:id="@+id/option3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Police station 3" />
+
+</LinearLayout>

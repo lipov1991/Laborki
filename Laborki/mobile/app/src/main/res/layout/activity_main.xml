@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:animateLayoutChanges="true"
+    android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/info"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/compass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/no_accelerometer_detected" />
+        android:layout_margin="16dp"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_compass" />
 
-</LinearLayout>
+</FrameLayout>
