@@ -2,6 +2,7 @@ package pl.lipov.laborki.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.rotationChange.observe(::getLifecycle) { rotation ->
             binding.compass.rotation = rotation
         }
+        Log.d("test", "test")
     }
 
     override fun onMapReady(
