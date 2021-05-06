@@ -2,25 +2,19 @@ package pl.lipov.laborki.presentation.map
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.customListAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.google.maps.android.heatmaps.HeatmapTileProvider
-import com.google.maps.android.heatmaps.WeightedLatLng
 import io.reactivex.Single
-import org.json.JSONException
-import pl.lipov.laborki.R
 import pl.lipov.laborki.common.utils.MapUtils
-import pl.lipov.laborki.data.model.PoliceStation
 import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.repository.api.dto.GalleryDto
-import java.util.*
-import kotlin.jvm.Throws
 
 class MapViewModel(
     private val mapUtils: MapUtils,
@@ -33,7 +27,8 @@ class MapViewModel(
     var markerBank: Marker? = null
     private var markerList = mutableListOf<Marker>()
     private var currentFloor: Int = 0
-//    private var heatmapTileProvider: HeatmapTileProvider? = null
+
+    //    private var heatmapTileProvider: HeatmapTileProvider? = null
     private var currentMarker = "Market"
     var galleries: MutableList<GalleryDto> = mutableListOf()
 
@@ -173,6 +168,25 @@ class MapViewModel(
 
     fun getGalleries(): Single<List<GalleryDto>> {
         return loginRepository.getGalleries()
+    }
+
+    fun showGalleryList(
+        context: Context,
+        button: FloatingActionButton,
+        googleMap: GoogleMap
+    ) {
+        button.setOnClickListener {
+            MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                title(text = "Galerie handlowe w Warszawie")
+                customListAdapter(
+                    GalleryAdapter(
+                        galleries,
+                        this@MapViewModel,
+                        googleMap
+                    )
+                )
+            }
+        }
     }
 
 //    private fun addHeatMap(

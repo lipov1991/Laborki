@@ -3,10 +3,7 @@ package pl.lipov.laborki.presentation.map
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.list.customListAdapter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -23,7 +20,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val viewModel: MapViewModel by viewModel()
     private lateinit var binding: ActivityMapBinding
     private val compositeDisposable = CompositeDisposable()
-    private lateinit var googleMap: GoogleMap
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -67,19 +63,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                         .show()
                 })
         )
-
-        binding.fab4.setOnClickListener {
-            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                title(text = "Galerie handlowe w Warszawie")
-                customListAdapter(
-                    GalleryAdapter(
-                        viewModel.galleries,
-                        viewModel,
-                        googleMap
-                    )
-                )
-            }
-        }
     }
 
     override fun onMapReady(
@@ -94,6 +77,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             binding.fab2,
             binding.fab3
         )
+        viewModel.showGalleryList(this, binding.fab4, googleMap)
     }
 
     override fun onBackPressed() {
