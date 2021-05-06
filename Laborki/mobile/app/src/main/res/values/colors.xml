@@ -7,4 +7,6 @@
     <color name="grey_with_mask">#80ffffff</color>
     <color name="error">#f44336</color>
     <color name="green">#15eb55</color>
+    <color name="lightPurple">#c203fc</color>
+    <color name="darkPurple">#680087</color>
 </resources>

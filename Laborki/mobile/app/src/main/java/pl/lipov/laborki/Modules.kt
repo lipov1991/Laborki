@@ -91,7 +91,8 @@ val viewModelsModule = module {
 
     viewModel {
         MapViewModel(
-            mapUtils = get()
+            mapUtils = get(),
+            loginRepository = get()
         )
     }
 }

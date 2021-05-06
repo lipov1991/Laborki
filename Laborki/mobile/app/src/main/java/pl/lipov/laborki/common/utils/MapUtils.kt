@@ -13,6 +13,7 @@ class MapUtils {
     ) {
 
         val galeria = LatLng(52.2550, 21.0378)
+        val australia = LatLng(-24.9922916,115.224928)
         val cameraPosition = CameraPosition.Builder()
             .target(galeria)
             .zoom(18f)

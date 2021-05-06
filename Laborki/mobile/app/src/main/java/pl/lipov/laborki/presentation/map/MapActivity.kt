@@ -1,18 +1,29 @@
 package pl.lipov.laborki.presentation.map
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.customListAdapter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
+import pl.lipov.laborki.data.repository.api.dto.GalleryDto
 import pl.lipov.laborki.databinding.ActivityMapBinding
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val viewModel: MapViewModel by viewModel()
     private lateinit var binding: ActivityMapBinding
+    private val compositeDisposable = CompositeDisposable()
+    private lateinit var googleMap: GoogleMap
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -35,31 +46,46 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             viewModel.markerCategory = MarkerCategory.bank
         }
 
-//        val galleries = listOf(
-//            Gallery(
-//                "https://upload.wikimedia.org/wikipedia/commons/8/8d/Centrum_Handlowe_Warszawa_Wile%C5%84ska_2015.JPG",
-//                "Galeria Wileńska"
-//            ),
-//            Gallery(
-//                "https://pl.wikipedia.org/wiki/Plik:Centrum_Handlowe_Arkadia_w_Warszawie_2014.JPG",
-//                "Arkadia"
-//                )
-//            )
-//
-//        binding.galleries.run {
-//            adapter = GalleryAdapter(galleries)
-//            val itemDecoration = DividerItemDecoration(
-//                context,
-//                LinearLayoutManager.HORIZONTAL
-//            )
-//            addItemDecoration(itemDecoration)
-//        }
+        compositeDisposable.add(
+            viewModel.getGalleries()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ list ->
+                    list.forEach {
+                        viewModel.galleries.add(
+                            GalleryDto(
+                                it.lat,
+                                it.lng,
+                                it.name,
+                                it.overcrowdingLevel,
+                                it.url
+                            )
+                        )
+                    }
+                }, {
+                    Toast.makeText(this, "Problem z połączeniem", Toast.LENGTH_LONG)
+                        .show()
+                })
+        )
+
+        binding.fab4.setOnClickListener {
+            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                title(text = "Galerie handlowe w Warszawie")
+                customListAdapter(
+                    GalleryAdapter(
+                        viewModel.galleries,
+                        viewModel,
+                        googleMap
+                    )
+                )
+            }
+        }
     }
 
     override fun onMapReady(
         googleMap: GoogleMap
     ) {
-        viewModel.setUpMap(googleMap)
+        viewModel.setUpMap(googleMap, this)
         viewModel.addLocation(googleMap)
         viewModel.removeMarker(googleMap)
         viewModel.indoorBuildingMarkerManagement(
@@ -69,5 +95,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             binding.fab3
         )
     }
+
+    override fun onBackPressed() {
+        MaterialDialog(this).show {
+            title(text = "Wyjście z aplikacji")
+            message(text = "Czy na pewno chcesz wyjść z aplikacji?")
+            positiveButton(text = "Tak") {
+                super.onBackPressed()
+            }
+            negativeButton(text = "Nie")
+        }
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
+    }
 }
+
 

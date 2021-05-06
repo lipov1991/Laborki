@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.Single
 import pl.lipov.laborki.data.model.Event
 import pl.lipov.laborki.data.repository.api.Api
+import pl.lipov.laborki.data.repository.api.dto.GalleryDto
 import pl.lipov.laborki.data.repository.api.dto.UnlockKeyDto
 import pl.lipov.laborki.data.repository.api.dto.UserDto
 
@@ -13,4 +14,5 @@ class LoginRepository(
     fun getUsers(): Single<List<UserDto>> = api.getUsers()
     lateinit var screenUnlockKey: UnlockKeyDto
     val attemptEnterPassword = MutableLiveData<Event>()
+    fun getGalleries(): Single<List<GalleryDto>> = api.getGalleries()
 }
