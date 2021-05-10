@@ -9,12 +9,14 @@ import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
+import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.presentation.LoginFirstViewModel
 import pl.lipov.laborki.presentation.LoginFragmentViewModel
 import pl.lipov.laborki.presentation.MainViewModel
+import pl.lipov.laborki.presentation.map.GalleryViewModel
 import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,6 +29,7 @@ val utilsModule = module {
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+    single { MapUtils()}
 
 }
 
@@ -89,7 +92,13 @@ val viewModelsModule = module {
     }
     viewModel{
         MapViewModel(
-            //loginRepository = get()
+            loginRepository = get(),
+            mapUtils = get()
+        )
+    }
+    viewModel{
+        GalleryViewModel(
+                mapUtils = get()
         )
     }
 

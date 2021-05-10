@@ -25,6 +25,15 @@
         android:orientation="vertical">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingBtn4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_money" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

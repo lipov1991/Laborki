@@ -3,4 +3,6 @@
     <dimen name="lock_icon_size">28dp</dimen>
     <dimen name="edit_text_corner_radius">32dp</dimen>
     <dimen name="unlock_size">96dp</dimen>
+    <dimen name="margin_standard">16dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
 </resources>

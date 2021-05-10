@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.android.ext.android.inject
@@ -49,14 +51,32 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             binding.deleteMarker.visibility = View.INVISIBLE
         }
 
+        mapViewModel.getGallery()
 
+        binding.floatingBtn4.setOnClickListener{
+            BottomSheetGalleryFragment(mapViewModel.galleryList).show(supportFragmentManager, "Galleries")
+            mapViewModel.removeAllMarkers()
+        }
+
+        mapViewModel.currentGalleryPosition.observe(this, Observer {
+
+            val name = mapViewModel.galleryList[it].name
+
+            val coordinates = LatLng(mapViewModel.galleryList[it].lat, mapViewModel.galleryList[it].lng)
+
+            mapViewModel.googleMap?.let { it1 ->
+                mapViewModel.setCameraOnPosition(coordinates,
+                    it1
+                )
+            }
+        })
 
     }
 
     override fun onMapReady(
         googleMap: GoogleMap
     ) {
-            mapViewModel.setUpMap(googleMap)
+            mapViewModel.setUpMap(googleMap, this)
             mapViewModel.setMarker(googleMap)
             mapViewModel.indoor(googleMap, this)
 
@@ -91,6 +111,11 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         mapViewModel.pin = p0
 
         return false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapViewModel.disposableclear()
     }
 
 
