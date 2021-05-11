@@ -74,7 +74,19 @@
 
         </LinearLayout>
 
+
+
     </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sendPlan"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/error"
+        android:src="@drawable/ic_send_plan"
+        app:borderWidth="0dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/placeButton"

@@ -1,14 +1,12 @@
 package pl.lipov.laborki.presentation.map
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BasicGridItem
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.bottomsheets.gridItems
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,19 +20,14 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import org.json.JSONArray
-import org.json.JSONObject
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
-import java.util.*
 
-class MapActivity: AppCompatActivity(), OnMapReadyCallback {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapBinding
     private val viewModel by inject<MapViewModel>()
     private var map: GoogleMap? = null
-    private var galWilenska = LatLng(52.255, 21.0378)
-    private var galMokotowska = LatLng(0.0, 0.0)
-    private var galArkadia = LatLng(0.0, 0.0)
 
     private var galNameList = mutableListOf<String>()
     private var galLatLngList = mutableListOf<LatLng>()
@@ -47,6 +40,7 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
     private var isRemoving: Int = 0
     private var currentFloor: Int = 0
     private var markerArray = mutableListOf<Marker>()
+    private var currentGallery = ""
 
     private lateinit var markerMarket: Marker
     private lateinit var markerRestaurant: Marker
@@ -61,7 +55,7 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         binding.marketButton.visibility = View.GONE
@@ -84,6 +78,15 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
             isRemoving = 0
         }
 
+        binding.sendPlan.setOnClickListener {
+            if (markerArray.count() == 0) {
+                Toast.makeText(this, "Brak punktów do wysłania!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Plan zagospodarowania został wysłany na serwer!", Toast.LENGTH_SHORT).show()
+                clear()
+            }
+        }
+
         binding.removeButton.setOnClickListener {
             isRemoving = 1
         }
@@ -100,6 +103,33 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun clear() {
+        for (marker in markerArray) {
+            marker.remove()
+        }
+        markerArray.clear()
+        marketCount = 0
+        restaurantCount = 0
+        bankCount = 0
+        currentCat = "Market"
+    }
+
+    override fun onBackPressed() {
+        if (markerArray.count() != 0) {
+            MaterialDialog(this).show {
+                title(text = "Wyjście z aplikacji")
+                message(text = "Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?")
+                positiveButton(text = "Tak") { dialog ->
+                    dialog.dismiss()
+                    super.onBackPressed()
+                }
+                negativeButton(text = "Nie") { dialog ->
+                    dialog.dismiss()
+                }
+            }
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
@@ -107,16 +137,25 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
             map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(warsaw, 15f))
 
             binding.placeButton.setOnClickListener {
-                MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                    listItems(items = galNameList) { _, index, _ ->
-                        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(galLatLngList[index], 18f), 2000, null)
-                        for (marker in markerArray) {
-                            marker.remove()
+                if (markerArray.count() != 0) {
+                    MaterialDialog(this).show {
+                        title(text = currentGallery)
+                        message(text = "Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?")
+                        positiveButton(text = "Tak") { dialog ->
+                            clear()
+                            dialog.dismiss()
                         }
-                        marketCount = 0
-                        restaurantCount = 0
-                        bankCount = 0
-                        currentCat = "Market"
+                        negativeButton(text = "Nie") { dialog ->
+                            dialog.dismiss()
+                        }
+                    }
+                } else if (markerArray.count() == 0) {
+                    MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                        listItems(items = galNameList) { _, index, _ ->
+                            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(galLatLngList[index], 18f), 2000, null)
+                            currentGallery = galNameList[index]
+                            clear()
+                        }
                     }
                 }
             }
