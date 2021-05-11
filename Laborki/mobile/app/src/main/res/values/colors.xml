@@ -12,8 +12,8 @@
     <color name="error">#f44336</color>
     <color name="gold">#ffc107</color>
     <color name="black">#000000</color>
-    <color name="marketGreen">#008000</color>
-    <color name="restaurantRed">#990000</color>
-    <color name="bankBlue">#3792cb</color>
-    <color name="placePurple">#4B0082</color>
+    <color name="marketGreen">#35ea35</color>
+    <color name="restaurantRed">#ea3535</color>
+    <color name="bankBlue">#3590ea</color>
+    <color name="placePurple">#a151db</color>
 </resources>

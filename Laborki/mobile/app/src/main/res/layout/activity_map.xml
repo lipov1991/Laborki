@@ -73,9 +73,6 @@
                 app:borderWidth="0dp"/>
 
         </LinearLayout>
-
-
-
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -84,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="top|right"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/error"
+        android:backgroundTint="@color/gold"
         android:src="@drawable/ic_send_plan"
         app:borderWidth="0dp"/>
 

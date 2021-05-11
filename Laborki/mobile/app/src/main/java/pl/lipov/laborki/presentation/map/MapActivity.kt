@@ -12,10 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.IndoorBuilding
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -62,6 +59,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.restaurantButton.visibility = View.GONE
         binding.bankButton.visibility = View.GONE
         binding.removeButton.visibility = View.GONE
+        binding.sendPlan.visibility = View.GONE
 
         binding.marketButton.setOnClickListener {
             currentCat = "Market"
@@ -163,7 +161,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             map!!.setOnMapLongClickListener {
                 if (currentCat == "Market" && marketCount == 0) {
                     markerMarket = googleMap.addMarker(
-                            MarkerOptions().position(it).title(currentCat).draggable(true)
+                            MarkerOptions().position(it).title(currentCat).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                     )
                     markerMarket.tag = currentFloor
                     markerArray.add(markerMarket)
@@ -171,7 +169,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
                 if (currentCat == "Restaurant" && restaurantCount == 0) {
                     markerRestaurant = googleMap.addMarker(
-                            MarkerOptions().position(it).title(currentCat).draggable(true)
+                            MarkerOptions().position(it).title(currentCat).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     )
                     markerRestaurant.tag = currentFloor
                     markerArray.add(markerRestaurant)
@@ -179,7 +177,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
                 if (currentCat == "Bank" && bankCount == 0) {
                     markerBank = googleMap.addMarker(
-                            MarkerOptions().position(it).title(currentCat).draggable(true)
+                            MarkerOptions().position(it).title(currentCat).draggable(true).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                     )
                     markerBank.tag = currentFloor
                     markerArray.add(markerBank)
@@ -212,11 +210,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     binding.restaurantButton.visibility = View.GONE
                     binding.bankButton.visibility = View.GONE
                     binding.removeButton.visibility = View.GONE
+                    binding.sendPlan.visibility = View.GONE
                 } else {
                     binding.marketButton.visibility = View.VISIBLE
                     binding.restaurantButton.visibility = View.VISIBLE
                     binding.bankButton.visibility = View.VISIBLE
                     binding.removeButton.visibility = View.VISIBLE
+                    binding.sendPlan.visibility = View.VISIBLE
                 }
             }
 

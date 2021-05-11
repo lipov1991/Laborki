@@ -21,7 +21,6 @@ class AuthFragment: Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentAuthBinding
     private var authCallback: AuthCallback? = null
-//    private val listOfLogins = listOf<String>("jacksonafide", "pawixior", "admin")
     val database = Firebase.database
     val dbRef = database.getReference()
 
@@ -48,20 +47,19 @@ class AuthFragment: Fragment() {
     }
 
     private fun loginAuthentication(userLoginInput: String) {
-//        if (listOfLogins.contains(userLoginInput)){
-//            authCallback?.onLoginSuccess()
-//        } else {
-//            Toast.makeText(context, "Login incorrect", Toast.LENGTH_SHORT).show()
-//        }
-        dbRef.child(userLoginInput).get().addOnSuccessListener {
-            if (it.value == null) {
-                Toast.makeText(context, "Login incorrect", Toast.LENGTH_SHORT).show()
-            } else {
-                authCallback?.onLoginSuccess()
-                viewModel.login = userLoginInput
+        if (userLoginInput.isEmpty() == false) {
+            dbRef.child(userLoginInput).get().addOnSuccessListener {
+                if (it.value == null) {
+                    Toast.makeText(context, "Login incorrect", Toast.LENGTH_SHORT).show()
+                } else {
+                    authCallback?.onLoginSuccess()
+                    viewModel.login = userLoginInput
+                }
+            }.addOnFailureListener {
+                Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show()
             }
-        }.addOnFailureListener {
-            Toast.makeText(context, "Error connecting to database", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Login is empty!", Toast.LENGTH_SHORT).show()
         }
     }
 }
