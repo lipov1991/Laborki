@@ -58,6 +58,10 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             mapViewModel.removeAllMarkers()
         }
 
+        binding.floatingBtn5.setOnClickListener{
+            mapViewModel.uploadBtn(this)
+        }
+
         mapViewModel.currentGalleryPosition.observe(this, Observer {
 
             val name = mapViewModel.galleryList[it].name
@@ -117,6 +121,7 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         super.onDestroy()
         mapViewModel.disposableclear()
     }
+
 
 
 }

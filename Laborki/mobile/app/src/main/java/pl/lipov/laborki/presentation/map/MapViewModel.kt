@@ -395,6 +395,13 @@ class MapViewModel (
         foodL2?.remove()
     }
 
+    fun uploadBtn(context: Context) {
+        Toast.makeText(context, "Plan zagospodarowania został wysłany na serwer", Toast.LENGTH_SHORT).show()
+
+        removeAllMarkers()
+        categoryMarker = "Market"
+    }
+
 
 
 }
