@@ -2,6 +2,7 @@ package pl.lipov.laborki.presentation.map
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.Single
+import pl.lipov.laborki.R
 import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.repository.api.dto.GalleryDto
@@ -27,6 +29,9 @@ class MapViewModel(
     var markerBank: Marker? = null
     private var markerList = mutableListOf<Marker>()
     private var currentFloor: Int = 0
+    private var isPlanBtnClicked: Boolean = false
+    private var currentGallery: String = "Galeria Wileńska"
+    private var galleryDialog: MaterialDialog? = null
 
     //    private var heatmapTileProvider: HeatmapTileProvider? = null
     private var currentMarker = "Market"
@@ -43,7 +48,6 @@ class MapViewModel(
     fun addLocation(
         googleMap: GoogleMap
     ) {
-
         googleMap.setOnMapLongClickListener { latLng ->
 
             if (markerCategory == MarkerCategory.market) {
@@ -58,6 +62,7 @@ class MapViewModel(
                 )
                 markerMarket!!.tag = currentFloor
                 markerList.add(markerMarket!!)
+                isPlanBtnClicked = false
             }
 
             if (markerCategory == MarkerCategory.restauracja) {
@@ -73,6 +78,7 @@ class MapViewModel(
                 )
                 markerRestaurant!!.tag = currentFloor
                 markerList.add(markerRestaurant!!)
+                isPlanBtnClicked = false
             }
 
             if (markerCategory == MarkerCategory.bank) {
@@ -87,6 +93,7 @@ class MapViewModel(
                 )
                 markerBank!!.tag = currentFloor
                 markerList.add(markerBank!!)
+                isPlanBtnClicked = false
             }
         }
     }
@@ -155,6 +162,7 @@ class MapViewModel(
             .build()
 
         currentMarker = "Sklep"
+        currentGallery = markerName
         markerList.clear()
         googleMap.clear()
 
@@ -176,8 +184,8 @@ class MapViewModel(
         googleMap: GoogleMap
     ) {
         button.setOnClickListener {
-            MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                title(text = "Galerie handlowe w Warszawie")
+            galleryDialog = MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                title(R.string.galleries_warsaw)
                 customListAdapter(
                     GalleryAdapter(
                         galleries,
@@ -185,6 +193,42 @@ class MapViewModel(
                         googleMap
                     )
                 )
+            }
+            if (!isPlanBtnClicked && markerList.count() != 0) {
+                MaterialDialog(context).show {
+                    title(text = currentGallery)
+                    message(R.string.end_plan)
+                    positiveButton(text = "Tak") {
+                        it.dismiss()
+                        markerMarket?.remove()
+                        markerRestaurant?.remove()
+                        markerBank?.remove()
+                        currentMarker = "Market"
+                    }
+                    negativeButton(text = "Nie") {
+                        it.dismiss()
+                        galleryDialog!!.dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    fun sendBuildingPlans(
+        context: Context,
+        button: FloatingActionButton
+    ) {
+        button.setOnClickListener {
+            if (markerList.count() != 0) {
+                Toast.makeText(context, R.string.send_plan, Toast.LENGTH_LONG).show()
+                markerMarket?.remove()
+                markerRestaurant?.remove()
+                markerBank?.remove()
+                markerList.clear()
+                currentMarker = "Market"
+                isPlanBtnClicked = true
+            } else {
+                Toast.makeText(context, R.string.send_plan_empty, Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -78,18 +78,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             binding.fab3
         )
         viewModel.showGalleryList(this, binding.fab4, googleMap)
+        viewModel.sendBuildingPlans(this, binding.fab5)
     }
 
     override fun onBackPressed() {
-        MaterialDialog(this).show {
-            title(text = "Wyjście z aplikacji")
-            message(text = "Czy na pewno chcesz wyjść z aplikacji?")
-            positiveButton(text = "Tak") {
-                super.onBackPressed()
+            MaterialDialog(this).show {
+                title(R.string.app_exit_title)
+                message(R.string.app_exit_message)
+                positiveButton(text = "Tak") {
+                    super.onBackPressed()
+                }
+                negativeButton(text = "Nie")
             }
-            negativeButton(text = "Nie")
         }
-    }
 
     override fun onDestroy() {
         compositeDisposable.clear()

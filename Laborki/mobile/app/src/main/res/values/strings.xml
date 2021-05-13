@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Laborki</string>
     <string name="no_accelerometer_detected">Nie wykryto akcelerometra.</string>
+    <string name="send_plan">Plan zagospodarowania został wysłany na serwer.</string>
+    <string name="send_plan_empty">Plan zagospodarowania nie został wysłany na serwer - brak markerów.</string>
+    <string name="end_plan">Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?</string>
+    <string name="app_exit_message">Czy na pewno chcesz wyjść z aplikacji?</string>
+    <string name="app_exit_title">Wyjście z aplikacji</string>
+    <string name="galleries_warsaw">Galerie handlowe w Warszawie</string>
 </resources>
