@@ -10,6 +10,8 @@ class GalleryDialogViewModel(
 ) : ViewModel() {
 
     var actualGallery = mapUtils.actualGallery
+    var ifDevelopmentBuilding = mapUtils.ifDevelopmentBuilding
+    var ifPlanBuilding = false
 
     fun setActualGallery(position: Int){
         actualGallery.postValue(position)

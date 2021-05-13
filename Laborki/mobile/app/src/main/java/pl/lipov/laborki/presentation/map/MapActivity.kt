@@ -30,6 +30,7 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
         setTheme(R.style.AppTheme)
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -42,27 +43,47 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
 //            binding.compass.rotation = rotation
 //        }
 
+
         viewModel.run {
+
+            ifDevelopmentBuilding.observe(this@MapActivity, Observer {
+                ifPlanBuilding = it
+            })
+
             actualGallery.observe(this@MapActivity, Observer {
-                val gallery = viewModel.galleries?.get(it)
+                val gallery = galleries?.get(it)
                 val name = gallery?.name
                 Toast.makeText(this@MapActivity, "Wybrano $name na pozycji $it", Toast.LENGTH_LONG).show()
-                viewModel.googleMap?.let { it1 ->
+                googleMap?.let { it1 ->
                     if (gallery != null) {
                         if (name != null) {
-                            viewModel.setGalleryPosition(LatLng(gallery.lat,gallery.lng),name, it1)
+                            setGalleryPosition(LatLng(gallery.lat,gallery.lng),name, it1)
+                            //addHeatMap(it1,LatLng(gallery.lat,gallery.lng),gallery.overcrowdingLevel)
                         }
                     }
                 }
 
-                viewModel.clearAllMarkers()
-                viewModel.markercategory = MarkerCategory.Market
+                clearAllMarkers()
+                markercategory = MarkerCategory.Market
+                ifDevelopmentBuilding.postValue(false)
+
 
             })
         }
 
+        binding.buttonPlan.setOnClickListener {
+            Toast.makeText(this,"Plan zagospodarowania został wysłany na serwer.", Toast.LENGTH_LONG).show()
+            viewModel.clearAllMarkers()
+            viewModel.markercategory = MarkerCategory.Market
+            viewModel.ifDevelopmentBuilding.postValue(true)
+        }
+
+
         binding.buttonGalleries.setOnClickListener {
             viewModel.galleries?.let { it1 -> GalleriesDialogFragment(it1).show(supportFragmentManager,"Galleries") }
+            if(viewModel.galleries == null){
+                Toast.makeText(this,"Nie udalo sie pobrac liste galeri",Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.buttonMarket.setOnClickListener {
@@ -95,7 +116,7 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
 
         //PoliceStationDialogFragment().show(supportFragmentManager,"policeStations")
 
-        viewModel.addHeatMap(googleMap,this)
+        //viewModel.addHeatMap(googleMap,this)
 
         viewModel.addMarket(googleMap)
 
@@ -111,14 +132,20 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
     }
 
     override fun onBackPressed() {
-        MaterialDialog(this).show {
-            title(text = "Wyjscie z aplikacji")
-            message(text = "Czy na pewno chcesz wyjsc z aplikacji")
-            positiveButton(text = "Tak") {
-                super.onBackPressed()
-            }
-            negativeButton(text = "Nie")
+        if (viewModel.ifDevelopmentBuilding.value!!){
+            super.onBackPressed()
         }
+        else{
+            MaterialDialog(this).show {
+                title(text = "Wyjscie z aplikacji")
+                message(text = "Czy na pewno chcesz wyjsc z aplikacji")
+                positiveButton(text = "Tak") {
+                    super.onBackPressed()
+                }
+                negativeButton(text = "Nie")
+            }
+        }
+
 
     }
 

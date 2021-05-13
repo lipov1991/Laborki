@@ -11,7 +11,8 @@ class MapUtils {
 
     private val galleryLatLng = LatLng(52.2550, 21.0378)
     lateinit var markerGallery : Marker
-    var actualGallery = MutableLiveData<Int>()
+    var actualGallery = MutableLiveData<Int>(1)
+    var ifDevelopmentBuilding = MutableLiveData<Boolean>(false)
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -32,6 +33,7 @@ class MapUtils {
                 .position(galleryLatLng)
                 .title("Galeria Wileńska")
         )
+
 
 //        googleMap.setOnIndoorStateChangeListener(object: GoogleMap.OnIndoorStateChangeListener{
 //            override fun onIndoorBuildingFocused() {

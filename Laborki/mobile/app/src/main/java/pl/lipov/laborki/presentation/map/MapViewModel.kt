@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
@@ -17,18 +15,14 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.json.JSONArray
 import org.json.JSONException
 import pl.lipov.laborki.R
-import pl.lipov.laborki.common.utils.CompassUtils
 import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.common.utils.STTUtils
 import pl.lipov.laborki.data.LoginRepository
 import pl.lipov.laborki.data.model.Gallery
 import pl.lipov.laborki.data.model.PoliceStation
-import pl.lipov.laborki.data.repository.api.dto.UserDto
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.jvm.Throws
 
 class MapViewModel(
@@ -53,6 +47,12 @@ class MapViewModel(
 
     var actualGallery = mapUtils.actualGallery
     var googleMap: GoogleMap? = null
+
+    var ifDevelopmentBuilding = mapUtils.ifDevelopmentBuilding
+    var ifPlanBuilding = false
+
+//    var provider: HeatmapTileProvider? = null
+//    var tileOverlay: TileOverlay? = null
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -164,36 +164,67 @@ class MapViewModel(
         })
     }
 
-    fun addHeatMap(
-        map:GoogleMap,
-        context: Context
-    ) {
-        var policeStations: List<PoliceStation>? = null
-
-        // Get the data: latitude/longitude positions of police stations.
-        try {
-            policeStations = getPoliceStations(context)
-            val weightedLocations = policeStations.map {
-                val latlng =LatLng(it.lat,it.lng)
-                WeightedLatLng(latlng,it.weight)
-            }
-
-            // Create a heat map tile provider, passing it the latlngs of the police stations.
-            val provider = HeatmapTileProvider.Builder()
-                .weightedData(weightedLocations)
-                .build()
-
-            provider.setRadius(50)
-
-            // Add a tile overlay to the map, using the heat map tile provider.
-            map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
-
-        } catch (e: JSONException) {
-            Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
-                .show()
-        }
-
-    }
+//    fun addHeatMap(
+//        map:GoogleMap,
+//        latLng: LatLng,
+//        overcrowdingLevel: Double
+////        context: Context
+//    ) {
+//
+//        val weightedLocations = WeightedLatLng(latLng,overcrowdingLevel)
+//
+//        if(provider == null){
+//            provider = HeatmapTileProvider.Builder()
+//                    .weightedData(mutableListOf(weightedLocations))
+//                    .build()
+//        }
+//        else{
+//            provider!!.setWeightedData(mutableListOf(weightedLocations))
+//        }
+////        // Create a heat map tile provider, passing it the latlngs of the police stations.
+////            val provider = HeatmapTileProvider.Builder()
+////                    .weightedData(mutableListOf(weightedLocations))
+////                    .build()
+//
+//
+//            provider?.setRadius(50)
+//            provider?.setOpacity(0.5)
+//
+//        if(tileOverlay == null){
+//            tileOverlay = map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+//        }
+//        else{
+//            tileOverlay!!.clearTileCache()
+//        }
+//            // Add a tile overlay to the map, using the heat map tile provider.
+//        //    map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+//
+////        var policeStations: List<PoliceStation>? = null
+////
+////        // Get the data: latitude/longitude positions of police stations.
+////        try {
+////            policeStations = getPoliceStations(context)
+////            val weightedLocations = policeStations.map {
+////                val latlng =LatLng(it.lat,it.lng)
+////                WeightedLatLng(latlng,it.weight)
+////            }
+////
+////            // Create a heat map tile provider, passing it the latlngs of the police stations.
+////            val provider = HeatmapTileProvider.Builder()
+////                .weightedData(weightedLocations)
+////                .build()
+////
+////            provider.setRadius(50)
+////
+////            // Add a tile overlay to the map, using the heat map tile provider.
+////            map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+////
+////        } catch (e: JSONException) {
+////            Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
+////                .show()
+////        }
+//
+//    }
 
     @Throws(JSONException::class)
     private fun getPoliceStations(

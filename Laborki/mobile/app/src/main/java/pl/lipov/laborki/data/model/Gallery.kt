@@ -4,6 +4,6 @@ data class Gallery(
         val lat: Double,
         val lng: Double,
         val name: String,
-        val overcrowdingLevel: String,
+        val overcrowdingLevel: Double,
         val url: String,
 )
