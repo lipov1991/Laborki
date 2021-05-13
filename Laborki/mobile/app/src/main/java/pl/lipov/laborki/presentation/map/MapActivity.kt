@@ -58,7 +58,7 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMarkerCli
                     if (gallery != null) {
                         if (name != null) {
                             setGalleryPosition(LatLng(gallery.lat,gallery.lng),name, it1)
-                            //addHeatMap(it1,LatLng(gallery.lat,gallery.lng),gallery.overcrowdingLevel)
+                            addHeatMap(it1,LatLng(gallery.lat,gallery.lng),gallery.overcrowdingLevel)
                         }
                     }
                 }
