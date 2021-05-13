@@ -32,6 +32,9 @@ class MainActivity :
         setContentView(binding.root)
         navigateTo(TextFragment())
         mDetector = GestureDetectorCompat(this, viewModel.gestureDetectorUtils)
+//        viewModel.setUpCompass(this) { rotation ->
+//            binding.compass.rotation = rotation
+//        }
 //
 //        binding.removeMarkerButton.setOnClickListener {
 //            val intent = Intent(this, MapActivity::class.java)

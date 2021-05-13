@@ -1,5 +1,7 @@
 package pl.lipov.laborki.presentation.map
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -48,6 +50,16 @@ class MapViewModel(
         return loginRepository.getGalleries()
     }
 
+    fun sendingDevelopmentPlan(
+        context: Context,
+        googleMap: GoogleMap
+    ) {
+        mapUtils.pinsList.clear()
+        googleMap.clear()
+        mapUtils.currentMarkerType = "Sklep"
+        mapUtils.areaButttonAlreadyPressed = true
+        Toast.makeText(context, "Plan zagospodarowania został wysłany na serwer.", Toast.LENGTH_LONG).show()
+    }
 //    fun addHeatMap(
 //        map:GoogleMap,
 //        context: Context

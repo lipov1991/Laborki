@@ -12,6 +12,7 @@ class MapUtils {
     var currentMarkerType = "Sklep"
 
     var pinsList: MutableList<Pair<Marker, Int>> = mutableListOf()
+    var areaButttonAlreadyPressed = false
 
     fun setUpMap(
         googleMap: GoogleMap,

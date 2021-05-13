@@ -89,11 +89,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
                     GalleryListAdapter(
                         viewModel.galleries,
                         viewModel.mapUtils,
-                        myMap
+                        myMap,
+                        this@MapActivity
                     )
                 )
             }
         }
+
+        binding.updateBtn.setOnClickListener {
+            viewModel.sendingDevelopmentPlan(this, myMap)
+        }
+
     }
 
     override fun onMapReady(
@@ -109,6 +115,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
 
 //        PoliceStationDialogFragment().show(supportFragmentManager, "PoliceStations")
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        if (requestCode == REQUEST_CODE_RECOGNIZE) {
+//            viewModel.handleActivityResult(resultCode, data, this)
+//        }
+//        else {
+//            super.onActivityResult(requestCode, resultCode, data)
+//        }
+//    }
 
     override fun onMapLongClick(p0: LatLng) {
         if (viewModel.mapUtils.focusedFlag) {
