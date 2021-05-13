@@ -21,6 +21,7 @@ import java.util.*
 class MapViewModel : ViewModel() {
     private val placeCoordinates = LatLng(52.2550, 21.0378)
 
+
     fun setUpMap(
         googleMap: GoogleMap
     )

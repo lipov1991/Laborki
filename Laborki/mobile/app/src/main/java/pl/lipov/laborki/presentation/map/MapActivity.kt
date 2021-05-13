@@ -23,11 +23,11 @@ import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
 
-class MapActivity: AppCompatActivity(), OnMapReadyCallback {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityMapBinding
     private val viewModel by inject<MapViewModel>()
-    var category: String = "None"
+    var category: String = "Market"
 
     var mapMarket: Marker? = null
     var mapBank: Marker? = null
@@ -41,6 +41,8 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
     private var galeriesNames = mutableListOf<String>()
     private var galeriesLatLng = mutableListOf<LatLng>()
 
+    var currentGallery: String = "Wilenska"
+
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
@@ -53,14 +55,18 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.BankBtn.setOnClickListener{
+        binding.BankBtn.setOnClickListener {
             onBankBtnClick()
         }
-        binding.ResBtn.setOnClickListener{
+        binding.ResBtn.setOnClickListener {
             onResBtnClick()
         }
-        binding.MarketBtn.setOnClickListener{
+        binding.MarketBtn.setOnClickListener {
             onMarketBtnClick()
+        }
+
+        binding.UploadPlan.setOnClickListener {
+            onUploadBtnClick()
         }
 
         dbRef.child("galeries").get().addOnSuccessListener {
@@ -72,7 +78,7 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
                 galeriesNames.add(name as String)
                 galeriesLatLng.add(LatLng(lat as Double, lng as Double))
             }
-            }
+        }
 
 
     }
@@ -83,92 +89,142 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
         viewModel.setUpMap(googleMap)
         addMarker(googleMap)
         viewModel.addHeatMap(googleMap, this)
-       // PoliceStationsDialogFragment().show(supportFragmentManager,"policeStations")
+        // PoliceStationsDialogFragment().show(supportFragmentManager,"policeStations")
 
         binding.galeriesNames.setOnClickListener {
-            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                listItems(items = galeriesNames) { _, index, _ ->
-                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(galeriesLatLng[index], 18f), 2000, null)
-                    Toast.makeText(this@MapActivity, galeriesLatLng[index].toString(), Toast.LENGTH_SHORT).show()
 
-                    mapRestauracja?.remove()
-                    mapBank?.remove()
-                    mapMarket?.remove()
-                    category = "Market"
+            fun galleryChange(){
+                MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                    listItems(items = galeriesNames) { _, index, _ ->
+                        googleMap?.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(
+                                galeriesLatLng[index],
+                                18f
+                            ), 2000, null
+                        )
+                        Toast.makeText(
+                            this@MapActivity,
+                            galeriesNames[index],
+                            Toast.LENGTH_SHORT
+                        ).show()
 
+
+                        category = "Market"
+                        currentGallery = galeriesNames[index]
+
+                    }
+
+                }
+            }
+            if(mapBank == null && mapRestauracja == null  && mapMarket == null){
+                galleryChange()
+            }
+            else{
+                MaterialDialog(this).show{
+                    title(text = currentGallery)
+                    message(text= "Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?")
+                    positiveButton(text = "TaK"){
+                        galleryChange()
+                        mapBank?.remove()
+                        mapBank = null
+                        mapMarket?.remove()
+                        mapMarket = null
+                        mapBank?.remove()
+                        mapBank = null
+                        category= "Market"
+                    }
+                    negativeButton(text ="Nie"){
+                        dialogBehavior.onDismiss()
+                    }
                 }
 
             }
+
         }
     }
 
 
-
-    override fun onBackPressed(){
-        super.onBackPressed()
+    override fun onBackPressed() {
         MaterialDialog(this).show {
             title(text = "Wyjscie z aplikacji")
-            message(text = "Czy na pewno")
-            positiveButton(text = "tak") { super.onBackPressed()}
-            negativeButton(text = "Nie")
+            message(text = "Czy na pewno chcesz wyjść z aplikacji")
+            positiveButton(text = "tak") { super.onBackPressed() }
+            negativeButton(text = "Nie") {dialogBehavior.onDismiss()}
         }
 
     }
+
     private fun onBankBtnClick() {
         Toast.makeText(this, "Bank", Toast.LENGTH_SHORT).show()
         this.category = "Bank"
 
     }
+
     private fun onResBtnClick() {
         Toast.makeText(this, "Restauracja", Toast.LENGTH_SHORT).show()
         this.category = "Restauracja"
 
     }
+
     private fun onMarketBtnClick() {
         Toast.makeText(this, "Market", Toast.LENGTH_SHORT).show()
         this.category = "Market"
 
     }
 
-    fun addMarker(googleMap: GoogleMap){
-        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener
-        {
-            override fun onIndoorBuildingFocused(){
+    private fun onUploadBtnClick(){
+        Toast.makeText(this, "Plan zagospodarowania został wysłany na serwer", Toast.LENGTH_SHORT).show()
+        if (mapBank != null) {
+            mapBank?.remove()
+            mapBank = null
+        }
+        if (mapMarket != null) {
+            mapMarket?.remove()
+            mapMarket = null
+        }
+        if (mapBank != null) {
+            mapBank?.remove()
+            mapBank = null
+        }
+        this.category = "Market"
+
+    }
+    fun addMarker(googleMap: GoogleMap) {
+        googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
+            override fun onIndoorBuildingFocused() {
             }
 
             override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding) {
-            Floor  = indoorBuilding.levels[indoorBuilding.activeLevelIndex].name.toInt()
-                if(mapMarket?.snippet.toString() != Floor.toString())
-                {
+                Floor = indoorBuilding.levels[indoorBuilding.activeLevelIndex].name.toInt()
+                if (mapMarket?.snippet.toString() != Floor.toString()) {
                     mapMarket?.isVisible = false
+                } else {
+                    mapMarket?.isVisible = true
                 }
-                else{mapMarket?.isVisible = true}
 
-                if(mapBank?.snippet.toString() != Floor.toString())
-                {
+                if (mapBank?.snippet.toString() != Floor.toString()) {
                     mapBank?.isVisible = false
+                } else {
+                    mapBank?.isVisible = true
                 }
-                else{mapBank?.isVisible = true}
 
-                if(mapRestauracja?.snippet.toString() != Floor.toString())
-                {
+                if (mapRestauracja?.snippet.toString() != Floor.toString()) {
                     mapRestauracja?.isVisible = false
+                } else {
+                    mapRestauracja?.isVisible = true
                 }
-                else{mapRestauracja?.isVisible = true}
 
             }
 
         })
         googleMap.setOnCameraMoveListener() {
-            if(googleMap.focusedBuilding == null)
-            {
+            if (googleMap.focusedBuilding == null) {
                 binding.BankBtn.hide()
                 binding.ResBtn.hide()
                 binding.MarketBtn.hide()
                 category = ""
 
-            }
-            else{
+            } else {
                 binding.BankBtn.show()
                 binding.ResBtn.show()
                 binding.MarketBtn.show()
@@ -176,45 +232,45 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback {
 
         }
         googleMap.setOnMapLongClickListener { latLng ->
-            if(category == "Market")
-            {
+            if (category == "Market") {
 
-                if( mapMarket != null)
-                {
+                if (mapMarket != null) {
                     mapMarket?.remove()
                     mapMarket = null
-                }
-                else{
-                    mapMarket = googleMap.addMarker(MarkerOptions().position(latLng).title(category).draggable(true).snippet(Floor.toString()))
+                } else {
+                    mapMarket = googleMap.addMarker(
+                        MarkerOptions().position(latLng).title(category).draggable(true)
+                            .snippet(Floor.toString())
+                    )
 
                 }
-        }
-            if(category == "Bank")
-            {
+            }
+            if (category == "Bank") {
 
-                if(mapBank != null)
-                {
+                if (mapBank != null) {
                     mapBank?.remove()
                     mapBank = null
+                } else {
+                    mapBank = googleMap.addMarker(
+                        MarkerOptions().position(latLng).title(category).draggable(true)
+                            .snippet(Floor.toString())
+                    )
                 }
-                else{
-                    mapBank = googleMap.addMarker(MarkerOptions().position(latLng).title(category).draggable(true).snippet(Floor.toString())) }
             }
-            if(category == "Restauracja")
-            {
+            if (category == "Restauracja") {
 
-                if(mapRestauracja != null)
-                {
+                if (mapRestauracja != null) {
                     mapRestauracja?.remove()
                     mapRestauracja = null
+                } else {
+                    mapRestauracja = googleMap.addMarker(
+                        MarkerOptions().position(latLng).title(category).draggable(true)
+                            .snippet(Floor.toString())
+                    )
                 }
-                else{
-                    mapRestauracja = googleMap.addMarker(MarkerOptions().position(latLng).title(category).draggable(true).snippet(Floor.toString())) }
             }
         }
     }
-
-
 
 
 }
