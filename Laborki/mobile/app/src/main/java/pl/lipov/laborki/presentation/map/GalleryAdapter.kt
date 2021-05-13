@@ -1,22 +1,22 @@
 package pl.lipov.laborki.presentation.map
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 import pl.lipov.laborki.R
 import pl.lipov.laborki.common.utils.MapUtils
-import pl.lipov.laborki.data.model.Gallery
 import pl.lipov.laborki.data.repository.api.dto.GalleriesDto
 
 class GalleryAdapter(
     private val galleries: List<GalleriesDto>,
     private val mapUtils: MapUtils,
-    private val googleMap: GoogleMap
+    private val googleMap: GoogleMap,
+    private val context: Context
 ) : RecyclerView.Adapter<GalleryViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -37,13 +37,25 @@ class GalleryAdapter(
         Picasso.get().load(gallery.url).into(holder.image)
 
         holder.itemView.setOnClickListener {
-            mapUtils.navToGallery(googleMap, gallery.name, galleryLatLng)
+            if (mapUtils.alreadySentAreaDevelopmentPlan) {
+                mapUtils.alreadySentAreaDevelopmentPlan = false
+                mapUtils.navToGallery(googleMap, gallery.name, galleryLatLng)
+            } else {
+                MaterialDialog(context).show {
+                    title(text = gallery.name)
+                    message(text = "Czy na pewno chcesz zakończyć plan zagospodarowania bez wysłania go na serwer?")
+                    positiveButton(text = "Tak") {
+                        it.cancel()
+                        mapUtils.navToGallery(googleMap, gallery.name, galleryLatLng)
+                    }
+                    negativeButton(text = "Nie") {
+                        it.cancel()
+                    }
+                }
+            }
         }
     }
 
     override fun getItemCount(): Int = galleries.size
-
-
-
 
 }

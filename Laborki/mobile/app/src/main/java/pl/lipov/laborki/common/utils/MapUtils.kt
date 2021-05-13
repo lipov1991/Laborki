@@ -15,6 +15,7 @@ class MapUtils {
     var currentMarkerType = "Shop"
     var currentMarkerIcon = R.drawable.bitmap_shop
     var markersList: MutableList<Pair<Marker, Int>> = mutableListOf()
+    var alreadySentAreaDevelopmentPlan = false
 
     fun setUpMap(
         googleMap: GoogleMap,
@@ -131,6 +132,22 @@ class MapUtils {
             return true
         }
         return false
+    }
+
+    fun sentAreaDevelopmentPlan(
+        context: Context,
+        googleMap: GoogleMap
+    ) {
+        markersList.clear()
+        googleMap.clear()
+        currentMarkerType = "Shop"
+        currentMarkerIcon = R.drawable.bitmap_shop
+        alreadySentAreaDevelopmentPlan = true
+        Toast.makeText(
+            context,
+            "Plan zagospodarowania został wysłany na serwer.",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
 }

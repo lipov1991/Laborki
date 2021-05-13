@@ -3,15 +3,9 @@ package pl.lipov.laborki.presentation.map
 import android.content.Context
 import android.graphics.Point
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.afollestad.materialdialogs.LayoutMode
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.list.customListAdapter
 import com.google.android.gms.maps.GoogleMap
 import io.reactivex.Single
-import pl.lipov.laborki.R
 import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.repository.api.dto.GalleriesDto

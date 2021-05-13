@@ -19,6 +19,17 @@
         app:srcCompat="@drawable/ic_compass" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mpzp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_mpzp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/market_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

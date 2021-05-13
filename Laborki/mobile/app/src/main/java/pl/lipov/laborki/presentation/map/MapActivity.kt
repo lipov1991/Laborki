@@ -18,7 +18,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
-import pl.lipov.laborki.data.model.Gallery
 import pl.lipov.laborki.data.repository.api.dto.GalleriesDto
 import pl.lipov.laborki.databinding.ActivityMapBinding
 import java.util.*
@@ -68,6 +67,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         mapFragment.getMapAsync(this)
 
 
+        binding.mpzpButton.setOnClickListener {
+            viewModel.mapUtils.sentAreaDevelopmentPlan(this, myMap)
+        }
 
         binding.bankButton.setOnClickListener {
             viewModel.changeMarker("Bank", R.drawable.bitmap_bank)
@@ -101,7 +103,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         binding.bottomSheetButton.setOnClickListener {
             MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 title(text = getString(R.string.bottom_sheet_title))
-                customListAdapter(GalleryAdapter(viewModel.galleryList, viewModel.mapUtils, googleMap))
+                customListAdapter(
+                    GalleryAdapter(
+                        viewModel.galleryList,
+                        viewModel.mapUtils,
+                        googleMap,
+                        this@MapActivity
+                    )
+                )
             }
         }
     }
