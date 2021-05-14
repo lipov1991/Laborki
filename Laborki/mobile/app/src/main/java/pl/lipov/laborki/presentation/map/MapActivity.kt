@@ -73,6 +73,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         mapFragment.getMapAsync(this)
 
 
+        viewModel.rotationChange.observe(::getLifecycle) { rotation ->
+            binding.compass.rotation = rotation
+        }
+        viewModel.setUpCompass()
+
         binding.mpzpButton.setOnClickListener {
             viewModel.mapUtils.sentAreaDevelopmentPlan(this, myMap)
         }

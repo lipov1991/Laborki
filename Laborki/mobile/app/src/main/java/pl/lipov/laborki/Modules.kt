@@ -9,10 +9,7 @@ import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import pl.lipov.laborki.common.utils.CompassUtils
-import pl.lipov.laborki.common.utils.GestureDetectorUtils
-import pl.lipov.laborki.common.utils.MapUtils
-import pl.lipov.laborki.common.utils.SensorEventsUtils
+import pl.lipov.laborki.common.utils.*
 import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.repository.api.Api
 import pl.lipov.laborki.presentation.AuthorizationViewModel
@@ -26,17 +23,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
-//    single {STTUtils()}
+    single { STTUtils() }
     single { GestureDetectorUtils() }
     single { provideSensorManager(context = get()) }
-    single(named("accelerometer")) { provideAccelerometer(sensorManager = get()) }
-//    single {
-//        CompassUtils(
-//            accelerometer = get(named("accelerometer")),
-//            megnetometer = get(named("megnetometer")),
-//            sensorManager = get(),
-//        )
-//    }
+    single(named("accelerometer")) {
+        provideAccelerometer(sensorManager = get())
+    }
+    single(named("magnetometer")) {
+        provideMagnetometer(sensorManager = get())
+    }
+    single {
+        CompassUtils(
+            accelerometer = get(named("accelerometer")),
+            magnetometer = get(named("magnetometer")),
+            sensorManager = get(),
+        )
+    }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get(named("accelerometer"))) }
     single { MapUtils() }
 }
@@ -49,9 +51,9 @@ private fun provideAccelerometer(
     sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-//private fun provideMegnetometer(
-//    sensorManager: SensorManager
-//): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE)
+private fun provideMagnetometer(
+    sensorManager: SensorManager
+): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
 
 val networkModule = module {
     factory { provideOkHttpClient() }
@@ -106,7 +108,8 @@ val viewModelsModule = module {
     viewModel {
         MapViewModel(
             mapUtils = get(),
-            loginRepository = get()
+            loginRepository = get(),
+            compassUtils = get()
         )
     }
 }

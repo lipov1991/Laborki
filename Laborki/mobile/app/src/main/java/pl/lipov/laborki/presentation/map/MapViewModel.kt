@@ -3,20 +3,23 @@ package pl.lipov.laborki.presentation.map
 import android.content.Context
 import android.graphics.Point
 import android.widget.ImageView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.GoogleMap
 import io.reactivex.Single
+import pl.lipov.laborki.common.utils.CompassUtils
 import pl.lipov.laborki.common.utils.MapUtils
 import pl.lipov.laborki.data.repository.LoginRepository
 import pl.lipov.laborki.data.repository.api.dto.GalleriesDto
 
 class MapViewModel(
     val mapUtils: MapUtils,
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    val compassUtils: CompassUtils
 ) : ViewModel() {
 
     var galleryList: MutableList<GalleriesDto> = mutableListOf()
-//    val rotationChange: LiveData<Float> = compassUtils.rotationChange
+    val rotationChange: LiveData<Float> = compassUtils.rotationChange
 
     fun deleteMarker(
         markerType: String
@@ -51,6 +54,10 @@ class MapViewModel(
 
     fun getGalleries(): Single<List<GalleriesDto>> {
         return loginRepository.getGalleries()
+    }
+
+    fun setUpCompass() {
+        compassUtils.setUpCompass()
     }
 
 }
