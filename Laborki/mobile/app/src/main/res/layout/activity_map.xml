@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -16,7 +17,6 @@
 
     </androidx.fragment.app.FragmentContainerView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,22 +25,13 @@
         android:orientation="vertical">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingBtn5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|top"
-            android:layout_margin="5dp"
-            android:clickable="true"
-            app:srcCompat="@drawable/ic_upload" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left|bottom"
             android:layout_margin="5dp"
             android:clickable="true"
-            app:srcCompat="@drawable/ic_money" />
+            app:srcCompat="@drawable/ic_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
@@ -74,11 +65,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
-            android:layout_margin="5dp"
             android:clickable="true"
             android:visibility="invisible"
             app:srcCompat="@drawable/ic_trash"
             />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/upload_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_upload" />
 
     </LinearLayout>
 

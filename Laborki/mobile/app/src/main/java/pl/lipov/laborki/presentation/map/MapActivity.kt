@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -54,11 +55,11 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         mapViewModel.getGallery()
 
         binding.floatingBtn4.setOnClickListener{
-            BottomSheetGalleryFragment(mapViewModel.galleryList).show(supportFragmentManager, "Galleries")
+            BottomSheetGalleryFragment(mapViewModel.galleryList, mapViewModel.ifUploadClick).show(supportFragmentManager, "Galleries")
             mapViewModel.removeAllMarkers()
         }
 
-        binding.floatingBtn5.setOnClickListener{
+        binding.uploadButton.setOnClickListener{
             mapViewModel.uploadBtn(this)
         }
 
@@ -73,7 +74,11 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
                     it1
                 )
             }
-        })
+        mapViewModel.removeAllMarkers()
+            mapViewModel.categoryMarker = "Market"
+            mapViewModel.ifUploadClick = false
+        }
+        )
 
     }
 
@@ -120,6 +125,22 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
     override fun onDestroy() {
         super.onDestroy()
         mapViewModel.disposableclear()
+    }
+
+    override fun onBackPressed() {
+        if (mapViewModel.ifUploadClick){
+            super.onBackPressed()
+        }
+        else{
+            MaterialDialog(this).show {
+                title(text = "Wyjscie z aplikacji")
+                message(text = "Czy na pewno chcesz wyjsc z aplikacji")
+                positiveButton(text = "Tak") {
+                    super.onBackPressed()
+                }
+                negativeButton(text = "Nie")
+            }
+        }
     }
 
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "167220145328",
+    "firebase_url": "https://laborki-7e3b1.firebaseio.com",
+    "project_id": "laborki-7e3b1",
+    "storage_bucket": "laborki-7e3b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167220145328:android:e6a3c2257f4944b1eb1f75",
+        "android_client_info": {
+          "package_name": "pl.lipov.laborki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167220145328-05dkq88bihfnv541u6pq9mm3lkia2cph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl2B9jFmo-O-eei6Ttio0RqQNngxfihG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167220145328-05dkq88bihfnv541u6pq9mm3lkia2cph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

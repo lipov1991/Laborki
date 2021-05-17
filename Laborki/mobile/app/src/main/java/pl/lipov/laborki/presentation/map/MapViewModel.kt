@@ -63,7 +63,7 @@ class MapViewModel (
     lateinit var galleryList : List<Gallery>
     var currentGalleryPosition = mapUtils.currentGalleryPosition
     var googleMap: GoogleMap? = null
-
+    var ifUploadClick = false
 
 
     fun setUpMap(
@@ -400,6 +400,7 @@ class MapViewModel (
 
         removeAllMarkers()
         categoryMarker = "Market"
+        ifUploadClick = true
     }
 
 
