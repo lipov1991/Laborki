@@ -1,5 +1,6 @@
 package pl.lipov.laborki.presentation.map
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -16,6 +17,9 @@ import com.google.android.gms.maps.model.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.google.maps.android.heatmaps.Gradient
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+import com.google.maps.android.heatmaps.WeightedLatLng
 import org.json.JSONArray
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
@@ -28,6 +32,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var galNameList = mutableListOf<String>()
     private var galLatLngList = mutableListOf<LatLng>()
+    private var galIntensityList = mutableListOf<WeightedLatLng>()
 
     private val warsaw = LatLng(52.229676, 21.012229)
     private var currentCat: String = "Market"
@@ -92,11 +97,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         dbRef.child("galeries").get().addOnSuccessListener {
             var array = JSONArray(Gson().toJson(it.value))
             for (i in 0 until array.length()) {
-                var name = array.getJSONObject(i).get("name")
-                var lat = array.getJSONObject(i).get("lat")
-                var lng = array.getJSONObject(i).get("lng")
-                galNameList.add(name as String)
-                galLatLngList.add(LatLng(lat as Double, lng as Double))
+                var name = array.getJSONObject(i).getString("name")
+                var lat = array.getJSONObject(i).getDouble("lat")
+                var lng = array.getJSONObject(i).getDouble("lng")
+                var intensity = array.getJSONObject(i).getDouble("overcrowdingLevel")
+                galNameList.add(name)
+                galLatLngList.add(LatLng(lat, lng))
+
+                if (intensity != 0.0) {
+                    galIntensityList.add(WeightedLatLng(LatLng(lat, lng), intensity))
+                }
             }
         }
     }
@@ -134,6 +144,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         if (map != null) {
             map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(warsaw, 15f))
 
+            var colors = listOf(Color.parseColor("#faac7c"), Color.parseColor("#3e1e70")).toIntArray()
+            var startPoints = listOf<Float>(0.2f, 1f).toFloatArray()
+            var gradient = Gradient(colors, startPoints)
+
             binding.placeButton.setOnClickListener {
                 if (markerArray.count() != 0) {
                     MaterialDialog(this).show {
@@ -151,6 +165,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                         listItems(items = galNameList) { _, index, _ ->
                             map?.animateCamera(CameraUpdateFactory.newLatLngZoom(galLatLngList[index], 18f), 2000, null)
+                            var heatMapProvider = HeatmapTileProvider.Builder().weightedData(listOf(galIntensityList[index])).radius(50).maxIntensity(5.0).gradient(gradient).build()
+                            map!!.addTileOverlay(TileOverlayOptions().tileProvider(heatMapProvider))
                             currentGallery = galNameList[index]
                             clear()
                         }
