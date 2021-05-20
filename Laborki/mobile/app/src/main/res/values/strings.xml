@@ -7,4 +7,5 @@
     <string name="app_exit_message">Czy na pewno chcesz wyjść z aplikacji?</string>
     <string name="app_exit_title">Wyjście z aplikacji</string>
     <string name="galleries_warsaw">Galerie handlowe w Warszawie</string>
+    <string name="heatmap_error">Problem z wczytaniem heatmapy</string>
 </resources>

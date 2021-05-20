@@ -1,6 +1,7 @@
 package pl.lipov.laborki.presentation.map
 
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.maps.android.heatmaps.Gradient
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+import com.google.maps.android.heatmaps.WeightedLatLng
 import io.reactivex.Single
 import pl.lipov.laborki.R
 import pl.lipov.laborki.common.utils.MapUtils
@@ -32,17 +36,14 @@ class MapViewModel(
     private var isPlanBtnClicked: Boolean = false
     private var currentGallery: String = "Galeria Wileńska"
     private var galleryDialog: MaterialDialog? = null
-
-    //    private var heatmapTileProvider: HeatmapTileProvider? = null
+    private var heatmapTileProvider: HeatmapTileProvider? = null
     private var currentMarker = "Market"
     var galleries: MutableList<GalleryDto> = mutableListOf()
 
     fun setUpMap(
-        googleMap: GoogleMap,
-        context: Context
+        googleMap: GoogleMap
     ) {
         mapUtils.setUpMap(googleMap)
-//        addHeatMap(googleMap, context)
     }
 
     fun addLocation(
@@ -153,7 +154,8 @@ class MapViewModel(
     fun setUpGallery(
         googleMap: GoogleMap,
         markerName: String,
-        galleryLatLng: LatLng
+        galleryLatLng: LatLng,
+        context: Context
     ) {
 
         val cameraPos = CameraPosition.Builder()
@@ -172,6 +174,7 @@ class MapViewModel(
                 .position(galleryLatLng)
                 .title(markerName)
         )
+        addHeatMap(googleMap, context)
     }
 
     fun getGalleries(): Single<List<GalleryDto>> {
@@ -190,7 +193,8 @@ class MapViewModel(
                     GalleryAdapter(
                         galleries,
                         this@MapViewModel,
-                        googleMap
+                        googleMap,
+                        context
                     )
                 )
             }
@@ -233,33 +237,33 @@ class MapViewModel(
         }
     }
 
-//    private fun addHeatMap(
-//        map: GoogleMap,
-//        context: Context
-//    ) {
-//        try {
-//            val policeStations = getPoliceStations(context)
-//            val weightedLatLngs = policeStations.map { policeStation ->
-//                val latlng = LatLng(policeStation.lat, policeStation.lng)
-//                WeightedLatLng(latlng, policeStation.weight)
-//            }
-//            val provider = HeatmapTileProvider.Builder()
-//                .weightedData(weightedLatLngs)
-//                .build()
-//            heatmapTileProvider?.setRadius(50)
-//            map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
-//        } catch (e: JSONException) {
-//            Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
-//                .show()
-//        }
-//    }
-//
-//    @Throws(JSONException::class)
-//    private fun getPoliceStations(context: Context): List<PoliceStation> {
-//        val inputStream = context.resources.openRawResource(R.raw.police_stations)
-//        val json = Scanner(inputStream).useDelimiter("\\A").next()
-//        val itemType = object : TypeToken<List<PoliceStation>>() {}.type
-//        return Gson().fromJson<List<PoliceStation>>(json, itemType)
-//    }
-
+    private fun addHeatMap(
+        googleMap: GoogleMap,
+        context: Context
+    ) {
+        try {
+            val colors = intArrayOf(
+                Color.rgb(0, 255, 0),
+                Color.rgb(255, 255, 0),
+                Color.rgb(255, 0, 0)
+            )
+            val startPoints = floatArrayOf(0.1f, 0.5f, 0.9f)
+            val gradient = Gradient(colors, startPoints)
+            val weightedLatLngs = galleries.map { gallery ->
+                val latlng = LatLng(gallery.lat, gallery.lng)
+                WeightedLatLng(latlng, gallery.overcrowdingLevel)
+            }
+            val provider = HeatmapTileProvider.Builder()
+                .weightedData(weightedLatLngs)
+                .gradient(gradient)
+                .build()
+            heatmapTileProvider?.setRadius(50)
+            val tileOverlay = googleMap.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+            tileOverlay?.clearTileCache()
+        } catch (e: Exception) {
+            Toast.makeText(context, R.string.heatmap_error, Toast.LENGTH_LONG)
+                .show()
+        }
+    }
 }
+

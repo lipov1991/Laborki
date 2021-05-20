@@ -68,7 +68,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(
         googleMap: GoogleMap
     ) {
-        viewModel.setUpMap(googleMap, this)
+        viewModel.setUpMap(googleMap)
         viewModel.addLocation(googleMap)
         viewModel.removeMarker(googleMap)
         viewModel.indoorBuildingMarkerManagement(
@@ -82,15 +82,15 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onBackPressed() {
-            MaterialDialog(this).show {
-                title(R.string.app_exit_title)
-                message(R.string.app_exit_message)
-                positiveButton(text = "Tak") {
-                    super.onBackPressed()
-                }
-                negativeButton(text = "Nie")
+        MaterialDialog(this).show {
+            title(R.string.app_exit_title)
+            message(R.string.app_exit_message)
+            positiveButton(text = "Tak") {
+                super.onBackPressed()
             }
+            negativeButton(text = "Nie")
         }
+    }
 
     override fun onDestroy() {
         compositeDisposable.clear()
