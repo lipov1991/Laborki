@@ -9,11 +9,10 @@
         android:name="pl.lipov.laborki.App"
         android:allowBackup="true"
         android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_elixir"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/SplashTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
@@ -25,6 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".presentation.map.MapActivity"
+            android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBqJ_cxlY4lJ6RcaddQjgnmGYt8709mKP8" />
 
     </application>
 
