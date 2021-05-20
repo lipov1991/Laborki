@@ -74,7 +74,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
 
 
         binding.mpzpButton.setOnClickListener {
-            viewModel.mapUtils.sentAreaDevelopmentPlan(this, myMap)
+            viewModel.mapUtils.sentAreaDevelopmentPlan(this)
         }
 
         binding.bankButton.setOnClickListener {

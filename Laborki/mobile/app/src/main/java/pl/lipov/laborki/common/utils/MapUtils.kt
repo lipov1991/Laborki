@@ -91,8 +91,12 @@ class MapUtils {
 
         currentMarkerType = "Shop"
         currentMarkerIcon = R.drawable.bitmap_shop
+
+        markersList.forEach {
+            it.first.remove()
+        }
+
         markersList.clear()
-        googleMap.clear()
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         googleMap.addMarker(
@@ -135,11 +139,13 @@ class MapUtils {
     }
 
     fun sentAreaDevelopmentPlan(
-        context: Context,
-        googleMap: GoogleMap
+        context: Context
     ) {
+        markersList.forEach {
+            it.first.remove()
+        }
         markersList.clear()
-        googleMap.clear()
+
         currentMarkerType = "Shop"
         currentMarkerIcon = R.drawable.bitmap_shop
         alreadySentAreaDevelopmentPlan = true
@@ -149,5 +155,4 @@ class MapUtils {
             Toast.LENGTH_LONG
         ).show()
     }
-
 }
