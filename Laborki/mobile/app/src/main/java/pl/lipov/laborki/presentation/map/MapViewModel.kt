@@ -52,6 +52,7 @@ class MapViewModel : ViewModel() {
             policeStations = getPoliceStations(context)
             val weightedLocations = policeStations.map {
                 val latlng = LatLng(it.lat, it.lng)
+
                 WeightedLatLng(latlng, it.weight)
             }
 

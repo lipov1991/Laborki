@@ -11,13 +11,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.IndoorBuilding
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+import com.google.maps.android.heatmaps.WeightedLatLng
 import org.json.JSONArray
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
@@ -40,7 +39,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var galeriesNames = mutableListOf<String>()
     private var galeriesLatLng = mutableListOf<LatLng>()
+    private var galeriesOverCrowding = mutableListOf<WeightedLatLng>()
 
+    var provider: HeatmapTileProvider? = null
     var currentGallery: String = "Wilenska"
 
     override fun onCreate(
@@ -75,8 +76,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 var name = array.getJSONObject(i).get("name")
                 var lat = array.getJSONObject(i).get("lat")
                 var lng = array.getJSONObject(i).get("lng")
+                var overcrowding = array.getJSONObject(i).get("overcrowdingLevel")
                 galeriesNames.add(name as String)
                 galeriesLatLng.add(LatLng(lat as Double, lng as Double))
+                galeriesOverCrowding.add(WeightedLatLng(LatLng(lat.toDouble(),lng.toDouble()), overcrowding.toString().toDouble()))
+
             }
         }
 
@@ -89,7 +93,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         viewModel.setUpMap(googleMap)
         addMarker(googleMap)
         viewModel.addHeatMap(googleMap, this)
-        // PoliceStationsDialogFragment().show(supportFragmentManager,"policeStations")
 
         binding.galeriesNames.setOnClickListener {
 
@@ -115,7 +118,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
 
                 }
+
             }
+
             if(mapBank == null && mapRestauracja == null  && mapMarket == null){
                 galleryChange()
             }
@@ -139,8 +144,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
             }
-
+            provider = HeatmapTileProvider.Builder().weightedData(galeriesOverCrowding).build()
+            provider?.setRadius(50)
+            googleMap.addTileOverlay(TileOverlayOptions().tileProvider(provider))
         }
+
     }
 
 
@@ -153,6 +161,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
+
 
     private fun onBankBtnClick() {
         Toast.makeText(this, "Bank", Toast.LENGTH_SHORT).show()
