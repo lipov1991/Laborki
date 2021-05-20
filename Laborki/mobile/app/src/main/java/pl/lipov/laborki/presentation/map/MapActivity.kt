@@ -1,5 +1,6 @@
 package pl.lipov.laborki.presentation.map
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,9 +14,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.TileOverlayOptions
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+import com.google.maps.android.heatmaps.WeightedLatLng
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONException
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.repository.api.dto.GalleryDto
@@ -109,21 +114,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
         viewModel.setUpMap(googleMap, getString(R.string.wilenska_galeria))
         googleMap.setOnMapLongClickListener(this)
         googleMap.setOnMarkerDragListener(this)
-
-
-        // heat map
-
-//        PoliceStationDialogFragment().show(supportFragmentManager, "PoliceStations")
+        addHeatMap(myMap, this)
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        if (requestCode == REQUEST_CODE_RECOGNIZE) {
-//            viewModel.handleActivityResult(resultCode, data, this)
-//        }
-//        else {
-//            super.onActivityResult(requestCode, resultCode, data)
-//        }
-//    }
 
     override fun onMapLongClick(p0: LatLng) {
         if (viewModel.mapUtils.focusedFlag) {
@@ -169,4 +161,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
     override fun onMarkerDragEnd(p0: Marker?) {}
     override fun onMarkerDragStart(p0: Marker?) {}
     override fun onMarkerDrag(p0: Marker?) {}
+
+    private fun addHeatMap(map: GoogleMap, context: Context) {
+        try {
+            val galleries = viewModel.galleries
+            val weightedLatLongs = galleries.map {
+                val latLng = LatLng(it.lat, it.lng)
+                WeightedLatLng(latLng, it.overcrowdingLevel.toDouble())
+            }
+            val provider = HeatmapTileProvider.Builder()
+                .weightedData(weightedLatLongs)
+                .build()
+            map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+        } catch (e: JSONException) {
+            Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
+                .show()
+        }
+    }
 }

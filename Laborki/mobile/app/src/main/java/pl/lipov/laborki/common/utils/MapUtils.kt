@@ -61,7 +61,6 @@ class MapUtils {
     fun addMarker(
         googleMap: GoogleMap,
         markerTitle: String,
-//        markerIcon: Int,
         coord: LatLng
     ) {
         val googleMarkers = googleMap.addMarker(
@@ -69,7 +68,6 @@ class MapUtils {
                 .position(coord)
                 .title(markerTitle)
                 .draggable(true)
-//                .icon(BitmapDescriptorFactory.fromResource(markerIcon))
         )
 
         pinsList.add(Pair(googleMarkers, currentLevel))
@@ -89,8 +87,8 @@ class MapUtils {
             .build()
 
         currentMarkerType = "Sklep"
+        pinsList.forEach { it.first.remove() }
         pinsList.clear()
-        googleMap.clear()
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         googleMap.addMarker(
