@@ -1,6 +1,7 @@
 package pl.lipov.laborki.presentation.map
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -29,6 +30,10 @@ import pl.lipov.laborki.databinding.ActivityMapBinding
 import java.util.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+
+    companion object {
+        private const val REQUEST_CODE_SPEECH_RECOGNIZE = 100
+    }
 
     private val viewModel by inject<MapViewModel>()
     private lateinit var binding: ActivityMapBinding
@@ -73,13 +78,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         mapFragment.getMapAsync(this)
 
 
+        binding.micIcon.setOnClickListener {
+            viewModel.listenForSpeechRecognize(this, REQUEST_CODE_SPEECH_RECOGNIZE)
+        }
+
         viewModel.rotationChange.observe(::getLifecycle) { rotation ->
             binding.compass.rotation = rotation
         }
         viewModel.setUpCompass()
 
         binding.mpzpButton.setOnClickListener {
-            viewModel.mapUtils.sentAreaDevelopmentPlan(this, myMap)
+            viewModel.mapUtils.sentAreaDevelopmentPlan(this)
         }
 
         binding.bankButton.setOnClickListener {
@@ -108,7 +117,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
         googleMap: GoogleMap
     ) {
         myMap = googleMap
-        viewModel.setUpMap(googleMap, this)
+        viewModel.setUpMap(
+            googleMap,
+            this,
+            listOf(binding.bankButton, binding.marketButton, binding.restaurantButton)
+        )
         googleMap.setOnMarkerDragListener(this)
         addHeatMap(googleMap, this)
         binding.bottomSheetButton.setOnClickListener {
@@ -123,6 +136,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
                     )
                 )
             }
+        }
+    }
+
+    @Suppress("deprecation")
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        if (requestCode == REQUEST_CODE_SPEECH_RECOGNIZE) {
+            viewModel.handleSpeechRecognizeResult(resultCode, data)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

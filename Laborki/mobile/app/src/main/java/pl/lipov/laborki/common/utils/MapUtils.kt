@@ -1,6 +1,7 @@
 package pl.lipov.laborki.common.utils
 
 import android.content.Context
+import android.view.View
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -16,10 +17,12 @@ class MapUtils {
     var currentMarkerIcon = R.drawable.bitmap_shop
     var markersList: MutableList<Pair<Marker, Int>> = mutableListOf()
     var alreadySentAreaDevelopmentPlan = false
+    var recognizeResult = ""
 
     fun setUpMap(
         googleMap: GoogleMap,
-        context: Context
+        context: Context,
+        listView: List<View>
     ) {
 
         val cameraPosition = CameraPosition.Builder()
@@ -27,6 +30,8 @@ class MapUtils {
             .zoom(10f)
             .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
+        googleMap.setMaxZoomPreference(10f)
 
         googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
             override fun onIndoorBuildingFocused() {
@@ -36,7 +41,15 @@ class MapUtils {
                     markersList.forEach {
                         it.first.isVisible = false
                     }
+                    listView.forEach {
+                        it.visibility = View.INVISIBLE
+                    }
+
                 } else {
+
+                    listView.forEach {
+                        it.visibility = View.VISIBLE
+                    }
                     checkIndoorLevel()
                 }
             }
@@ -84,6 +97,8 @@ class MapUtils {
         galleryLatLon: LatLng
     ) {
 
+        googleMap.setMaxZoomPreference(18f)
+
         val cameraPosition = CameraPosition.Builder()
             .target(galleryLatLon)
             .zoom(18f)
@@ -91,8 +106,10 @@ class MapUtils {
 
         currentMarkerType = "Shop"
         currentMarkerIcon = R.drawable.bitmap_shop
+        markersList.forEach {
+            it.first.remove()
+        }
         markersList.clear()
-        googleMap.clear()
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         googleMap.addMarker(
@@ -124,6 +141,12 @@ class MapUtils {
         }
     }
 
+    fun checkRecognizeResult() {
+        markersList.forEach {
+            it.first.isVisible = it.first.title == recognizeResult
+        }
+    }
+
     fun markerChecker(): Boolean {
         if (markersList
                 .filter { (it.second == currentIndoorLevel) and (it.first.title == currentMarkerType) }
@@ -135,11 +158,12 @@ class MapUtils {
     }
 
     fun sentAreaDevelopmentPlan(
-        context: Context,
-        googleMap: GoogleMap
+        context: Context
     ) {
+        markersList.forEach {
+            it.first.remove()
+        }
         markersList.clear()
-        googleMap.clear()
         currentMarkerType = "Shop"
         currentMarkerIcon = R.drawable.bitmap_shop
         alreadySentAreaDevelopmentPlan = true
@@ -149,5 +173,4 @@ class MapUtils {
             Toast.LENGTH_LONG
         ).show()
     }
-
 }

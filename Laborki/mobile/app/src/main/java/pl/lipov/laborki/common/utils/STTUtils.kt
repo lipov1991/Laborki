@@ -2,9 +2,9 @@ package pl.lipov.laborki.common.utils
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.widget.Toast
 import java.util.*
 
@@ -31,13 +31,15 @@ class STTUtils {
 
     fun handleSpeechRecognizeResult(
         data: Intent,
-        context: Context
+        mapUtils: MapUtils
     ) {
         data.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS)
             ?.firstOrNull()?.let { recognizeResult ->
-                // TODO Do something with result
-                Toast.makeText(context, recognizeResult, Toast.LENGTH_LONG).show()
+                Log.d("STT_git", recognizeResult)
+
+                mapUtils.recognizeResult = recognizeResult
+                mapUtils.checkRecognizeResult()
+
             }
     }
-
 }

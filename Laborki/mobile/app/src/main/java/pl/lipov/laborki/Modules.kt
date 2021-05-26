@@ -109,7 +109,8 @@ val viewModelsModule = module {
         MapViewModel(
             mapUtils = get(),
             loginRepository = get(),
-            compassUtils = get()
+            compassUtils = get(),
+            sttfUtils = get()
         )
     }
 }
