@@ -1,7 +1,11 @@
 package pl.lipov.laborki.presentation.map
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +28,7 @@ import org.json.JSONArray
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapBinding
@@ -43,6 +48,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var currentFloor: Int = 0
     private var markerArray = mutableListOf<Marker>()
     private var currentGallery = ""
+    private val REQUEST_CODE_STT = 1
+    private var recognizedText = ""
 
     private lateinit var markerMarket: Marker
     private lateinit var markerRestaurant: Marker
@@ -65,6 +72,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.bankButton.visibility = View.GONE
         binding.removeButton.visibility = View.GONE
         binding.sendPlan.visibility = View.GONE
+        binding.sttButton.visibility = View.GONE
 
         binding.marketButton.setOnClickListener {
             currentCat = "Market"
@@ -94,6 +102,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
             isRemoving = 1
         }
 
+        binding.sttButton.setOnClickListener {
+            val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ROOT)
+            sttIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Mów teraz!")
+            try {
+                startActivityForResult(sttIntent, REQUEST_CODE_STT)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                Toast.makeText(this, "Twoje urządzenie nie obsługuje STT.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         dbRef.child("galeries").get().addOnSuccessListener {
             var array = JSONArray(Gson().toJson(it.value))
             for (i in 0 until array.length()) {
@@ -111,6 +132,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun recognizeAction(){
+        if (recognizedText == "markety") {
+            currentCat = "Market"
+            isRemoving = 0
+        } else if (recognizedText == "banki") {
+            currentCat = "Bank"
+            isRemoving = 0
+        } else if (recognizedText == "fast food") {
+            currentCat = "Restaurant"
+            isRemoving = 0
+        } else {
+            Toast.makeText(this, "Nie rozpoznano kategorii!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun clear() {
         for (marker in markerArray) {
             marker.remove()
@@ -120,6 +156,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         restaurantCount = 0
         bankCount = 0
         currentCat = "Market"
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_CODE_STT -> {
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    if (!result.isNullOrEmpty()) {
+                        recognizedText = result[0]
+                        recognizeAction()
+                    }
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -142,7 +193,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
 
         if (map != null) {
-            map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(warsaw, 15f))
+            map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(warsaw, 12f))
+            map!!.setMaxZoomPreference(12f)
 
             var colors = listOf(Color.parseColor("#faac7c"), Color.parseColor("#3e1e70")).toIntArray()
             var startPoints = listOf<Float>(0.2f, 1f).toFloatArray()
@@ -164,6 +216,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 } else if (markerArray.count() == 0) {
                     MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                         listItems(items = galNameList) { _, index, _ ->
+                            map?.setMaxZoomPreference(18f)
                             map?.animateCamera(CameraUpdateFactory.newLatLngZoom(galLatLngList[index], 18f), 2000, null)
                             var heatMapProvider = HeatmapTileProvider.Builder().weightedData(listOf(galIntensityList[index])).radius(50).maxIntensity(5.0).gradient(gradient).build()
                             map!!.addTileOverlay(TileOverlayOptions().tileProvider(heatMapProvider))
@@ -227,12 +280,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     binding.bankButton.visibility = View.GONE
                     binding.removeButton.visibility = View.GONE
                     binding.sendPlan.visibility = View.GONE
+                    binding.sttButton.visibility = View.GONE
                 } else {
                     binding.marketButton.visibility = View.VISIBLE
                     binding.restaurantButton.visibility = View.VISIBLE
                     binding.bankButton.visibility = View.VISIBLE
                     binding.removeButton.visibility = View.VISIBLE
                     binding.sendPlan.visibility = View.VISIBLE
+                    binding.sttButton.visibility = View.VISIBLE
                 }
             }
 
