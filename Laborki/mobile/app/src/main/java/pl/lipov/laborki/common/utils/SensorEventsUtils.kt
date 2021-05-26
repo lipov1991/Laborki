@@ -23,12 +23,32 @@ class SensorEventsUtils(
     override fun onSensorChanged(
         sensorEvent: SensorEvent
     ) {
+
+        val x = sensorEvent.values[0]
+        val y = sensorEvent.values[1]
+
+        if ((x > 5) or (y > 5)) {
+            Log.d(TAG, " value $x $y.")
+            onEvent.postValue(Event.ACCELERATION_CHANGE)
+        }
     }
 
     override fun onAccuracyChanged(
-        sensor: Sensor,
+        sensor: Sensor?,
         accuracy: Int
     ) {
-        Log.d(TAG, "${sensor.name} accuracy changed to $accuracy.")
+        Log.d(TAG, "${sensor?.name} accuracy changed to $accuracy.")
+    }
+
+    fun registerEventListener() {
+        if (accelerometer == null) {
+            onAccelerometerNotDetected.postValue(Unit)
+        } else {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    fun unregisterEventListener() {
+        sensorManager.unregisterListener(this, accelerometer)
     }
 }

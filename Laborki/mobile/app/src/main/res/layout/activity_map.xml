@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:title="Laborki"
+        app:titleTextColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/mic_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_mic"
+        android:contentDescription="@null" />
+
+
+    <ImageView
+        android:id="@+id/compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_compass" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mpzp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_mpzp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/market_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="90dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="@null"
+        android:visibility="gone"
+        android:src="@drawable/ic_shop" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bank_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="164dp"
+        android:backgroundTint="@color/gold"
+        android:contentDescription="@null"
+        android:visibility="gone"
+        android:src="@drawable/ic_bank" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/restaurant_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/red"
+        android:contentDescription="@null"
+        android:visibility="gone"
+        android:src="@drawable/ic_restaurant" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bottom_sheet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_bottom_sheet" />
+
+    <ImageView
+        android:id="@+id/img_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/red"
+        android:src="@drawable/ic_delete"
+        android:visibility="gone"
+        android:contentDescription="@null"/>
+
+</FrameLayout>

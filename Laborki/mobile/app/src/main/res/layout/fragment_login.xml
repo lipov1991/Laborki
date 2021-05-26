@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.TrainingActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/ic_first_login"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_star_border"
+                android:contentDescription="@null" />
+
+            <View
+                android:id="@+id/ic_second_login"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_star_border"
+                android:contentDescription="@null" />
+
+            <View
+                android:id="@+id/ic_third_login"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_star_border"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:id="@+id/ic_fourth_login"
+                android:layout_width="@dimen/lock_icon_size"
+                android:layout_height="@dimen/lock_icon_size"
+                android:background="@drawable/ic_star_border"
+                android:contentDescription="@null" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
