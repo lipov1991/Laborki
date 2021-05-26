@@ -5,7 +5,7 @@ class Gallery (
         val lat: Double,
         val lng: Double,
         val name: String,
-        val densityLevel: Int,
+        val overcrowdingLevel: Int,
         val url: String
 
 )

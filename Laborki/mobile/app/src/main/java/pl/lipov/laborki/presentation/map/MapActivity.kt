@@ -68,11 +68,14 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             val name = mapViewModel.galleryList[it].name
 
             val coordinates = LatLng(mapViewModel.galleryList[it].lat, mapViewModel.galleryList[it].lng)
+            val crowd = mapViewModel.galleryList[it].overcrowdingLevel
 
             mapViewModel.googleMap?.let { it1 ->
                 mapViewModel.setCameraOnPosition(coordinates,
                     it1
                 )
+                mapViewModel.addHeatMap(this, it1, coordinates, crowd)
+
             }
         mapViewModel.removeAllMarkers()
             mapViewModel.categoryMarker = "Market"
