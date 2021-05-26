@@ -25,20 +25,21 @@ class STTUtils {
         }
         try {
             activity.startActivityForResult(recognizeSpeechIntent, requestCode)
-        }   catch (exception: ActivityNotFoundException) {
+        } catch (exception: ActivityNotFoundException) {
             Toast.makeText(activity, "Brak STT w urządzeniu", Toast.LENGTH_SHORT).show()
         }
     }
 
-//    fun handleSpeechRecognizeResult(
-//        data: Intent,
-//        context: Context
-//    ) {
-//        data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-//            ?.firstOrNull()?.Let {  recognizeResult ->
-//                //TODO do something with a result
-//                Toast.makeText(context, recognizeResult, Toast.LENGTH_SHORT).show()
-//            }
-//    }
+    fun handleSpeechRecognizeResult(
+        data: Intent,
+        context: Context,
+        mapUtils: MapUtils
+    ) {
+        data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            ?.firstOrNull()?.let { recognizeResult ->
+                mapUtils.lastRecognizedVoiceResult = recognizeResult
+                mapUtils.changeVisibilityBasedOnVoice()
+            }
+    }
 
 }

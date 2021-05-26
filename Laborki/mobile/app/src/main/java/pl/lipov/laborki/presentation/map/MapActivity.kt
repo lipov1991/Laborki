@@ -1,6 +1,7 @@
 package pl.lipov.laborki.presentation.map
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -25,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.repository.api.dto.GalleryDto
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener,
@@ -34,6 +36,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
     private val compositeDisposable = CompositeDisposable()
     private lateinit var binding: ActivityMapBinding
     private lateinit var myMap: GoogleMap
+    private val REQUEST_CODE_STT = 1
 
     public override fun onCreate(
         savedInstanceState: Bundle?
@@ -105,16 +108,25 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
             viewModel.sendingDevelopmentPlan(this, myMap)
         }
 
+        binding.voiceSearch.setOnClickListener {
+            viewModel.listenForSpeechRecognize(this, REQUEST_CODE_STT)
+        }
+
     }
 
     override fun onMapReady(
         googleMap: GoogleMap
     ) {
         myMap = googleMap
-        viewModel.setUpMap(googleMap, getString(R.string.wilenska_galeria))
+        viewModel.setUpMap(
+            googleMap,
+            getString(R.string.wilenska_galeria),
+            listOf(binding.floatingBtnBank, binding.floatingBtnMarket, binding.floatingBtnRes)
+        )
         googleMap.setOnMapLongClickListener(this)
         googleMap.setOnMarkerDragListener(this)
         addHeatMap(myMap, this)
+
     }
 
     override fun onMapLongClick(p0: LatLng) {
@@ -176,6 +188,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLong
         } catch (e: JSONException) {
             Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
                 .show()
+        }
+    }
+
+    @Suppress("deprecation")
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        if (requestCode == REQUEST_CODE_STT) {
+            viewModel.handleSpeechRecognizeResult(resultCode, data, this)
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }

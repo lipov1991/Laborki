@@ -1,5 +1,6 @@
 package pl.lipov.laborki.common.utils
 
+import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -14,16 +15,21 @@ class MapUtils {
     var pinsList: MutableList<Pair<Marker, Int>> = mutableListOf()
     var areaButttonAlreadyPressed = false
 
+    var lastRecognizedVoiceResult = ""
+
     fun setUpMap(
         googleMap: GoogleMap,
         markerTitle: String,
+        listView: List<View>
     ) {
 
         val cameraPosition = CameraPosition.Builder()
             .target(galleryLatLon)
-            .zoom(18f)
+            .zoom(10f)
             .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
+        googleMap.setMaxZoomPreference(10f)
 
         googleMap.addMarker(
             MarkerOptions()
@@ -39,9 +45,15 @@ class MapUtils {
                     pinsList.forEach {
                         it.first.isVisible = false
                     }
+                    listView.forEach {
+                        it.visibility = View.INVISIBLE
+                    }
                 } else {
                     pinsList.forEach {
                         it.first.isVisible = it.second == currentLevel
+                    }
+                    listView.forEach {
+                        it.visibility = View.VISIBLE
                     }
                 }
             }
@@ -53,9 +65,13 @@ class MapUtils {
                     it.first.isVisible = it.second == currentLevel
                 }
             }
-
         })
+    }
 
+    fun changeVisibilityBasedOnVoice() {
+        pinsList.forEach {
+            it.first.isVisible = it.first.title == lastRecognizedVoiceResult
+        }
     }
 
     fun addMarker(
@@ -71,8 +87,6 @@ class MapUtils {
         )
 
         pinsList.add(Pair(googleMarkers, currentLevel))
-
-
     }
 
     fun setUpGallery(
@@ -80,6 +94,8 @@ class MapUtils {
         markerName: String,
         latLonGallery: LatLng
     ) {
+
+        googleMap.setMaxZoomPreference(18f)
 
         val cameraPosition = CameraPosition.Builder()
             .target(latLonGallery)

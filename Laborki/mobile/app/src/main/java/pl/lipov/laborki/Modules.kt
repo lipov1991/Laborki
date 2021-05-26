@@ -7,9 +7,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import pl.lipov.laborki.common.utils.*
+import pl.lipov.laborki.common.utils.GestureDetectorUtils
+import pl.lipov.laborki.common.utils.MapUtils
+import pl.lipov.laborki.common.utils.STTUtils
+import pl.lipov.laborki.common.utils.SensorEventsUtils
 import pl.lipov.laborki.data.Api
 import pl.lipov.laborki.data.repository.api.LoginRepository
 import pl.lipov.laborki.presentation.login.TextViewModel
@@ -25,20 +27,9 @@ val utilsModule = module {
     single { GestureDetectorUtils() }
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
-//    factory { provideMagnetometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
     single { MapUtils() }
-//    single { STTUtils() }
-//    single(named("magnetometer")) {
-//        provideMagnetometer(sensorManager = get())
-//    }
-//    single(named("accelerometer")) {
-//        provideMagnetometer(sensorManager = get())
-//    }
-//    single {
-//        CompassUtils(
-//        accelerometer = get(named("accelerometer")),
-//        magnetometer =  get(named("magnetometer"))) }
+    single { STTUtils() }
 }
 
 private fun provideSensorManager(
@@ -88,7 +79,6 @@ val viewModelsModule = module {
             gestureDetectorUtils = get(),
             sensorEventsUtils = get(),
             loginRepository = get()
-//            compassUtils = get()
         )
     }
 
@@ -101,7 +91,8 @@ val viewModelsModule = module {
     viewModel {
         MapViewModel(
             mapUtils = get(),
-            loginRepository = get()
+            loginRepository = get(),
+            STTUtils = get()
         )
     }
 }

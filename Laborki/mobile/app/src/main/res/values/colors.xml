@@ -9,4 +9,5 @@
     <color name="green">#339933</color>
     <color name="blue_dark">#007ac1</color>
     <color name="grey_with_mask">#80ffffff</color>
+    <color name="colorPrimaryDark">#007ac1</color>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,6 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:title="Laborki" />
+
+    <ImageView
+        android:id="@+id/voice_search"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_voice_search" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_btn_market"
         android:layout_width="wrap_content"
@@ -16,7 +31,8 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_margin="16dp"
         android:backgroundTint="@color/error"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_btn_bank"
@@ -25,7 +41,8 @@
         android:layout_gravity="start|bottom"
         android:layout_margin="16dp"
         android:backgroundTint="@color/gold"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_btn_res"
@@ -34,7 +51,8 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:backgroundTint="@color/green"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_gallery_list"
@@ -51,8 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
+        android:layout_marginTop="65dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/grey"
         android:contentDescription="TODO" />
 
