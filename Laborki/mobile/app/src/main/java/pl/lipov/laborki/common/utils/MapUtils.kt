@@ -13,16 +13,12 @@ class MapUtils {
     ) {
 
         val galeria = LatLng(52.2550, 21.0378)
-        val australia = LatLng(-24.9922916,115.224928)
+        val warsaw = LatLng(52.2224, 21.0388)
         val cameraPosition = CameraPosition.Builder()
-            .target(galeria)
-            .zoom(18f)
+            .target(warsaw)
+            .zoom(10f)
             .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(galeria)
-                .title("Galeria Wileńska")
-        )
+        googleMap.setMinZoomPreference(10f)
     }
 }

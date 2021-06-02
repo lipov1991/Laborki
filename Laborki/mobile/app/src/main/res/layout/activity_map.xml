@@ -21,6 +21,16 @@
         app:rippleColor="@color/darkGreen"
         app:srcCompat="@drawable/ic_building_plan" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_margin="5dp"
+        app:backgroundTint="@color/grey"
+        app:rippleColor="@color/darkGrey"
+        app:srcCompat="@drawable/ic_mic" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +45,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="5dp"
             android:clickable="false"
+            android:visibility="gone"
             app:backgroundTint="@color/colorPrimary"
             app:rippleColor="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_market" />
@@ -46,6 +57,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="5dp"
             android:clickable="false"
+            android:visibility="gone"
             app:backgroundTint="@color/colorPrimary"
             app:rippleColor="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_restaurant" />
@@ -57,6 +69,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="5dp"
             android:clickable="false"
+            android:visibility="gone"
             app:backgroundTint="@color/colorPrimary"
             app:rippleColor="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_bank" />

@@ -1,6 +1,8 @@
 package pl.lipov.laborki.presentation.map
 
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
@@ -14,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.data.repository.api.dto.GalleryDto
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -40,6 +43,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         binding.fab3.setOnClickListener {
             viewModel.markerCategory = MarkerCategory.bank
+        }
+        binding.fab6.setOnClickListener {
+            getSpeechInput()
         }
 
         compositeDisposable.add(
@@ -95,6 +101,60 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         compositeDisposable.clear()
         super.onDestroy()
+    }
+
+    private fun getSpeechInput() {
+        val intent = Intent(
+            RecognizerIntent.ACTION_RECOGNIZE_SPEECH
+        )
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE,
+            Locale.ENGLISH                      //język polski nie jest dostępny
+        )
+        startActivityForResult(intent, 10)
+    }
+
+    override fun onActivityResult(
+        inputCode: Int,
+        outputCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(
+            inputCode,
+            outputCode,
+            data
+        )
+        when (inputCode) {
+            10 -> if (
+                outputCode == RESULT_OK &&
+                data != null
+            ) {
+                val resultArray =
+                    data.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS
+                    )
+                val result = resultArray?.get(0)
+                Toast.makeText(this, "Wykryto hasło: $result", Toast.LENGTH_LONG).show()
+
+                if (result == "market" || result == "Market") {
+                    viewModel.markerMarket?.isVisible = true
+                    viewModel.markerBank?.isVisible = false
+                    viewModel.markerRestaurant?.isVisible = false
+                } else if (result == "bank" || result == "Bank") {
+                    viewModel.markerMarket?.isVisible = false
+                    viewModel.markerBank?.isVisible = true
+                    viewModel.markerRestaurant?.isVisible = false
+                } else if (result == "fast food" || result == "Fast food") {
+                    viewModel.markerMarket?.isVisible = false
+                    viewModel.markerBank?.isVisible = false
+                    viewModel.markerRestaurant?.isVisible = true
+                }
+            }
+        }
     }
 }
 

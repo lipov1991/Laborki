@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#007ac1</color>
     <color name="colorAccent">#f75454</color>
     <color name="grey">#9e9e9e</color>
+    <color name="darkGrey">#5b5c5b</color>
     <color name="grey_with_mask">#80ffffff</color>
     <color name="error">#f44336</color>
     <color name="green">#15eb55</color>
