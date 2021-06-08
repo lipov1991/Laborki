@@ -1,7 +1,12 @@
 package pl.lipov.laborki.presentation.map
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -18,12 +23,13 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
 class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var binding : ActivityMapBinding
     private val mapViewModel by inject<MapViewModel>()
-
+    private val REQUEST_CODE = 1
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -61,6 +67,9 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
 
         binding.uploadButton.setOnClickListener{
             mapViewModel.uploadBtn(this)
+        }
+        binding.micButton.setOnClickListener{
+            listenSpeech(this,REQUEST_CODE)
         }
 
         mapViewModel.currentGalleryPosition.observe(this, Observer {
@@ -145,6 +154,51 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
             }
         }
     }
+    fun listenSpeech(
+        activity: Activity,
+        requestCode: Int
+    ){
+        val recognizeSpeechInt = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply{
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Podaj kategorię")
+        }
+        try{
+            activity.startActivityForResult(recognizeSpeechInt, requestCode)
+        }catch (exception: ActivityNotFoundException){
+            Toast.makeText(activity, "Twoje urzadzenie nie obsługuje STT", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+    fun handleSpeechResult(
+        data: Intent,
+        context: Context
+    ){
+
+        data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            ?.firstOrNull()?.let { recognizeResult ->
+
+                mapViewModel.categoryType = recognizeResult
+                mapViewModel.galeriaLevelList[mapViewModel.activeLevel!!].setCategoryVisibility(recognizeResult)
+
+                Toast.makeText(context, recognizeResult, Toast.LENGTH_LONG).show()
+            }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK){
+                data?.let { handleSpeechResult(data, this) }
+            }
+        }
+    }
+
+
 
 
 

@@ -37,23 +37,10 @@ class MapViewModel (
     private val placeCoordinates = LatLng(52.2550, 21.0378) //-24.89262,131.9301376,4.31z
     //private val placeCoordinates = LatLng(-24.89262,131.9301376)
     var categoryMarker : String? = null
-    var market : Marker? = null
-    var food : Marker?=null
-    var bank : Marker?= null
+
     var pin : Marker? = null
     var pin_gallery : Marker? = null
 
-    var marketL0 : Marker? = null
-    var foodL0 : Marker? = null
-    var bankL0 : Marker? = null
-
-    var marketL1 : Marker? = null
-    var foodL1 : Marker? = null
-    var bankL1 : Marker? = null
-
-    var marketL2 : Marker? = null
-    var foodL2 : Marker? = null
-    var bankL2 : Marker? = null
 
     var activeLevel: Int? = 0
 
@@ -68,6 +55,15 @@ class MapViewModel (
 
     var provider: HeatmapTileProvider? = null
     var tileOverlay: TileOverlay? = null
+    var categoryType: String? = "market"
+
+
+    var galeriaLevelList: List<Level> = listOf(
+        Level(0),
+        Level(1),
+        Level(2)
+    )
+
 
 
     fun setUpMap(
@@ -78,17 +74,22 @@ class MapViewModel (
         this.googleMap = googleMap
         val cameraPosition = CameraPosition.Builder()
             .target(placeCoordinates)
-            .zoom(18f)
+            .zoom(10f)
             .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        googleMap.setMinZoomPreference(10f)
 
        pin_gallery= googleMap.addMarker(
             MarkerOptions()
                 .position(placeCoordinates)
                 .title("Galeria Wileńska")
+
+
         )
-        // TODO po wybraniu budynku
-        //addHeatMap(context,googleMap, )
+
+        galeriaLevelList.forEach{
+            it.setVisibility(false)
+        }
 
     }
 
@@ -100,138 +101,23 @@ class MapViewModel (
 
 
             if (focusedBuildingFlag) {
-            //if (true) {
+                val activeLevel = galeriaLevelList[activeLevel!!]
+                var marker = activeLevel.getMarker(categoryMarker)
 
-                if(activeLevel == 0) {
-                    if (categoryMarker == "market") {
-                        if (marketL0 != null) {
-                            marketL0?.remove()
-                        }
-                        marketL0 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
+                marker?.remove()
 
-                        )
-                    }
-                }
-                if(activeLevel == 0) {
-                    if (categoryMarker == "restauracja") {
-                        if (foodL0 != null) {
-                            foodL0?.remove()
-                        }
-                        foodL0 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
+                marker = googleMap?.addMarker(
+                    MarkerOptions()
+                        .position(latLng)
+                        .title(categoryMarker)
+                        .draggable(true) // allows to drag & drop marker
+                )
 
-                        )
-                    }
-                }
-                if(activeLevel == 0) {
-                    if (categoryMarker == "bank") {
-                        if (bankL0 != null) {
-                            bankL0?.remove()
-                        }
-                        bankL0 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-                        )
-                    }
+                if (marker != null) {
+                    activeLevel.setMarket(marker,categoryMarker)
                 }
 
-                if(activeLevel == 1) {
-                    if (categoryMarker == "market") {
-                        if (marketL1 != null) {
-                            marketL1?.remove()
-                        }
-                        marketL1 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
                 }
-                if(activeLevel == 1) {
-                    if (categoryMarker == "restauracja") {
-                        if (foodL1 != null) {
-                            foodL1?.remove()
-                        }
-                        foodL1 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
-                }
-                if(activeLevel == 1) {
-                    if (categoryMarker == "bank") {
-                        if (bankL1 != null) {
-                            bankL1?.remove()
-                        }
-                        bankL1 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
-                }
-
-                if(activeLevel == 2) {
-                    if (categoryMarker == "market") {
-                        if (marketL2 != null) {
-                            marketL2?.remove()
-                        }
-                        marketL2 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
-                }
-                if(activeLevel == 2) {
-                    if (categoryMarker == "restauracja") {
-                        if (foodL2 != null) {
-                            foodL2?.remove()
-                        }
-                        foodL2 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
-                }
-                if(activeLevel == 2) {
-                    if (categoryMarker == "bank") {
-                        if (bankL2 != null) {
-                            bankL2?.remove()
-                        }
-                        bankL2 = map.addMarker(
-                            MarkerOptions()
-                                .position(latLng)
-                                .title(categoryMarker)
-                                .draggable(true)
-
-                        )
-                    }
-                }
-
-            }
-
 
         }
     }
@@ -246,69 +132,45 @@ class MapViewModel (
                 override fun onIndoorBuildingFocused() {
                     context.showToast("onIndoorBuildingFocused")
                     focusedBuildingFlag = !focusedBuildingFlag
-//                    if (focusedBuildingFlag) {
-//                        binding.floatingBtn.visibility = View.VISIBLE
-//                    }
-//                    else{
-//                        binding.floatingBtn.visibility = View.INVISIBLE
-//                    }
 
 
                 }
 
                 override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding) {
                     context.showToast("onIndoorLevelActivated")
+                    googleMap?.setOnIndoorStateChangeListener(object :GoogleMap.OnIndoorStateChangeListener{
+                        override fun onIndoorBuildingFocused() {
+                            focusedBuildingFlag = !focusedBuildingFlag
 
-                    activeLevel = indoorBuilding.activeLevelIndex
+                            if (!focusedBuildingFlag){
+                                if (activeLevel != null){
+                                    galeriaLevelList[activeLevel!!].setVisibility(false)
 
-                    if(activeLevel == 0){
+                                }
+                            }
+                            else{
+                                if (activeLevel != null){
+                                    galeriaLevelList[activeLevel!!].setCategoryVisibility(categoryType)
+                                }
+                            }
 
-                        marketL0?.isVisible = true
-                        foodL0?.isVisible = true
-                        bankL0?.isVisible = true
+                        }
 
-                        marketL1?.isVisible = false
-                        foodL1?.isVisible = false
-                        bankL1?.isVisible = false
+                        override fun onIndoorLevelActivated(indoorBuilding: IndoorBuilding?) {
+                            activeLevel = indoorBuilding?.activeLevelIndex
+                            Log.i("LOG", activeLevel.toString())
 
-                        marketL2?.isVisible = false
-                        foodL2?.isVisible = false
-                        bankL2?.isVisible = false
+                            for(i in galeriaLevelList.indices){
+                                if(i == activeLevel) galeriaLevelList[i].setVisibility(true)
+                                else galeriaLevelList[i].setVisibility(false)
+                            }
 
-                    }
-                    if (activeLevel == 1) {
+                        }
 
-                        marketL0?.isVisible = false
-                        foodL0?.isVisible = false
-                        bankL0?.isVisible = false
-
-                        marketL1?.isVisible = true
-                        foodL1?.isVisible = true
-                        bankL1?.isVisible = true
-
-                        marketL2?.isVisible = false
-                        foodL2?.isVisible = false
-                        bankL2?.isVisible = false
-
-                    }
-                    if (activeLevel == 2){
-
-                        marketL0?.isVisible = false
-                        foodL0?.isVisible = false
-                        bankL0?.isVisible = false
-
-                        marketL1?.isVisible = false
-                        foodL1?.isVisible = false
-                        bankL1?.isVisible = false
-
-                        marketL2?.isVisible = true
-                        foodL2?.isVisible = true
-                        bankL2?.isVisible = true
+                    })
 
                     }
-
-                }
-            })
+                })
         }
 
     fun Context.showToast(
@@ -348,23 +210,6 @@ class MapViewModel (
                 tileOverlay!!.clearTileCache()
             }
 
-
-//            val policeStations = getPoliceStations(context)
-//
-//
-//            val weightedLatLngs = policeStations.map {policeStation ->
-//                val latLng = LatLng(policeStation.lat, policeStation.lng)
-//                WeightedLatLng(latLng, policeStation.weight)
-//
-//            }
-//
-//            // Create a heat map tile provider, passing it the latlngs of the police stations.
-//            val provider = HeatmapTileProvider.Builder()
-//                .weightedData(weightedLatLngs)
-//                .build()
-//
-//            // Add a tile overlay to the map, using the heat map tile provider.
-//           map.addTileOverlay(TileOverlayOptions().tileProvider(provider))
 
         } catch (e: JSONException) {
             Toast.makeText(context, "Problem reading list of locations.", Toast.LENGTH_LONG)
@@ -413,17 +258,9 @@ class MapViewModel (
 
 
     fun removeAllMarkers(){
-        marketL0?.remove()
-        marketL1?.remove()
-        marketL2?.remove()
-
-        bankL0?.remove()
-        bankL1?.remove()
-        bankL2?.remove()
-
-        foodL0?.remove()
-        foodL1?.remove()
-        foodL2?.remove()
+        galeriaLevelList.forEach {
+            it.clearMarkers()
+        }
     }
 
     fun uploadBtn(context: Context) {

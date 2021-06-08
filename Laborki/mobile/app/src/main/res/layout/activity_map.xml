@@ -79,6 +79,16 @@
             android:clickable="true"
             app:srcCompat="@drawable/ic_upload" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mic_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_upload" />
+
+
     </LinearLayout>
 
 </FrameLayout>
