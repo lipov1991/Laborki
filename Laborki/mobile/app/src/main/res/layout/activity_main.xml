@@ -10,11 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:contentDescription="@null"
-
-        app:srcCompat = "@drawable/pw"
-
+        android:foreground="@drawable/main_background_gradient"
         android:scaleType="centerCrop"
-        />
+        app:srcCompat="@drawable/pw" />
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Button>
 
 
 </LinearLayout>

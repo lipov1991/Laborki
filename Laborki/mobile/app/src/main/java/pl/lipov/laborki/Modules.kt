@@ -10,20 +10,30 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import pl.lipov.laborki.common.utils.GestureDetectorUtils
 import pl.lipov.laborki.common.utils.SensorEventsUtils
-import pl.lipov.laborki.data.LoginApi
-import pl.lipov.laborki.data.LoginRepository
-import pl.lipov.laborki.presentation.MainViewModel
+import pl.lipov.laborki.data.repository.LoginRepository
+import pl.lipov.laborki.data.repository.api.Api
+import pl.lipov.laborki.presentation.main.MainViewModel
+import pl.lipov.laborki.presentation.map.MapViewModel
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val LOGIN_API_ENDPOINT = "http://apka.targislubne.pl/"
+private const val LOGIN_API_ENDPOINT = "https://laborki-7e3b1.firebaseio.com/"
 
 val utilsModule = module {
     single { GestureDetectorUtils() }
     factory { provideSensorManager(context = get()) }
     factory { provideAccelerometer(sensorManager = get()) }
+//    single { provideMagnetometer(sensorManager = get()) }
     single { SensorEventsUtils(sensorManager = get(), accelerometer = get()) }
+
+//    single (named("accelerometer")){
+//        provideAccelerometer(sensorManager = get())
+//    }
+//
+//    single (named("magnetometer")){
+//        provideMagnetometer(sensorManager = get())
+//    }
 }
 
 private fun provideSensorManager(
@@ -33,6 +43,10 @@ private fun provideSensorManager(
 private fun provideAccelerometer(
     sensorManager: SensorManager
 ): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+//private fun provideMagnetometer(
+//    sensorManager: SensorManager
+//): Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
 
 val networkModule = module {
     factory { provideOkHttpClient() }
@@ -57,10 +71,11 @@ private fun provideRetrofit(
 
 private fun provideLoginApi(
     retrofit: Retrofit
-): LoginApi = retrofit.create(LoginApi::class.java)
+): Api = retrofit.create(
+    Api::class.java)
 
 val repositoriesModule = module {
-    factory { LoginRepository(loginApi = get()) }
+    single { LoginRepository(api = get()) }
 }
 
 val viewModelsModule = module {
@@ -70,5 +85,8 @@ val viewModelsModule = module {
             sensorEventsUtils = get(),
             loginRepository = get()
         )
+    }
+    viewModel {
+        MapViewModel()
     }
 }
