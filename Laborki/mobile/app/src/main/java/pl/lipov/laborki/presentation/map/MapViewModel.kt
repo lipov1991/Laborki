@@ -7,7 +7,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.TileOverlayOptions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,7 +18,7 @@ import pl.lipov.laborki.data.model.PoliceStation
 import java.util.*
 
 class MapViewModel : ViewModel() {
-    private val placeCoordinates = LatLng(52.2550, 21.0378)
+    private val placeCoordinates = LatLng(52.229676, 21.012229)
 
 
     fun setUpMap(
@@ -28,15 +27,15 @@ class MapViewModel : ViewModel() {
     {
         val cameraPosition = CameraPosition.Builder()
             .target(placeCoordinates) // Sets the center of the map to Mountain View
-            .zoom(18f)            // Sets the zoom
+            .zoom(11f)        // Sets the zoom
             .build()              // Creates a CameraPosition from the builder
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(placeCoordinates)
-                .title("Galeria Wileńska")
-        )
+//        googleMap.addMarker(
+//            MarkerOptions()
+//                .position(placeCoordinates)
+//                .title("Galeria Wileńska")
+//        )
 
 
     }

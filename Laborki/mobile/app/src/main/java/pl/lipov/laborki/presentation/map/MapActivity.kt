@@ -1,6 +1,9 @@
 package pl.lipov.laborki.presentation.map
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.LayoutMode
@@ -21,6 +24,7 @@ import org.json.JSONArray
 import org.koin.android.ext.android.inject
 import pl.lipov.laborki.R
 import pl.lipov.laborki.databinding.ActivityMapBinding
+import java.util.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -43,6 +47,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     var provider: HeatmapTileProvider? = null
     var currentGallery: String = "Wilenska"
+    private val REQUEST_CODE_SPEECH_INPUT= 1
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -69,6 +74,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.UploadPlan.setOnClickListener {
             onUploadBtnClick()
         }
+
+        binding.Mic.setOnClickListener { speechRegocnition() }
 
         dbRef.child("galeries").get().addOnSuccessListener {
             var array = JSONArray(Gson().toJson(it.value))
@@ -198,6 +205,52 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         this.category = "Market"
 
     }
+    private fun speechRegocnition(){
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Mikrofon wlaczony")
+        try {
+            startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
+        }
+        catch(e:Exception)
+        {
+            println("An error occured: " + e.toString())
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            REQUEST_CODE_SPEECH_INPUT->{
+                if(resultCode == Activity.RESULT_OK && data != null){
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    if(result.isNullOrEmpty() == false)
+                    {
+                        Toast.makeText(this, result[0].toString(), Toast.LENGTH_LONG).show()
+
+                        if(result[0].toString() == "markety")
+                        {
+                            mapMarket?.isVisible = true
+
+                        }
+                        if(result[0].toString() == "banki")
+                        {
+                            mapBank?.isVisible = true
+
+                        }
+                        if(result[0].toString() == "fastfoody")
+                        {
+                            mapRestauracja?.isVisible = true
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     fun addMarker(googleMap: GoogleMap) {
         googleMap.setOnIndoorStateChangeListener(object : GoogleMap.OnIndoorStateChangeListener {
             override fun onIndoorBuildingFocused() {

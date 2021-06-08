@@ -39,13 +39,6 @@
         android:clickable="true"
         app:srcCompat="@drawable/ic_market" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ic_compass"
-        android:src="@drawable/ic_compass"
-        android:layout_margin="16dp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/galeries_names"
         android:layout_width="wrap_content"
@@ -61,8 +54,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
-        android:layout_margin="5dp"
+        android:layout_marginTop="100dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_upload" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Mic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_mic" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        app:title="Lab-9"
+        android:background="@color/blue"/>
 
 </FrameLayout>

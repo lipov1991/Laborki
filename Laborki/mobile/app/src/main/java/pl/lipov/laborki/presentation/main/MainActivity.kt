@@ -22,6 +22,7 @@ import pl.lipov.laborki.presentation.login.LoginCallback
 import pl.lipov.laborki.presentation.login.LoginFragment
 import pl.lipov.laborki.presentation.map.MapActivity
 
+
 private const val DEBUG_TAG = "Gestures"
 
 class MainActivity() : AppCompatActivity(), GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener,
