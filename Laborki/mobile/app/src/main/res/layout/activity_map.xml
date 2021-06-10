@@ -40,6 +40,7 @@
             android:layout_gravity="bottom|left"
             android:layout_margin="5dp"
             android:clickable="true"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_shop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,6 +50,7 @@
             android:layout_gravity="bottom|left"
             android:layout_margin="5dp"
             android:clickable="true"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_food" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -58,6 +60,7 @@
             android:layout_gravity="left|bottom"
             android:layout_margin="5dp"
             android:clickable="true"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_money" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -86,7 +89,7 @@
             android:layout_gravity="right"
             android:layout_margin="16dp"
             android:clickable="true"
-            app:srcCompat="@drawable/ic_upload" />
+            app:srcCompat="@drawable/ic_mic" />
 
 
     </LinearLayout>

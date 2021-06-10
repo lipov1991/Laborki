@@ -30,6 +30,7 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
     private lateinit var binding : ActivityMapBinding
     private val mapViewModel by inject<MapViewModel>()
     private val REQUEST_CODE = 1
+    private var btnFlag = false
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -63,6 +64,19 @@ class MapActivity: AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerCl
         binding.floatingBtn4.setOnClickListener{
             BottomSheetGalleryFragment(mapViewModel.galleryList, mapViewModel.ifUploadClick).show(supportFragmentManager, "Galleries")
             mapViewModel.removeAllMarkers()
+            if (!btnFlag) {
+                binding.floatingBtn3.visibility = View.VISIBLE
+                binding.floatingBtn.visibility = View.VISIBLE
+                binding.floatingBtn2.visibility = View.VISIBLE
+                btnFlag = true
+            }
+            else
+            {
+                binding.floatingBtn3.visibility = View.INVISIBLE
+                binding.floatingBtn.visibility = View.INVISIBLE
+                binding.floatingBtn2.visibility = View.INVISIBLE
+                btnFlag = false
+            }
         }
 
         binding.uploadButton.setOnClickListener{
